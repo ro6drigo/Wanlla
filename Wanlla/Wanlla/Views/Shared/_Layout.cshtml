@@ -1,0 +1,73 @@
+﻿@using System.Web.Optimization;
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="recetas recetas y más recetas :v">
+    <meta name="keywords" content="comida, receta, ingrediente, buscar, dieta">
+    <title>@ViewBag.Title - Wanlla</title>
+    <link rel="icon" href="images/favicon.png">
+
+    <!-- Bootstrap css -->
+    <!-- Font Awesome css -->
+    <!-- Own Styles css -->
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand(Marca) and toggle(Nav) get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#wanlla-navbar" aria-expanded="false">
+                    <span class="sr-only">Navegación</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Wanlla", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="wanlla-navbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Dietas", "", "")</li>
+                    <li>@Html.ActionLink("Pedidos", "", "")</li>
+                    <li>@Html.ActionLink("Registrarse", "Registrarse", "Usuario")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuario <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Perfil", "", "")</li>
+                            <li role="separator" class="divider"></li>
+                            <li>@Html.ActionLink("Cerrar Sesión", "", "")</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <main>
+        <div class="page-header">
+            <div class="container">
+                <h1>@ViewBag.Title</h1>
+            </div>
+        </div>
+
+        <div class="container">
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <p class="text-footer">© 2015 - @DateTime.Now.Year. AppsTacna</p>
+        </div>
+    </footer>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Bootstrap's JavaScript plugins -->
+    @Scripts.Render("~/bundles/js")
+</body>
+</html>

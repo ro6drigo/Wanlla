@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Registrarse";
+}
+
+<form action="#" method="post" class="form-horizontal">
+    <div class="form-group">
+        <label for="nom_usuario" class="col-sm-4 control-label hidden-xs"><span class="fa fa-user fa-2x" aria-hidden="true"></span></label>
+        <label for="nom_usuario" class="col-sm-4 control-label visible-xs">Nombre</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="nom_usuario" name="nom_usuario" placeholder="Nombre">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="ape_usuario" class="col-sm-4 control-label hidden-xs"></label>
+        <label for="ape_usuario" class="col-sm-4 control-label visible-xs">Apellido</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="ape_usuario" name="ape_usuario" placeholder="Apellido">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="email_usuario" class="col-sm-4 control-label hidden-xs"><span class="fa fa-envelope fa-2x"></span></label>
+        <label for="email_usuario" class="col-sm-4 control-label visible-xs">Correo Electrónico</label>
+        <div class="col-sm-4">
+            <input type="email" class="form-control" id="email_usuario" name="email_usuario" placeholder="Correo Electrónico">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tel_usuario" class="col-sm-4 control-label hidden-xs"><span class="fa fa-phone fa-2x"></span></label>
+        <label for="tel_usuario" class="col-sm-4 control-label visible-xs">Teléfono</label>
+        <div class="col-sm-4">
+            <input type="tel" class="form-control" id="tel_usuario" name="tel_usuario" placeholder="Teléfono">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="fecnac_usuario" class="col-sm-4 control-label hidden-xs"><span class="fa fa-calendar fa-2x"></span></label>
+        <label for="fecnac_usuario" class="col-sm-4 control-label visible-xs">Fecha de Nacimiento</label>
+        <div class="col-sm-4">
+            <input type="date" class="form-control" id="fecnac_usuario" name="fecnac_usuario" placeholder="Fecha de Nacimiento">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label hidden-xs"><span class="fa fa-venus-mars fa-2x"></span></label>
+        <label class="col-sm-4 control-label visible-xs">Sexo</label>
+        <div class="col-sm-4">
+            <label class="radio-inline">
+                <input type="radio" name="sex_usuario" id="sex_usuario1" value="Masculino"> Masculino
+            </label>
+            <label class="checkbox-inline">
+                <input type="radio" name="sex_usuario" id="sex_usuario2" value="Femenino"> Femenino
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pass_usuario" class="col-sm-4 control-label hidden-xs"><span class="fa fa-key fa-2x"></span></label>
+        <label for="pass_usuario" class="col-sm-4 control-label visible-xs">Contraseña</label>
+        <div class="col-sm-4">
+            <input type="password" class="form-control" id="pass_usuario" name="pass_usuario" placeholder="Contraseña">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-4">
+            <button type="submit" class="btn btn-default">Registrarse</button>
+        </div>
+    </div>
+</form>
