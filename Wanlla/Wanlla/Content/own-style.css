@@ -172,3 +172,46 @@ body { padding-top: 50px; }
 
 
 /* ----------------------------------------------- */
+
+/* Favorite Icon
+-------------------------------------------------- */
+
+.favorite-icon-inactive, .favorite-icon-active {
+    font-size: 25px;
+}
+
+.favorite-icon-inactive:hover {
+    color: #f9ff40;
+}
+
+.favorite-icon-active {
+    color: #f9ff40;
+}
+
+.favorite-icon-active:hover {
+    color: inherit;
+}
+
+/* ----------------------------------------------- */
+
+/* Action Icons
+-------------------------------------------------- */
+
+.os-ac-icon {
+    font-size: 25px;
+    color: #a6a6a6;
+}
+
+.os-hover-green:hover {
+    color: #009900;
+}
+
+.os-hover-red:hover {
+    color: #ff0000;
+}
+
+.os-hover-yellow:hover {
+    color: #e6e600;
+}
+
+/* ----------------------------------------------- */
