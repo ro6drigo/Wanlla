@@ -41,7 +41,7 @@ namespace Modelo
         public DateTime fecnac_usuario { get; set; }
 
         [Required]
-        [StringLength(6)]
+        [StringLength(10)]
         public string sex_usuario { get; set; }
 
         [Required]

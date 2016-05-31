@@ -204,6 +204,7 @@
     <Content Include="Views\Receta\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Dieta\Detalle.cshtml" />
+    <None Include="Properties\PublishProfiles\Wanlla.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
