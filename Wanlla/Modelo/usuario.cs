@@ -4,6 +4,7 @@ namespace Modelo
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity;
     using System.Data.Entity.Spatial;
 
     [Table("usuario")]
@@ -58,5 +59,53 @@ namespace Modelo
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<receta> receta { get; set; }
+
+        /// <summary>
+        /// Manteniemiento (Agregar, Modificar) Usuario
+        /// </summary>
+        public void mantenimiento()
+        {
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    if (this.id_usuario > 0)
+                    {
+                        db.Entry(this).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        this.pass_usuario = BCrypt.Net.BCrypt.HashPassword(this.pass_usuario, BCrypt.Net.BCrypt.GenerateSalt());
+                        db.Entry(this).State = EntityState.Added;
+                    }
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Cambiar password del Usuario
+        /// </summary>
+        public void cambiarPass()
+        {
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    this.pass_usuario = BCrypt.Net.BCrypt.HashPassword(this.pass_usuario, BCrypt.Net.BCrypt.GenerateSalt());
+                    db.Entry(this).State = EntityState.Modified;
+
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

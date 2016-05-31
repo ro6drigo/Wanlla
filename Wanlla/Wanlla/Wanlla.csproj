@@ -146,7 +146,8 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="images\favicon.png" />
+    <Content Include="images\icon_blanco.png" />
+    <Content Include="images\icon_verde.png" />
     <Content Include="images\ing_pan.jpg" />
     <Content Include="images\ing_pollo.jpg" />
     <Content Include="images\media1.jpg" />
@@ -213,6 +214,12 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Modelo\Modelo.csproj">
+      <Project>{3ee0a024-1662-4ddf-a28b-e337b19e667c}</Project>
+      <Name>Modelo</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
