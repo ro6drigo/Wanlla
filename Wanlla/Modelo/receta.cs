@@ -4,8 +4,9 @@ namespace Modelo
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity;
     using System.Data.Entity.Spatial;
-
+    using System.Linq;
     [Table("receta")]
     public partial class receta
     {
@@ -60,5 +61,116 @@ namespace Modelo
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<usuario> usuario { get; set; }
+
+        public List<receta> Listar()
+        {
+            var recetas = new List<receta>();
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    recetas = db.receta.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return recetas;
+        }
+
+        public receta Obtener(int id) //retornar es un objeto
+        {
+            var recetas = new receta();
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    recetas = db.receta.Include("categoria")
+                        //.Include("PRODUCTO.NOMBRE")
+                        .Where(x => x.id_receta == id)
+                        .SingleOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return recetas;
+        }
+        /// <summary>
+        /// Buscar recetas
+        /// </summary>
+        /// <param name="nom_receta">Nombre de la receta a buscar</param>
+        /// <param name="des_receta">Descripción de la receta a buscar</param>
+        /// <param name="time_receta">Tiempo de cocción de las recetas</param>
+        /// <returns></returns>
+        public List<receta> buscar(string nom_receta, string des_receta, int time_receta)
+        {
+            var recetas = new List<receta>();
+
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    if (id_receta == 0)
+                    {
+                        recetas = db.receta
+                                .Where(x => x.nom_receta.Contains(nom_receta) || x.des_receta.Contains(des_receta) || x.time_receta == time_receta)
+                                .ToList();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return recetas;
+        }
+        /// <summary>
+        /// Mantenimiento tabla Receta: Agregar / Actulizar
+        /// </summary>
+        public void mantenimiento()
+        {
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    if (this.id_receta > 0)
+                    {
+                        db.Entry(this).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        db.Entry(this).State = EntityState.Added;
+                    }
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        /// <summary>
+        /// Eliminar receta
+        /// </summary>
+        public void eliminar()
+        {
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    db.Entry(this).State = System.Data.Entity.EntityState.Deleted;
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
