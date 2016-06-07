@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Modelo;
+using Wanlla.Filters;
 
 namespace Wanlla.Controllers
 {
@@ -13,24 +14,6 @@ namespace Wanlla.Controllers
         public ActionResult Index()
         {
             return View();
-        }
-
-        public ActionResult Registro()
-        {
-            return View();
-        }
-
-        public ActionResult Mantenimiento(usuario model)
-        {
-            if (ModelState.IsValid)
-            {
-                model.mantenimiento();
-                return Redirect("~/Home"); // Devuelve el index
-            }
-            else
-            {
-                return View("~/Views/Usuario/Registro.cshtml", model);
-            }
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Modelo
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity;
     using System.Data.Entity.Spatial;
-
+    using System.Linq;
     [Table("usuario")]
     public partial class usuario
     {
@@ -85,6 +85,43 @@ namespace Modelo
             {
                 throw;
             }
+        }
+
+        public ResponseModel Acceder(string email, string pass)
+        {
+            var rm = new ResponseModel();
+
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    var usu = db.usuario.Where(x => x.email_usuario == email)
+                                            .SingleOrDefault();
+
+                    if (usu != null)
+                    {
+                        if (BCrypt.Net.BCrypt.Verify(pass, usu.pass_usuario))
+                        {
+                            SessionHelper.AddUserToSession(usu.id_usuario.ToString());
+                            rm.SetResponse(true);
+                        }
+                        else
+                        {
+                            rm.SetResponse(false, "Contraseña incorrecta");
+                        }
+                    }
+                    else
+                    {
+                        rm.SetResponse(false, "El usuario no existe");
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+
+            return rm;
         }
 
         /// <summary>

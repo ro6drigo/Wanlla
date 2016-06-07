@@ -1,0 +1,30 @@
+﻿@using System.Web.Optimization;
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="recetas recetas y más recetas :v">
+    <meta name="keywords" content="comida, receta, ingrediente, buscar, dieta">
+    <title>@ViewBag.Title - Wanlla</title>
+    <link rel="icon" href="~/images/icon_verde.png">
+    <!-- Bootstrap css -->
+    <!-- Font Awesome css -->
+    <!-- Own Styles css -->
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <p class="text-footer">© 2015 - @DateTime.Now.Year. AppsTacna</p>
+        </div>
+    </footer>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Bootstrap's JavaScript plugins -->
+    @Scripts.Render("~/bundles/js")
+</body>
+</html>
