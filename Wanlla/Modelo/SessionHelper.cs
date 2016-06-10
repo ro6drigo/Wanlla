@@ -11,22 +11,47 @@ namespace Modelo
 {
     public class SessionHelper
     {
-        public const string TEXTOVAR = "Texto";
-        public const string CONTADORVAR = "Contador";
+        public static void CrearSesion(string id_usuario, string tipo_usuario, string nombre_usuario)
+        {
+            HttpContext.Current.Session["login"] = true;
+            HttpContext.Current.Session["id_usuario"] = id_usuario;
+            HttpContext.Current.Session["tipo_usuario"] = tipo_usuario;
+            HttpContext.Current.Session["nombre_usuario"] = nombre_usuario;
+        }
 
-        public static T Lee<T>(string variable)
+        public static void DestruirSesion()
+        {
+            HttpContext.Current.Session.RemoveAll();
+        }
+
+        public static bool ExisteSesion()
+        {
+            if(Convert.ToBoolean(HttpContext.Current.Session["login"]) == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static T Leer<T>(string variable)
         {
             object valor = HttpContext.Current.Session[variable];
+
             if (valor == null)
                 return default(T);
             else
                 return ((T)valor);
         }
 
-        public static void Escribe(string variable, object valor)
+        public static void Escribir(string variable, object valor)
         {
             HttpContext.Current.Session[variable] = valor;
         }
+
+
 
         public static bool ExistUserInSession()
         {
@@ -51,7 +76,6 @@ namespace Modelo
             }
             return user_id;
         }
-
 
         public static void AddUserToSession(string id)
         {

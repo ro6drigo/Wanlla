@@ -14,6 +14,7 @@ namespace Wanlla.Controllers
         public ActionResult Index()
         {
             return View();
+            Session["hola"] = "";
         }
 
         public ActionResult Detalle()

@@ -103,6 +103,7 @@ namespace Modelo
                         if (BCrypt.Net.BCrypt.Verify(pass, usu.pass_usuario))
                         {
                             SessionHelper.AddUserToSession(usu.id_usuario.ToString());
+                            SessionHelper.CrearSesion(usu.id_usuario.ToString(), usu.id_usuario.ToString(), (usu.nom_usuario + " " + usu.ape_usuario));
                             rm.SetResponse(true);
                         }
                         else
