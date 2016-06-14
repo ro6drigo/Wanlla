@@ -34,10 +34,6 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (SessionHelper.ExisteSesion())
                     {
-                        if (SessionHelper.Leer<int>("tipo_usuario") == 6)
-                        {
-                            <li>@Html.ActionLink("Marca", "Index", "Dieta")</li>
-                        }
                         <li>@Html.ActionLink("Dietas", "Index", "Dieta")</li>
                         <li>@Html.ActionLink("Favoritos", "Index", "Favorito")</li>
                         <li>@Html.ActionLink("Pedidos", "", "")</li>
