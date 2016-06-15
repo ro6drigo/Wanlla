@@ -224,6 +224,8 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Ingrediente\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Ingrediente\Mantenimiento.cshtml" />
     <None Include="Properties\PublishProfiles\Wanlla.pubxml" />
     <Content Include="Views\Shared\_Login.cshtml" />
     <None Include="Web.Debug.config">
@@ -236,7 +238,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Ingrediente\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Usuario\" />
   </ItemGroup>
