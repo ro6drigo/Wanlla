@@ -182,6 +182,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoriaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DistribuidorController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MarcaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\DietaController.cs" />
     <Compile Include="Controllers\FavoritoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -238,6 +242,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Categoria\" />
+    <Folder Include="Areas\Admin\Views\Distribuidor\" />
+    <Folder Include="Areas\Admin\Views\Marca\" />
+    <Folder Include="Areas\Admin\Views\Usuario\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Usuario\" />
   </ItemGroup>
