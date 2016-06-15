@@ -34,7 +34,11 @@ namespace Modelo
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<producto> producto { get; set; }
 
-        public List<ingrediente> Listar()
+        /// <summary>
+        /// Listar todos los ingredientes sin filtro
+        /// </summary>
+        /// <returns></returns>
+        public List<ingrediente> listar()
         {
             var ingredientes = new List<ingrediente>();
             try
@@ -50,6 +54,7 @@ namespace Modelo
             }
             return ingredientes;
         }
+
         /// <summary>
         /// Buscar Ingredientes
         /// </summary>
@@ -67,7 +72,7 @@ namespace Modelo
                     if (id_ingrediente == 0)
                     {
                         ingredientes = db.ingrediente
-                                .Where(x => x.nom_ingrediente == nom_ingrediente || x.tipo_ingrediente.Contains(tipo_ingrediente))
+                                .Where(x => x.nom_ingrediente.Contains(nom_ingrediente) || x.tipo_ingrediente == tipo_ingrediente)
                                 .ToList();
                     }
 
@@ -80,6 +85,7 @@ namespace Modelo
 
             return ingredientes;
         }
+
         /// <summary>
         /// Mantenimiento Tabla Ingredientes: Agregar / Actualizar
         /// </summary>
@@ -105,6 +111,7 @@ namespace Modelo
                 throw;
             }
         }
+
         /// <summary>
         /// Eliminar ingrediente
         /// </summary>
@@ -115,7 +122,7 @@ namespace Modelo
                 using (var db = new db_wanlla())
                 {
                     db.Entry(this).State = System.Data.Entity.EntityState.Deleted;
-                    db.SaveChanges();
+                    //db.SaveChanges();
                 }
             }
             catch (Exception ex)
