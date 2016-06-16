@@ -1,0 +1,39 @@
+﻿@model List<Modelo.marca>
+@{
+    ViewBag.Title = "Marcas";
+}
+<div class="row">
+    <div class="col-sm-6">
+
+    </div>
+    <div class="col-sm-6 text-right">
+        <a class="btn btn-default" href="~/Admin/Marca/Mantenimiento/0" role="button">Nueva Marca</a>
+    </div>
+</div>
+
+<br>
+
+<div class="table-responsive">
+    <table class="table table-hover table-bordered text-center">
+        <thead>
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">Marca</th>
+                <th class="text-center">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td>@m.id_marca</td>
+                    <td>@m.nom_marca</td>
+                    <td>
+                        <a href="~/Admin/Marca/Mantenimiento/@m.id_marca" class="btn btn-warning">Modificar</a>
+                        <a onclick="return confirm('¿Está seguro de eliminar el registro?');" href="~/Areas/Admin/Views/Marca/Eliminar/@m.id_marca" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

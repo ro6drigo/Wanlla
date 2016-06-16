@@ -248,6 +248,8 @@
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Areas\Admin\Views\Usuario\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Usuario\Perfil.cshtml" />
+    <Content Include="Areas\Admin\Views\Marca\Mantenimiento.cshtml" />
+    <Content Include="Areas\Admin\Views\Marca\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -260,7 +262,6 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Categoria\" />
     <Folder Include="Areas\Admin\Views\Distribuidor\" />
-    <Folder Include="Areas\Admin\Views\Marca\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
