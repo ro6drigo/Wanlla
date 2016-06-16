@@ -244,6 +244,8 @@
     <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Ingrediente\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Ingrediente\Mantenimiento.cshtml" />
+    <Content Include="Areas\Admin\Views\Distribuidor\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Distribuidor\Mantenimiento.cshtml" />
     <None Include="Properties\PublishProfiles\Wanlla.pubxml" />
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Areas\Admin\Views\Usuario\Index.cshtml" />
@@ -261,7 +263,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Categoria\" />
-    <Folder Include="Areas\Admin\Views\Distribuidor\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

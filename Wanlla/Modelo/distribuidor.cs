@@ -4,7 +4,9 @@ namespace Modelo
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity;
     using System.Data.Entity.Spatial;
+    using System.Linq;
 
     [Table("distribuidor")]
     public partial class distribuidor
@@ -40,5 +42,107 @@ namespace Modelo
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<producto> producto { get; set; }
+
+        public List<distribuidor> Listar()
+        {
+            var distribuidores = new List<distribuidor>();
+
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    distribuidores = dbwanlla.distribuidor.ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return distribuidores;
+        }
+
+        public List<distribuidor> Buscar(string criterio)
+        {
+            var distribuidores = new List<distribuidor>();
+
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    distribuidores = dbwanlla.distribuidor
+                                .Where(x => x.nom_distribuidor.Contains(criterio) 
+                                       || x.tel_distribuidor.Contains(criterio) 
+                                       || x.email_distribuidor.Contains(criterio))
+                                .ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return distribuidores;
+        }
+
+        public distribuidor Obtener(int id)
+        {
+            var distribuidor = new distribuidor();
+
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    distribuidor = dbwanlla.distribuidor
+                        .Where(x => x.id_distribuidor == id)
+                        .SingleOrDefault();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return distribuidor;
+        }
+
+        public void Guardar()
+        {
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    if (this.id_distribuidor > 0)
+                    {
+                        dbwanlla.Entry(this).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        dbwanlla.Entry(this).State = EntityState.Added;
+                    }
+                    dbwanlla.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Eliminar()
+        {
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    dbwanlla.Entry(this).State = EntityState.Deleted;
+                    dbwanlla.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

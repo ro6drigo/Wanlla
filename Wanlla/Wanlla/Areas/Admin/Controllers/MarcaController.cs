@@ -8,10 +8,10 @@ using Wanlla.Filters;
 
 namespace Wanlla.Areas.Admin.Controllers
 {
-    [Autenticado]
+    //[Autenticado]
     public class MarcaController : Controller
     {
-        // GET: Marca
+        // GET: Admin/Marca
         private marca marca = new marca();
 
         public ActionResult Index(string criterio)
@@ -29,7 +29,7 @@ namespace Wanlla.Areas.Admin.Controllers
         public ActionResult Mantenimiento(int id = 0)
         {
             return View(
-                id == 0 ? new marca() //nueva categoria
+                id == 0 ? new marca() //nueva marca
                         : marca.Obtener(id)
             );
         }
