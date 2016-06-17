@@ -15,7 +15,8 @@ namespace Wanlla.App_Start
                         "~/Scripts/bootstrap.min.js",
                         "~/Scripts/own-javascript.js",
                         "~/Scripts/jquery.validate.min.js",
-                        "~/Scripts/jquery.validate.unobtrusive.min.js")); //JS Bootstrap 3.3.6
+                        "~/Scripts/jquery.validate.unobtrusive.min.js",
+                        "~/Scripts/jquery.anexgrid.min.js")); //JS Bootstrap 3.3.6
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css", //CSS Bootstrap 3.3.6

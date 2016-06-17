@@ -7,6 +7,7 @@ namespace Modelo
     using System.Data.Entity;
     using System.Data.Entity.Spatial;
     using System.Linq;
+
     [Table("ingrediente")]
     public partial class ingrediente
     {
@@ -54,7 +55,86 @@ namespace Modelo
             }
             return ingredientes;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="grilla"></param>
+        /// <returns></returns>
+        public AnexGRIDResponde ListarGrilla(AnexGRID grilla)
+        {
 
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    grilla.Inicializar();
+
+                    var query = db.ingrediente.Where(x => x.id_ingrediente > 0);
+
+                    //ordenar por columnas
+                    if (grilla.columna == "id_ingrediente")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.id_ingrediente)
+                            : query.OrderBy(x => x.id_ingrediente);
+                    }
+                    if (grilla.columna == "nom_ingrediente")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.nom_ingrediente)
+                            : query.OrderBy(x => x.nom_ingrediente);
+                    }
+                    if (grilla.columna == "tipo_ingrediente")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.tipo_ingrediente)
+                            : query.OrderBy(x => x.tipo_ingrediente);
+                    }
+
+                    var ingredientes = query.Skip(grilla.pagina).Take(grilla.limite).ToList();
+
+                    var total = query.Count();
+
+                    //enviamos a la grilla
+                    grilla.SetData(
+                        from t in ingredientes
+                        select new
+                        {
+                            t.id_ingrediente,
+                            t.nom_ingrediente,
+                            t.tipo_ingrediente
+                        },
+                        total
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return grilla.responde();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ingrediente Obtener(int id) //retornar es un objeto
+        {
+            var ingredientes = new ingrediente();
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    ingredientes = db.ingrediente.Include("PRODUCTO")
+                        //.Include("PRODUCTO.NOMBRE")
+                        .Where(x => x.id_ingrediente == id)
+                        .SingleOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return ingredientes;
+        }
         /// <summary>
         /// Buscar Ingredientes
         /// </summary>

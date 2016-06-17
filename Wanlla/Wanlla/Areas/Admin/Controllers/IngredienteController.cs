@@ -4,9 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Modelo;
+using Wanlla.Filters;
 
 namespace Wanlla.Controllers
 {
+    [Autenticado]
     public class IngredienteController : Controller
     {
         /// <summary>
