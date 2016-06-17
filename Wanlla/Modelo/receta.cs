@@ -79,6 +79,23 @@ namespace Modelo
             return recetas;
         }
 
+        public List<receta> Listar(int cont)
+        {
+            var recetas = new List<receta>();
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    recetas = db.receta.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return recetas;
+        }
+
         public receta Obtener(int id) //retornar es un objeto
         {
             var recetas = new receta();
