@@ -141,7 +141,7 @@ namespace Modelo
         /// <param name="nom_ingrediente">Nombre del ingrediente</param>
         /// <param name="tipo_ingrediente">Tipo de ingrediente</param>
         /// <returns></returns>
-        public List<ingrediente> buscar(string nom_ingrediente, string tipo_ingrediente)
+        public List<ingrediente> buscar(string criterio)
         {
             var ingredientes = new List<ingrediente>();
 
@@ -152,7 +152,7 @@ namespace Modelo
                     if (id_ingrediente == 0)
                     {
                         ingredientes = db.ingrediente
-                                .Where(x => x.nom_ingrediente.Contains(nom_ingrediente) || x.tipo_ingrediente == tipo_ingrediente)
+                                .Where(x => x.nom_ingrediente.Contains(criterio) || x.tipo_ingrediente.Contains(criterio))
                                 .ToList();
                     }
 

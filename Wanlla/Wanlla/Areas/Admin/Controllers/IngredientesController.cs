@@ -9,22 +9,22 @@ using Wanlla.Filters;
 namespace Wanlla.Controllers
 {
     [Autenticado]
-    public class IngredienteController : Controller
+    public class IngredientesController : Controller
     {
         /// <summary>
         /// Instancia la clase Ingrediente
         /// </summary>
         private ingrediente ingrediente = new ingrediente();
         // GET: Ingrediente
-        public ActionResult Index(string nom_ingrediente, string tipo_ingrediente)
+        public ActionResult Index(string criterio)
         {
-            if (nom_ingrediente == null || nom_ingrediente == "")
+            if (criterio == null || criterio == "")
             {
                 return View(ingrediente.listar());
             }
             else
             {
-                return View(ingrediente.buscar(nom_ingrediente, tipo_ingrediente));
+                return View(ingrediente.buscar(criterio));
             }
         }
 
@@ -64,14 +64,6 @@ namespace Wanlla.Controllers
             ingrediente.id_ingrediente = id;
             ingrediente.eliminar();
             return Redirect("~/Admin/Ingrediente/Index");
-        }
-
-        public ActionResult Buscar(string nom_ingrediente, string tipo_ingrediente)
-        {
-            return View(
-                    nom_ingrediente == null || nom_ingrediente == "" ? ingrediente.listar()
-                    : ingrediente.buscar(nom_ingrediente, tipo_ingrediente)
-                    );
         }
     }
 }
