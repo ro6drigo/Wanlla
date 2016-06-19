@@ -44,9 +44,9 @@ namespace Modelo
             var ingredientes = new List<ingrediente>();
             try
             {
-                using (var db = new db_wanlla())
+                using (var dbwanlla = new db_wanlla())
                 {
-                    ingredientes = db.ingrediente.ToList();
+                    ingredientes = dbwanlla.ingrediente.ToList();
                 }
             }
             catch (Exception ex)
@@ -121,9 +121,9 @@ namespace Modelo
             var ingredientes = new ingrediente();
             try
             {
-                using (var db = new db_wanlla())
+                using (var dbwanlla = new db_wanlla())
                 {
-                    ingredientes = db.ingrediente.Include("PRODUCTO")
+                    ingredientes = dbwanlla.ingrediente.Include("producto")
                         //.Include("PRODUCTO.NOMBRE")
                         .Where(x => x.id_ingrediente == id)
                         .SingleOrDefault();
@@ -147,11 +147,11 @@ namespace Modelo
 
             try
             {
-                using (var db = new db_wanlla())
+                using (var dbwanlla = new db_wanlla())
                 {
                     if (id_ingrediente == 0)
                     {
-                        ingredientes = db.ingrediente
+                        ingredientes = dbwanlla.ingrediente
                                 .Where(x => x.nom_ingrediente.Contains(criterio) || x.tipo_ingrediente.Contains(criterio))
                                 .ToList();
                     }
@@ -199,10 +199,10 @@ namespace Modelo
         {
             try
             {
-                using (var db = new db_wanlla())
+                using (var dbwanlla = new db_wanlla())
                 {
-                    db.Entry(this).State = System.Data.Entity.EntityState.Deleted;
-                    //db.SaveChanges();
+                    dbwanlla.Entry(this).State = System.Data.Entity.EntityState.Deleted;
+                    dbwanlla.SaveChanges();
                 }
             }
             catch (Exception ex)
