@@ -51,7 +51,7 @@ namespace Modelo
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
             return ingredientes;
         }
@@ -107,7 +107,7 @@ namespace Modelo
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
             return grilla.responde();
         }
@@ -131,7 +131,7 @@ namespace Modelo
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
             return ingredientes;
         }
@@ -160,7 +160,7 @@ namespace Modelo
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
             return ingredientes;
@@ -188,7 +188,7 @@ namespace Modelo
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
@@ -207,7 +207,7 @@ namespace Modelo
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
     }

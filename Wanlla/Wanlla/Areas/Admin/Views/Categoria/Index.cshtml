@@ -1,7 +1,49 @@
-﻿
+﻿@model List<Modelo.categoria>
 @{
     ViewBag.Title = "Categorías";
 }
 
-<h2>Index</h2>
+@using (Html.BeginForm("Index", "Categoria", FormMethod.Post, new { criterio = "frm-buscar" }))
+{
+    <div class="row">
+        <div class="col-sm-5 text-left">
+            @Html.TextBox("criterio", null, new { type = "text", @class = "form-control", placeholder = "Ingrese nombre" })
+        </div>
+        <div class="col-sm-3">
+            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Buscar</button>
+        </div>
+        <div class="col-sm-4 text-right">
+            <a class="btn btn-info" href="~/Admin/Categoria/Mantenimiento/0" role="button"><i class="fa fa-plus"></i> Nueva Categoría</a>
+        </div>
+    </div>
 
+}
+<hr />
+<div class="table-responsive">
+    <table class="table table-hover table-bordered text-center">
+        <thead>
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">Categoría</th>
+                <th class="text-center">Imagen</th>
+                <th class="text-center">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td>@m.id_categoria</td>
+                    <td>@m.nom_categoria</td>
+                    <td>@m.img_categoria</td>
+                    <td>
+                        <a class="btn btn-success" href="~/Admin/Categoria/Mantenimiento/@m.id_categoria"><i class="fa fa-pencil fa-lg"></i> Modificar</a>
+                        <a onclick="return confirm('¿Está seguro de eliminar el registro?');" href="~/Admin/Categoria/Eliminar/@m.id_categoria" class="btn btn-danger">
+                            <i class="fa fa-trash-o fa-lg"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

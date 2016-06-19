@@ -83,7 +83,7 @@ namespace Modelo
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
@@ -119,7 +119,7 @@ namespace Modelo
             }
             catch(Exception ex)
             {
-                throw;
+                throw ex;
             }
 
             return rm;
@@ -142,7 +142,7 @@ namespace Modelo
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
     }
