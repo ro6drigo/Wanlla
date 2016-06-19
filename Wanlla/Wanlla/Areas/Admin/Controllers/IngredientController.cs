@@ -9,49 +9,49 @@ using Wanlla.Filters;
 namespace Wanlla.Areas.Admin.Controllers
 {
     //[Autenticado]
-    public class ProductoController : Controller
+    public class IngredientController : Controller
     {
-        private producto producto = new producto();
-        // GET: Admin/Producto
+        private ingrediente ingrediente = new ingrediente();
+        // GET: Admin/Ingredient
         public ActionResult Index(string criterio)
         {
             if (criterio == null | criterio == "")
             {
-                return View(producto.listar());
+                return View(ingrediente.listar());
             }
             else
             {
-                return View(producto.buscar(criterio));
+                return View(ingrediente.buscar(criterio));
             }
         }
 
         public ActionResult Mantenimiento(int id = 0)
         {
             return View(
-                id == 0 ? new producto() //nuevo producto
-                        : producto.Obtener(id)
+                id == 0 ? new ingrediente() //nuevo ingrediente
+                        : ingrediente.Obtener(id)
             );
         }
 
-        public ActionResult Guardar(producto model)
+        public ActionResult Guardar(ingrediente model)
         {
             if (ModelState.IsValid)
             {
                 model.mantenimiento();
-                return Redirect("~/Admin/Producto/");
+                return Redirect("~/Admin/Ingredient/");
             }
             else
             {
-                return View("~/Admin/Producto/Mantenimiento.cshtml", model);
+                return View("~/Admin/Ingredient/Mantenimiento.cshtml", model);
             }
 
         }
 
         public ActionResult Eliminar(int id)
         {
-            producto.id_ingrediente = id;
-            producto.eliminar();
-            return Redirect("~/Admin/Producto/");
+            ingrediente.id_ingrediente = id;
+            ingrediente.eliminar();
+            return Redirect("~/Admin/Ingredient/");
         }
     }
 }

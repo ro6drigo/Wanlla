@@ -10,13 +10,12 @@
             @Html.TextBox("criterio", null, new { type = "text", @class = "form-control", placeholder = "Ingrese nombre" })
         </div>
         <div class="col-sm-3">
-            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Buscar</button>
+            <button type="submit" class="btn btn-lg btn-default fa fa-search" data-toggle="tooltip" title="Buscar"></button>
         </div>
         <div class="col-sm-4 text-right">
-            <a class="btn btn-info" href="~/Admin/Categoria/Mantenimiento/0" role="button"><i class="fa fa-plus"></i> Nueva Categoría</a>
+            <a class="btn btn-lg btn-success fa fa-plus" href="~/Admin/Categoria/Mantenimiento/0" role="button" data-toggle="tooltip" title="Nueva Categoría"></a>
         </div>
     </div>
-
 }
 <hr />
 <div class="table-responsive">
@@ -37,13 +36,18 @@
                     <td>@m.nom_categoria</td>
                     <td>@m.img_categoria</td>
                     <td>
-                        <a class="btn btn-success" href="~/Admin/Categoria/Mantenimiento/@m.id_categoria"><i class="fa fa-pencil fa-lg"></i> Modificar</a>
-                        <a onclick="return confirm('¿Está seguro de eliminar el registro?');" href="~/Admin/Categoria/Eliminar/@m.id_categoria" class="btn btn-danger">
-                            <i class="fa fa-trash-o fa-lg"></i>
-                        </a>
+                        <a href="~/Admin/Categoria/Detalle/@m.id_categoria" class="btn fa fa-eye os-ac-icon os-hover-yellow" data-toggle="tooltip" title="Ver Detalle"></a>
+                        <a href="~/Admin/Categoria/Mantenimiento/@m.id_categoria" class="btn fa fa-edit os-ac-icon os-hover-green" data-toggle="tooltip" title="Editar"></a>
+                        <a onclick="return confirm('¿Está seguro de eliminar el registro?');" href="~/Admin/Categoria/Eliminar/@m.id_categoria" class="btn fa fa-trash os-ac-icon os-hover-red" data-toggle="tooltip" title="Eliminar"></a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+<script>
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+</script>

@@ -1,7 +1,65 @@
-﻿
+﻿@model List<Modelo.producto>
 @{
     ViewBag.Title = "Productos";
 }
 
-<h2>Index</h2>
+@using (Html.BeginForm("Index", "Producto", FormMethod.Post, new { criterio = "frm-buscar" }))
+{
+    <div class="row">
+        <div class="col-sm-5 text-left">
+            @Html.TextBox("criterio", null, new { type = "text", @class = "form-control", placeholder = "Ingrese dato a buscar" })
+        </div>
+        <div class="col-sm-3">
+            <button type="submit" class="btn btn-lg btn-default fa fa-search" data-toggle="tooltip" title="Buscar"></button>
+        </div>
+        <div class="col-sm-4 text-right">
+            <a class="btn btn-lg btn-success fa fa-plus" href="~/Admin/Ingredient/Mantenimiento/0" role="button" data-toggle="tooltip" title="Nuevo Producto"></a>
+        </div>
+    </div>
+}
+<hr />
+<div class="table-responsive">
+    <table class="table table-hover table-bordered text-center">
+        <thead>
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">Ingrediente</th>
+                <th class="text-center">Distribuidor</th>
+                <th class="text-center">Marca</th>
+                <th class="text-center">Descripción</th>
+                <th class="text-center">Unidad Medida</th>
+                <th class="text-center">Cantidad</th>
+                <th class="text-center">Precio</th>
+                <th class="text-center">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td>@m.id_producto</td>
+                    <td>@m.ingrediente.nom_ingrediente</td>
+                    <td>@m.distribuidor.nom_distribuidor</td>
+                    <td>@m.marca.nom_marca</td>
+                    <td>@m.des_producto</td>
+                    <td>@m.umed_producto</td>
+                    <td>@m.cant_producto</td>
+                    <td>@m.precio_producto</td>
+                    <td>
+                        <a href="~/Admin/Producto/Detalle/@m.id_producto" class="btn fa fa-eye os-ac-icon os-hover-yellow" data-toggle="tooltip" title="Ver Detalle"></a>
+                        <a href="~/Admin/Producto/Mantenimiento/@m.id_producto" class="btn fa fa-edit os-ac-icon os-hover-green" data-toggle="tooltip" title="Editar"></a>
+                        <a onclick="return confirm('¿Está seguro de eliminar el registro?');" href="~/Admin/Producto/Eliminar/@m.id_producto" class="btn fa fa-trash os-ac-icon os-hover-red" data-toggle="tooltip" title="Eliminar">
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
+</div>
+
+<script>
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+</script>

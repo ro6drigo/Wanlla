@@ -133,7 +133,7 @@ namespace Modelo
                     if (id_receta == 0)
                     {
                         recetas = dbwanlla.receta
-                                .Where(x => x.nom_receta.Contains(criterio) || x.des_receta.Contains(criterio) || Convert.ToString(x.time_receta).Contains(criterio))
+                                .Where(x => x.nom_receta.Contains(criterio) || x.des_receta.Contains(criterio))
                                 .ToList();
                     }
 

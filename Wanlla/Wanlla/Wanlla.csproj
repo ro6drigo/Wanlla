@@ -199,13 +199,13 @@
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriaController.cs" />
     <Compile Include="Areas\Admin\Controllers\DistribuidorController.cs" />
+    <Compile Include="Areas\Admin\Controllers\IngredientController.cs" />
     <Compile Include="Areas\Admin\Controllers\MarcaController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductoController.cs" />
     <Compile Include="Controllers\DietaController.cs" />
     <Compile Include="Controllers\FavoritoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Areas\Admin\Controllers\RecetaController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Filters\AdminFilters.cs" />
@@ -236,7 +236,6 @@
     <Content Include="Views\Dieta\Index.cshtml" />
     <Content Include="Views\Dieta\Mantenimiento.cshtml" />
     <Content Include="Views\Favorito\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Receta\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Dieta\Detalle.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -248,7 +247,8 @@
     <Content Include="Areas\Admin\Views\Producto\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Categoria\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Categoria\Mantenimiento.cshtml" />
-    <Content Include="Areas\Admin\Views\Receta\Mantenimiento.cshtml" />
+    <Content Include="Areas\Admin\Views\Ingredient\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Ingredient\Mantenimiento.cshtml" />
     <None Include="Properties\PublishProfiles\Wanlla.pubxml" />
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Areas\Admin\Views\Usuario\Index.cshtml" />

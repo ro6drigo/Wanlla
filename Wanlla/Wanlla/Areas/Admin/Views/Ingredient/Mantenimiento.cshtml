@@ -1,0 +1,36 @@
+﻿@model Modelo.ingrediente
+@{
+    ViewBag.Title = (Model.id_ingrediente > 0 ? Model.nom_ingrediente : "Nuevo Ingrediente");
+}
+
+@using (Html.BeginForm("Guardar", "ingrediente", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(x => x.id_ingrediente);
+    <div class="form-group">
+        <label for="nom_categoria" class="col-sm-4 control-label hidden-xs"><i class="fa fa-certificate fa-2x" aria-hidden="true"></i></label>
+        <label for="nom_categoria" class="col-sm-4 control-label visible-xs">Ingrediente</label>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(x => x.nom_ingrediente, new { type = "text", @class = "form-control", placeholder = "Ingrediente" })
+            @Html.ValidationMessageFor(x => x.nom_ingrediente, null, new { @class = "label label-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="img_categoria" class="col-sm-4 control-label hidden-xs"><i class="fa fa-info fa-2x" aria-hidden="true"></i></label>
+        <label for="img_categoria" class="col-sm-4 control-label visible-xs">Tipo</label>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(x => x.tipo_ingrediente, new { type = "text", @class = "form-control", placeholder = "Tipo" })
+            @Html.ValidationMessageFor(x => x.tipo_ingrediente, null, new { @class = "label label-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-4">
+            <button type="submit" class="btn btn-success glyphicon glyphicon-floppy-disk" data-toggle="tooltip" title="Guardar"></button>
+            <button type="button" class="btn btn-danger glyphicon glyphicon-floppy-remove" onclick="javascript:history.back()" data-toggle="tooltip" title="Cancelar"></button>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+}
