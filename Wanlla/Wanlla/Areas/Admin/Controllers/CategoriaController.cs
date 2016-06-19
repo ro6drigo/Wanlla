@@ -28,7 +28,7 @@ namespace Wanlla.Areas.Admin.Controllers
         public ActionResult Mantenimiento(int id = 0)
         {
             return View(
-                id == 0 ? new categoria() //nueva distribuidor
+                id == 0 ? new categoria() //nueva categoría
                         : categoria.Obtener(id)
             );
         }

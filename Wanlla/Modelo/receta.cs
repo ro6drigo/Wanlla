@@ -67,9 +67,9 @@ namespace Modelo
             var recetas = new List<receta>();
             try
             {
-                using (var db = new db_wanlla())
+                using (var dbwanlla = new db_wanlla())
                 {
-                    recetas = db.receta.ToList();
+                    recetas = dbwanlla.receta.ToList();
                 }
             }
             catch (Exception ex)
@@ -84,9 +84,9 @@ namespace Modelo
             var recetas = new List<receta>();
             try
             {
-                using (var db = new db_wanlla())
+                using (var dbwanlla = new db_wanlla())
                 {
-                    recetas = db.receta.ToList();
+                    recetas = dbwanlla.receta.ToList();
                 }
             }
             catch (Exception ex)
@@ -101,9 +101,9 @@ namespace Modelo
             var recetas = new receta();
             try
             {
-                using (var db = new db_wanlla())
+                using (var dbwanlla = new db_wanlla())
                 {
-                    recetas = db.receta.Include("categoria")
+                    recetas = dbwanlla.receta.Include("categoria")
                         //.Include("PRODUCTO.NOMBRE")
                         .Where(x => x.id_receta == id)
                         .SingleOrDefault();
@@ -122,18 +122,18 @@ namespace Modelo
         /// <param name="des_receta">Descripción de la receta a buscar</param>
         /// <param name="time_receta">Tiempo de cocción de las recetas</param>
         /// <returns></returns>
-        public List<receta> buscar(string nom_receta, string des_receta, int time_receta)
+        public List<receta> buscar(string criterio)
         {
             var recetas = new List<receta>();
 
             try
             {
-                using (var db = new db_wanlla())
+                using (var dbwanlla = new db_wanlla())
                 {
                     if (id_receta == 0)
                     {
-                        recetas = db.receta
-                                .Where(x => x.nom_receta.Contains(nom_receta) || x.des_receta.Contains(des_receta) || x.time_receta == time_receta)
+                        recetas = dbwanlla.receta
+                                .Where(x => x.nom_receta.Contains(criterio) || x.des_receta.Contains(criterio) || Convert.ToString(x.time_receta).Contains(criterio))
                                 .ToList();
                     }
 
@@ -153,17 +153,17 @@ namespace Modelo
         {
             try
             {
-                using (var db = new db_wanlla())
+                using (var dbwanlla = new db_wanlla())
                 {
                     if (this.id_receta > 0)
                     {
-                        db.Entry(this).State = EntityState.Modified;
+                        dbwanlla.Entry(this).State = EntityState.Modified;
                     }
                     else
                     {
-                        db.Entry(this).State = EntityState.Added;
+                        dbwanlla.Entry(this).State = EntityState.Added;
                     }
-                    db.SaveChanges();
+                    dbwanlla.SaveChanges();
                 }
             }
             catch (Exception ex)
@@ -178,10 +178,10 @@ namespace Modelo
         {
             try
             {
-                using (var db = new db_wanlla())
+                using (var dbwanlla = new db_wanlla())
                 {
-                    db.Entry(this).State = System.Data.Entity.EntityState.Deleted;
-                    db.SaveChanges();
+                    dbwanlla.Entry(this).State = System.Data.Entity.EntityState.Deleted;
+                    dbwanlla.SaveChanges();
                 }
             }
             catch (Exception ex)

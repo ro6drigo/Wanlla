@@ -4,9 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Modelo;
+using Wanlla.Filters;
 
 namespace Wanlla.Controllers
 {
+    //[Autenticado]
     public class RecetaController : Controller
     {
         /// <summary>
@@ -14,21 +16,16 @@ namespace Wanlla.Controllers
         /// </summary>
         private receta receta = new receta();
         // GET: Receta
-        public ActionResult Index(string nom_receta,string des_receta, int time_receta)
+        public ActionResult Index(string criterio)
         {
-            if (nom_receta == null || nom_receta == "")
+            if (criterio == null || criterio == "")
             {
                 return View(receta.Listar());
             }
             else
             {
-                return View(receta.buscar(nom_receta, des_receta, time_receta));
+                return View(receta.buscar(criterio));
             }
-        }
-
-        public ActionResult Detalle(int id)
-        {
-            return View(receta.Obtener(id));
         }
 
         public ActionResult Mantenimiento(int id = 0)
@@ -57,14 +54,6 @@ namespace Wanlla.Controllers
             receta.id_receta = id;
             receta.eliminar();
             return Redirect("~/Receta/Index");
-        }
-
-        public ActionResult Buscar(string nom_receta, string des_receta, int time_receta)
-        {
-            return View(
-                    nom_receta == null || nom_receta == "" ? receta.Listar()
-                    : receta.buscar(nom_receta, des_receta, time_receta)
-                    );
         }
     }
 }
