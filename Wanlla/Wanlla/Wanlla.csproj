@@ -199,8 +199,8 @@
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriaController.cs" />
     <Compile Include="Areas\Admin\Controllers\DistribuidorController.cs" />
-    <Compile Include="Areas\Admin\Controllers\IngredientesController.cs" />
     <Compile Include="Areas\Admin\Controllers\MarcaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductoController.cs" />
     <Compile Include="Controllers\DietaController.cs" />
     <Compile Include="Controllers\FavoritoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -245,8 +245,8 @@
     <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Distribuidor\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Distribuidor\Mantenimiento.cshtml" />
-    <Content Include="Areas\Admin\Views\Ingredientes\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Ingredientes\Mantenimiento.cshtml" />
+    <Content Include="Areas\Admin\Views\Producto\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Categoria\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Wanlla.pubxml" />
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Areas\Admin\Views\Usuario\Index.cshtml" />
@@ -263,7 +263,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Categoria\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
