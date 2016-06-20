@@ -99,11 +99,11 @@ namespace Modelo
                     {
                         productos = dbwanlla.producto
                                 .Include("ingrediente").Include("distribuidor").Include("marca")
-                                .Where(x => x.ingrediente.nom_ingrediente.Contains(criterio)
-                                || x.distribuidor.nom_distribuidor.Contains(criterio)
-                                || x.marca.nom_marca.Contains(criterio)
-                                || x.des_producto.Contains(criterio)
-                                || x.umed_producto.Contains(criterio))
+                                .Where(x => x.ingrediente.nom_ingrediente == criterio
+                                || x.distribuidor.nom_distribuidor == criterio
+                                || x.marca.nom_marca == criterio
+                                || x.des_producto == criterio
+                                || x.umed_producto == criterio)
                                 .ToList();
                     }
 
