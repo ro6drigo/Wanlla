@@ -202,6 +202,7 @@
     <Compile Include="Areas\Admin\Controllers\IngredientController.cs" />
     <Compile Include="Areas\Admin\Controllers\MarcaController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductoController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RecetaController.cs" />
     <Compile Include="Controllers\DietaController.cs" />
     <Compile Include="Controllers\FavoritoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -249,6 +250,7 @@
     <Content Include="Areas\Admin\Views\Categoria\Mantenimiento.cshtml" />
     <Content Include="Areas\Admin\Views\Ingredient\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Ingredient\Mantenimiento.cshtml" />
+    <Content Include="Areas\Admin\Views\Receta\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Wanlla.pubxml" />
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Areas\Admin\Views\Usuario\Index.cshtml" />
