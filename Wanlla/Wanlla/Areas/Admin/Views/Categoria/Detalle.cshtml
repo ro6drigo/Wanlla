@@ -1,0 +1,62 @@
+﻿@model Modelo.categoria
+@{
+    ViewBag.Title = "Detalle Categoría";
+}
+
+<ol class="breadcrumb">
+
+    <li><a href="~/Admin/Categoria/">Categorías</a></li>
+    <li class="active">@Model.nom_categoria</li>
+</ol>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Información de la Categoría
+    </div>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>ID</dt>
+            <dd>@Model.id_categoria</dd>
+            <dt>NOMBRE</dt>
+            <dd>@Model.nom_categoria</dd>
+            <dt>IMAGEN</dt>
+            <dd>@Model.img_categoria</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Recetas
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="width:50px;">Id</th>
+                    <th style="width:200px;">Nombre</th>
+                    <th style="width:200px;">Descripción</th>
+                    <th style="width:50px;">Imagen</th>
+                    <th style="width:200px;">Video</th>
+                    <th style="width:200px;">Dificultad</th>
+                    <th style="width:50px;">Tiempo</th>
+                    <th style="width:50px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var r in Model.receta)
+                {
+                    <tr>
+                        <th>@(r.id_receta)</th>
+                        <th>@(r.nom_receta)</th>
+                        <th>@(r.des_receta)</th>
+                        <th>@(r.img_receta)</th>
+                        <th>@(r.vid_receta)</th>
+                        <th>@(r.diff_receta)</th>
+                        <th>@(r.time_receta)</th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

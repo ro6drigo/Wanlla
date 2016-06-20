@@ -251,6 +251,7 @@
     <Content Include="Areas\Admin\Views\Ingredient\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Ingredient\Mantenimiento.cshtml" />
     <Content Include="Areas\Admin\Views\Receta\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Categoria\Detalle.cshtml" />
     <None Include="Properties\PublishProfiles\Wanlla.pubxml" />
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Areas\Admin\Views\Usuario\Index.cshtml" />

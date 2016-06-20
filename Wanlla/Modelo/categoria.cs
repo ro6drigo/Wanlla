@@ -6,7 +6,10 @@ namespace Modelo
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity;
     using System.Data.Entity.Spatial;
+    using System.Data.Entity.Validation;
+    using System.IO;
     using System.Linq;
+    using System.Web;
 
     [Table("categoria")]
     public partial class categoria
@@ -129,6 +132,53 @@ namespace Modelo
             {
                 throw ex;
             }
+        }
+
+        public ResponseModel GuardarFoto(HttpPostedFileBase Foto)
+        {
+            var rm = new ResponseModel();
+
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    dbwanlla.Configuration.ValidateOnSaveEnabled = false;
+
+                    var eUsuario = dbwanlla.Entry(this);
+                    eUsuario.State = EntityState.Modified;
+                    //Obviar campos o ignorar en la actualización
+                    if (Foto != null)
+                    {
+                        String archivo = Path.GetFileName(Foto.FileName);//Path.GetExtension(Foto.FileName);
+
+                        //Nombre de imagen en forma aleatoria
+                        //String archivo = DateTime.Now.ToString("yyyyMMddHHmmss") + Path.GetExtension(Foto.FileName);
+
+                        //Colocar la ruta donde se grabará
+                        Foto.SaveAs(HttpContext.Current.Server.MapPath("~/Uploads/" + archivo));
+
+                        //enviar al modelo el nombre del archivo
+                        this.img_categoria = archivo;
+                    }
+                    else eUsuario.Property(x => x.img_categoria).IsModified = false; // el campo no es obligatorio
+
+                    //if (this.NOMBREUSU == null) eUsuario.Property(x => x.NOMBREUSU).IsModified = false;
+
+                    //if (this.PASSWORD == null) eUsuario.Property(x => x.PASSWORD).IsModified = false;
+
+                    dbwanlla.SaveChanges();
+                    rm.SetResponse(true);
+                }
+            }
+            catch (DbEntityValidationException e)
+            {
+                throw e;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return rm;
         }
     }
 }

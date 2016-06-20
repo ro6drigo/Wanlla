@@ -62,6 +62,23 @@ namespace Modelo
             return distribuidores;
         }
 
+        public List<distribuidor> ListarDistribuidor()
+        {
+            var tipo = new List<distribuidor>();
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    tipo = dbwanlla.distribuidor.OrderBy(x => x.id_distribuidor).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return tipo;
+        }
+
         public List<distribuidor> Buscar(string criterio)
         {
             var distribuidores = new List<distribuidor>();

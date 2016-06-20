@@ -25,6 +25,11 @@ namespace Wanlla.Areas.Admin.Controllers
             }
         }
 
+        public ActionResult Detalle(int id)
+        {
+            return View(producto.Obtener(id));
+        }
+
         public ActionResult Mantenimiento(int id = 0)
         {
             return View(

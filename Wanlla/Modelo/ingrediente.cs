@@ -55,6 +55,23 @@ namespace Modelo
             }
             return ingredientes;
         }
+
+        public List<ingrediente> ListarIngrediente()
+        {
+            var tipo = new List<ingrediente>();
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    tipo = dbwanlla.ingrediente.OrderBy(x => x.id_ingrediente).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return tipo;
+        }
         /// <summary>
         /// 
         /// </summary>

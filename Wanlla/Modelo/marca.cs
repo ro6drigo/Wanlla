@@ -46,6 +46,23 @@ namespace Modelo
             return marcas;
         }
 
+        public List<marca> ListarMarca()
+        {
+            var tipo = new List<marca>();
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    tipo = dbwanlla.marca.OrderBy(x => x.id_marca).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return tipo;
+        }
+
         public List<marca> Buscar(string criterio)
         {
             var marcas = new List<marca>();
