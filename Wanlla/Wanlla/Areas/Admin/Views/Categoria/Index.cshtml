@@ -36,18 +36,21 @@
                     <td>@m.nom_categoria</td>
                     <td>@m.img_categoria</td>
                     <td>
-                        <a href="~/Admin/Categoria/Detalle/@m.id_categoria" class="btn fa fa-eye os-ac-icon os-hover-yellow" data-toggle="tooltip" title="Ver Detalle"></a>
-                        <a href="~/Admin/Categoria/Mantenimiento/@m.id_categoria" class="btn fa fa-edit os-ac-icon os-hover-green" data-toggle="tooltip" title="Editar"></a>
-                        <a onclick="return confirm('¿Está seguro de eliminar el registro?');" href="~/Admin/Categoria/Eliminar/@m.id_categoria" class="btn fa fa-trash os-ac-icon os-hover-red" data-toggle="tooltip" title="Eliminar"></a>
+                        <table class="table text-center">
+                            <tbody>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Categoría</th>
+                                    <th class="text-center">Imagen</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="~/Admin/Categoria/Detalle/@m.id_categoria" title="Ver Detalle"><span class="fa fa-eye os-ac-icon os-hover-yellow"></span></a>
+                        <a href="~/Admin/Categoria/Mantenimiento/@m.id_categoria" title="Editar"><span class="fa fa-pencil os-ac-icon os-hover-green"></a>
+                        <a onclick="return confirm('¿Está seguro de eliminar el registro?');" href="~/Admin/Categoria/Eliminar/@m.id_categoria" title="Eliminar"><span class="fa fa-trash os-ac-icon os-hover-red"></span></a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
-
-<script>
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
-</script>
