@@ -48,6 +48,10 @@ namespace Modelo
         [StringLength(255)]
         public string pass_usuario { get; set; }
 
+        [Required]
+        [StringLength(25)]
+        public string tipo_usuario { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<dieta> dieta { get; set; }
 
@@ -87,7 +91,7 @@ namespace Modelo
             }
         }
 
-        public ResponseModel Acceder(string email, string pass)
+        public ResponseModel acceder(string email, string pass)
         {
             var rm = new ResponseModel();
 
@@ -103,7 +107,7 @@ namespace Modelo
                         if (BCrypt.Net.BCrypt.Verify(pass, usu.pass_usuario))
                         {
                             SessionHelper.AddUserToSession(usu.id_usuario.ToString());
-                            SessionHelper.CrearSesion(usu.id_usuario.ToString(), usu.id_usuario.ToString(), (usu.nom_usuario + " " + usu.ape_usuario));
+                            SessionHelper.CrearSesion(usu.id_usuario.ToString(), usu.tipo_usuario.ToString(), (usu.nom_usuario + " " + usu.ape_usuario));
                             rm.SetResponse(true);
                         }
                         else
@@ -118,6 +122,51 @@ namespace Modelo
                 }
             }
             catch(Exception ex)
+            {
+                throw ex;
+            }
+
+            return rm;
+        }
+
+        public ResponseModel accederAdmin(string email, string pass)
+        {
+            var rm = new ResponseModel();
+
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    var usu = db.usuario.Where(x => x.email_usuario == email)
+                                            .SingleOrDefault();
+
+                    if (usu != null)
+                    {
+                        if (BCrypt.Net.BCrypt.Verify(pass, usu.pass_usuario))
+                        {
+                            if (usu.tipo_usuario == "Admin")
+                            {
+                                SessionHelper.AddUserToSession(usu.id_usuario.ToString());
+                                SessionHelper.CrearSesion(usu.id_usuario.ToString(), usu.tipo_usuario.ToString(), (usu.nom_usuario + " " + usu.ape_usuario));
+                                rm.SetResponse(true);
+                            }
+                            else
+                            {
+                                rm.SetResponse(false, "Sin privilegios suficientes");
+                            }
+                        }
+                        else
+                        {
+                            rm.SetResponse(false, "Contraseña incorrecta");
+                        }
+                    }
+                    else
+                    {
+                        rm.SetResponse(false, "El usuario no existe");
+                    }
+                }
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }

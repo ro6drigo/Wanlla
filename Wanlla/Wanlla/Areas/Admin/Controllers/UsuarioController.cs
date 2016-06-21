@@ -8,6 +8,7 @@ using Wanlla.Filters;
 
 namespace Wanlla.Controllers
 {
+    [AutenticadoAdmin]
     public class UsuarioController : Controller
     {
         // GET: Usuario

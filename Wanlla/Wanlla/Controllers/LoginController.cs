@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Modelo;
-using Wanlla.Filters;
 
 namespace Wanlla.Controllers
 {
@@ -24,7 +23,7 @@ namespace Wanlla.Controllers
 
         public ActionResult Acceder(string email_usuario, string pass_usuario)
         {
-            var rm = usuario.Acceder(email_usuario, pass_usuario);
+            var rm = usuario.acceder(email_usuario, pass_usuario);
 
             if (rm.response)
             {
@@ -39,6 +38,7 @@ namespace Wanlla.Controllers
         public ActionResult Logout()
         {
             SessionHelper.DestroyUserSession();
+            SessionHelper.DestruirSesion();
             return Redirect("~/");
         }
 

@@ -8,7 +8,7 @@ using Wanlla.Filters;
 
 namespace Wanlla.Areas.Admin.Controllers
 {
-    //[Autenticado]
+    [AutenticadoAdmin]
     public class DistribuidorController : Controller
     {
         // GET: Admin/Distribuidor

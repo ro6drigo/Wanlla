@@ -8,7 +8,7 @@ using Wanlla.Filters;
 
 namespace Wanlla.Areas.Admin.Controllers
 {
-    //[Autenticado]
+    [AutenticadoAdmin]
     public class RecetaController : Controller
     {
         private receta receta = new receta();

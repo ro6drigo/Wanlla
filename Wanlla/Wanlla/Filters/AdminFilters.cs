@@ -14,9 +14,22 @@ namespace Wanlla.Filters
         {
             base.OnActionExecuting(filterContext);
 
-            if (!SessionHelper.ExistUserInSession())
+            if (!SessionHelper.ExisteSesion())
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { Controller = "Login", Action = "Index" }));
+            }
+        }
+    }
+
+    public class AutenticadoAdminAttribute : ActionFilterAttribute
+    {
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            base.OnActionExecuting(filterContext);
+
+            if (!SessionHelper.ExisteSesion() && SessionHelper.Leer<string>("tipo_usuario") != "Admin")
+            {
+                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { Controller = "LoginAdmin", Action = "Index" }));
             }
         }
     }
