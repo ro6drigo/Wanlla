@@ -46,20 +46,16 @@
                     <td>@m.cant_producto</td>
                     <td>@m.precio_producto</td>
                     <td>
-                        <a href="~/Admin/Producto/Detalle/@m.id_producto" class="btn fa fa-eye os-ac-icon os-hover-yellow" data-toggle="tooltip" title="Ver Detalle"></a>
-                        <a href="~/Admin/Producto/Mantenimiento/@m.id_producto" class="btn fa fa-edit os-ac-icon os-hover-green" data-toggle="tooltip" title="Editar"></a>
-                        <a onclick="return confirm('¿Está seguro de eliminar el registro?');" href="~/Admin/Producto/Eliminar/@m.id_producto" class="btn fa fa-trash os-ac-icon os-hover-red" data-toggle="tooltip" title="Eliminar">
-                        </a>
+                        <table class="text-center" style="width:100%;">
+                            <tr>
+                                <td><a href="~/Admin/Producto/Detalle/@m.id_producto" data-toggle="tooltip" data-placement="bottom" title="Ver Detalle"><span class="fa fa-eye os-ac-icon os-hover-yellow"></span></a></td>
+                                <td><a href="~/Admin/Producto/Mantenimiento/@m.id_producto" data-toggle="tooltip" data-placement="bottom" title="Editar"><span class="fa fa-pencil os-ac-icon os-hover-green"></span></a></td>
+                                <td><a onclick="return confirm('¿Está seguro de eliminar el registro?');" href="~/Admin/Producto/Eliminar/@m.id_producto" data-toggle="tooltip" data-placement="bottom" title="Eliminar"><span class="fa fa-trash os-ac-icon os-hover-red"></span></a></td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-
 </div>
-
-<script>
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
-</script>

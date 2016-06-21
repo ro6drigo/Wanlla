@@ -27,7 +27,7 @@ namespace Wanlla.Filters
         {
             base.OnActionExecuting(filterContext);
 
-            if (!SessionHelper.ExisteSesion() && SessionHelper.Leer<string>("tipo_usuario") != "Admin")
+            if (!SessionHelper.ExisteSesion() || SessionHelper.Leer<string>("tipo_usuario") != "Admin")
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { Controller = "LoginAdmin", Action = "Index" }));
             }

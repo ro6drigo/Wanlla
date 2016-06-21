@@ -36,7 +36,10 @@
                     <ul class="nav navbar-nav navbar-right">
                         @if (SessionHelper.ExisteSesion())
                         {
-
+                            <li>@Html.ActionLink("Categoria", "Index", "Categoria")</li>
+                            <li>@Html.ActionLink("Distribuidor", "Index", "Distribuidor")</li>
+                            <li>@Html.ActionLink("Ingrediente", "Index", "Ingredient")</li>
+                            <li>@Html.ActionLink("Marca", "Index", "Marca")</li>
                             <li>@Html.ActionLink("Productos", "Index", "Producto")</li>
                             <li>@Html.ActionLink("Recetas", "Index", "Receta")</li>
                             <li class="dropdown">
