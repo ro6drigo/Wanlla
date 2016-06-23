@@ -156,7 +156,7 @@ namespace Modelo
                 using (var db = new db_wanlla())
                 {
                     dieta_recetas = db.dieta
-                                .Include("dieta_receta")
+                                .Include("dieta_receta.receta")
                                 .Where(x => x.id_dieta == id_dieta && x.id_usuario == id_usuario)
                                 .SingleOrDefault();
                 }
