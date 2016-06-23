@@ -107,7 +107,7 @@ namespace Modelo
                         if (BCrypt.Net.BCrypt.Verify(pass, usu.pass_usuario))
                         {
                             SessionHelper.AddUserToSession(usu.id_usuario.ToString());
-                            SessionHelper.CrearSesion(usu.id_usuario.ToString(), usu.tipo_usuario.ToString(), (usu.nom_usuario + " " + usu.ape_usuario));
+                            SessionHelper.CrearSesion(usu.id_usuario, usu.tipo_usuario, (usu.nom_usuario + " " + usu.ape_usuario));
                             rm.SetResponse(true);
                         }
                         else
@@ -147,7 +147,7 @@ namespace Modelo
                             if (usu.tipo_usuario == "Admin")
                             {
                                 SessionHelper.AddUserToSession(usu.id_usuario.ToString());
-                                SessionHelper.CrearSesion(usu.id_usuario.ToString(), usu.tipo_usuario.ToString(), (usu.nom_usuario + " " + usu.ape_usuario));
+                                SessionHelper.CrearSesion(usu.id_usuario, usu.tipo_usuario, (usu.nom_usuario + " " + usu.ape_usuario));
                                 rm.SetResponse(true);
                             }
                             else

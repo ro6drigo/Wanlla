@@ -1,18 +1,25 @@
-﻿@{
-    ViewBag.Title = "Dietas";
+﻿@model Modelo.dieta
+@{
+    ViewBag.Title = (Model.id_dieta > 0 ? Model.nom_dieta : "Nueva Dieta");
 }
 
-<form action="#" method="post" class="form-horizontal">
-    <div class="form-group">
-        <label for="nom_dieta" class="col-sm-4 control-label hidden-xs"><span class="fa fa-cutlery fa-2x" aria-hidden="true"></span></label>
-        <label for="nom_dieta" class="col-sm-4 control-label visible-xs">Dieta</label>
-        <div class="col-sm-4">
-            <input type="text" class="form-control" id="nom_dieta" name="nom_dieta" placeholder="Dieta">
+@using (Html.BeginForm("Guardar", "Dieta", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <form action="#" method="post" class="form-horizontal">
+        <div class="form-group">
+            @Html.HiddenFor(x => x.id_dieta)
+            <label for="nom_dieta" class="col-sm-4 control-label hidden-xs"><span class="fa fa-cutlery fa-2x" aria-hidden="true"></span></label>
+            <label for="nom_dieta" class="col-sm-4 control-label visible-xs">Dieta</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.nom_dieta, new { type = "text", @class = "form-control", placeholder = "Dieta" })
+                @Html.ValidationMessageFor(x => x.nom_dieta, null, new { @class = "label label-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-4 col-sm-4">
-            <button type="submit" class="btn btn-default">Guardar</button>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-4">
+                <button type="submit" class="btn btn-default">Guardar</button>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+
+}

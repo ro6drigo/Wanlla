@@ -11,7 +11,7 @@ namespace Modelo
 {
     public class SessionHelper
     {
-        public static void CrearSesion(string id_usuario, string tipo_usuario, string nombre_usuario)
+        public static void CrearSesion(int id_usuario, string tipo_usuario, string nombre_usuario)
         {
             HttpContext.Current.Session["login"] = true;
             HttpContext.Current.Session["id_usuario"] = id_usuario;
@@ -43,7 +43,7 @@ namespace Modelo
             if (valor == null)
                 return default(T);
             else
-                return ((T)valor);
+                return (T)valor;
         }
 
         public static void Escribir(string variable, object valor)

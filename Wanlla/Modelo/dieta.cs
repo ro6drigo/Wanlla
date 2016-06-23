@@ -43,12 +43,9 @@ namespace Modelo
             {
                 using (var db = new db_wanlla())
                 {
-                    if(id_usuario == 0)
-                    {
-                        dietas = db.dieta
-                                .Where(x => x.id_usuario == id_usuario)
-                                .ToList();
-                    }
+                    dietas = db.dieta
+                            .Where(x => x.id_usuario == id_usuario)
+                            .ToList();
                 }
             }
             catch (Exception ex)
@@ -73,13 +70,9 @@ namespace Modelo
             {
                 using (var db = new db_wanlla())
                 {
-                    if(id_usuario == 0)
-                    {
-                        dietas = db.dieta
-                                .Where(x => x.id_usuario == id_usuario && x.nom_dieta.Contains(nom_dieta))
-                                .ToList();
-                    }
-                    
+                    dietas = db.dieta
+                            .Where(x => x.id_usuario == id_usuario && x.nom_dieta.Contains(nom_dieta))
+                            .ToList();
                 }
             }
             catch (Exception ex)
@@ -116,6 +109,25 @@ namespace Modelo
             }
         }
 
+        public dieta obtener(int id, int id_usuario) //retornar es un objeto
+        {
+            var dietas = new dieta();
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    dietas = db.dieta
+                            .Where(x => x.id_dieta == id && x.id_usuario == id_usuario)
+                            .SingleOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return dietas;
+        }
+
         /// <summary>
         /// Eliminar Dieta
         /// </summary>
@@ -136,6 +148,24 @@ namespace Modelo
         }
 
 
-
+        public dieta detalle(int id_dieta, int id_usuario)
+        {
+            var dieta_recetas = new dieta();
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    dieta_recetas = db.dieta
+                                .Include("dieta_receta")
+                                .Where(x => x.id_dieta == id_dieta && x.id_usuario == id_usuario)
+                                .SingleOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return dieta_recetas;
+        }
     }
 }

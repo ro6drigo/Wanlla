@@ -1,54 +1,63 @@
-﻿@{
+﻿@model List<Modelo.dieta>
+@{
     ViewBag.Title = "Dietas";
 }
 <div class="row">
     <div class="col-sm-6">
-
+        @using (Html.BeginForm("Index", "Dieta", FormMethod.Post, new { @class = "form-inline" }))
+        {
+            <div class="form-group">
+                <label class="sr-only" for="buscar">Buscar</label>
+                <div class="input-group">
+                    @Html.TextBox("buscar", null, new { type = "search", @class = "form-control", placeholder = "Ingrese nombre", id = "buscar" , autocomplete = "off"})
+                    <div class="input-group-addon"><a href="javascript: document.myform.submit();"><span class="fa fa-search"></span></a></div>
+                </div>
+            </div>
+        }
     </div>
     <div class="col-sm-6 text-right">
-        <a class="btn btn-default" href="~/Dieta/Mantenimiento/0" role="button">Nueva Dieta</a>
+        <a class="btn btn-default" href="~/Dieta/Mantenimiento" role="button">Nueva Dieta</a>
     </div>
 </div>
 
 <br>
 
-<div class="table-responsive">
-    <table class="table table-hover table-bordered">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Dieta</th>
-                <th>Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Vegetariana</td>
-                <td>
-                    <a href="~/Dieta/Detalle/1"><span class="fa fa-eye os-ac-icon os-hover-yellow"></span></a>
-                    <a href="#"><span class="fa fa-pencil os-ac-icon os-hover-green"></span></a> 
-                    <a href="#"><span class="fa fa-trash os-ac-icon os-hover-red"></span></a>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Postres</td>
-                <td>
-                    <a href="~/Dieta/Detalle/2"><span class="fa fa-eye os-ac-icon os-hover-yellow"></span></a>
-                    <a href="#"><span class="fa fa-pencil os-ac-icon os-hover-green"></span></a>
-                    <a href="#"><span class="fa fa-trash os-ac-icon os-hover-red"></span></a>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Dieta diaria</td>
-                <td>
-                    <a href="~/Dieta/Detalle/3"><span class="fa fa-eye os-ac-icon os-hover-yellow"></span></a>
-                    <a href="#"><span class="fa fa-pencil os-ac-icon os-hover-green"></span></a>
-                    <a href="#"><span class="fa fa-trash os-ac-icon os-hover-red"></span></a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+@if(Model.Count == 0)
+{
+    <div class="text-center">
+        Sin Dietas
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered text-center">
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th class="text-center">Dieta</th>
+                    <th class="text-center">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int count = 1;}
+                @foreach (var m in Model)
+                {
+                    <tr>
+                        <th class="text-center" scope="row">@(count++)</th>
+                        <td>@(m.nom_dieta)</td>
+                        <td>
+                            <table class="text-center" style="width:100%;">
+                                <tr>
+                                    <td><a href="~/Dieta/Detalle/@(m.id_dieta)" data-toggle="tooltip" data-placement="bottom" title="Detalle"><span class="fa fa-eye os-ac-icon os-hover-yellow"></span></a></td>
+                                    <td><a href="~/Dieta/Mantenimiento/@(m.id_dieta)" data-toggle="tooltip" data-placement="bottom" title="Editar"><span class="fa fa-pencil os-ac-icon os-hover-green"></span></a></td>
+                                    <td><a onclick="return confirm('¿Si elimina la dieta @(m.nom_dieta), perderá todas las recetas guardadas?');" href="~/Dieta/Eliminar/@(m.id_dieta)" data-toggle="tooltip" data-placement="bottom" title="Eliminar"><span class="fa fa-trash os-ac-icon os-hover-red"></span></a></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

@@ -1,66 +1,51 @@
-﻿
+﻿@model Modelo.dieta
 @{
-    ViewBag.Title = "Vegetariana";
+    ViewBag.Title = Model.nom_dieta;
 }
 
 <div class="row">
+    <div class="col-sm-6">
+        @*@using (Html.BeginForm("Index", "Dieta", FormMethod.Post, new { @class = "form-inline" }))
+        {
+            <div class="form-group">
+                <label class="sr-only" for="buscar">Buscar</label>
+                <div class="input-group">
+                    @Html.TextBox("buscar", null, new { type = "search", @class = "form-control", placeholder = "Ingrese nombre", id = "buscar", autocomplete = "off" })
+                    <div class="input-group-addon"><a href="javascript: document.myform.submit();"><span class="fa fa-search"></span></a></div>
+                </div>
+            </div>
+        }*@
+    </div>
+    <div class="col-sm-6 text-right">
+        <a class="btn btn-default" href="~/Detalle/Mantenimiento" role="button">Agregar Receta</a>
+    </div>
+</div>
 
+<br />
+
+<div class="row">
     <div class="col-sm-12">
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <h3 class="panel-title">Día 1</h3>
-            </div>
-            <div class="panel-body">
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object" src="~/images/media1.jpg" alt="128">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">Ají de Gallina </h4>
-                        En una olla poner a sancochar la pechuga de la gallina, una vez sancochada se deberá deshilachar.
+        @{ int count = 1;}
+        @foreach (var r in Model.dieta_receta)
+        {
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Día @(count++)</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object" src="~/images/media1.jpg" alt="@(r.receta.nom_receta)">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">@(r.receta.nom_receta)</h4>
+                            @(r.receta.des_receta)
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <h3 class="panel-title">Día 2</h3>
-            </div>
-            <div class="panel-body">
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object" src="~/images/media2.jpg" alt="128">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">Rocoto Relleno</h4>
-                        Posee un sabor más dulzón, que es muy apreciado principalmente en la región Arequipa pero también extendido en el resto de este país.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <h3 class="panel-title">Día 3</h3>
-            </div>
-            <div class="panel-body">
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object" src="~/images/media3.jpg" alt="128">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">Picarones</h4>
-                        Los picarones son un dulce en forma de anillos hecho con masa de harina de trigo mezclada con zapallo y en ocasiones camote y bañados en chancaca
-                    </div>
-                </div>
-            </div>
-        </div>
+        }
     </div>
 </div>
