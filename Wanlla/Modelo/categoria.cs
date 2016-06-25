@@ -50,6 +50,57 @@ namespace Modelo
             return categorias;
         }
 
+        public AnexGRIDResponde ListarGrilla(AnexGRID grilla)
+        {
+
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    grilla.Inicializar();
+
+                    var query = db.categoria.Where(x => x.id_categoria > 0);
+
+                    //ordenar por columnas
+                    if (grilla.columna == "id_categoria")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.id_categoria)
+                            : query.OrderBy(x => x.id_categoria);
+                    }
+                    if (grilla.columna == "nom_categoria")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.nom_categoria)
+                            : query.OrderBy(x => x.nom_categoria);
+                    }
+                    if (grilla.columna == "img_categoria")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.img_categoria)
+                            : query.OrderBy(x => x.img_categoria);
+                    }
+
+                    var categorias = query.Skip(grilla.pagina).Take(grilla.limite).ToList();
+
+                    var total = query.Count();
+
+                    //enviamos a la grilla
+                    grilla.SetData(
+                        from c in categorias
+                        select new
+                        {
+                            c.id_categoria,
+                            c.nom_categoria,
+                            c.img_categoria
+                        },
+                        total
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return grilla.responde();
+        }
         public categoria Obtener(int id) //retornar es un objeto
         {
             var categorias = new categoria();

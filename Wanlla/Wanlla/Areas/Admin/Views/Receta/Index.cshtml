@@ -18,3 +18,44 @@
     </div>
 }
 <hr />
+<div class="table-responsive">
+    <table class="table table-hover table-bordered text-center">
+        <thead>
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">Nombre</th>
+                <th class="text-center">Descripción</th>
+                <th class="text-center">Imagen</th>
+                <th class="text-center">Video</th>
+                <th class="text-center">Dificultad</th>
+                <th class="text-center">Tiempo Cocción</th>
+                <th class="text-center">Categoría</th>
+                <th class="text-center">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td>@m.id_receta</td>
+                    <td>@m.nom_receta</td>
+                    <td>@m.des_receta</td>
+                    <td>@m.img_receta</td>
+                    <td>@m.vid_receta</td>
+                    <td>@m.diff_receta</td>
+                    <td>@m.time_receta</td>
+                    <td>@m.categoria.nom_categoria</td>
+                    <td>
+                        <table class="text-center" style="width:100%;">
+                            <tr>
+                                <td><a href="~/Admin/Receta/Detalle/@m.id_receta" data-toggle="tooltip" data-placement="bottom" title="Ver Detalle"><span class="fa fa-eye os-ac-icon os-hover-yellow"></span></a></td>
+                                <td><a href="~/Admin/Receta/Mantenimiento/@m.id_receta" data-toggle="tooltip" data-placement="bottom" title="Editar"><span class="fa fa-pencil os-ac-icon os-hover-green"></span></a></td>
+                                <td><a onclick="return confirm('¿Está seguro de eliminar el registro?');" href="~/Admin/Receta/Eliminar/@m.id_receta" data-toggle="tooltip" data-placement="bottom" title="Eliminar"><span class="fa fa-trash os-ac-icon os-hover-red"></span></a></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -69,7 +69,9 @@ namespace Modelo
             {
                 using (var dbwanlla = new db_wanlla())
                 {
-                    recetas = dbwanlla.receta.ToList();
+                    recetas = dbwanlla.receta
+                                        .Include("categoria")
+                                        .ToList();
                 }
             }
             catch (Exception ex)
@@ -103,7 +105,9 @@ namespace Modelo
             {
                 using (var dbwanlla = new db_wanlla())
                 {
-                    recetas = dbwanlla.receta.Include("categoria")
+                    recetas = dbwanlla.receta.Include("ingrediente")
+                        .Include("ingrediente_receta")
+                        .Include("paso_receta")
                         //.Include("PRODUCTO.NOMBRE")
                         .Where(x => x.id_receta == id)
                         .SingleOrDefault();
@@ -133,7 +137,10 @@ namespace Modelo
                     if (id_receta == 0)
                     {
                         recetas = dbwanlla.receta
-                                .Where(x => x.nom_receta.Contains(criterio) || x.des_receta.Contains(criterio))
+                                .Include("categoria")
+                                .Where(x => x.nom_receta == criterio
+                                        || x.des_receta == criterio
+                                        || x.categoria.nom_categoria == criterio)
                                 .ToList();
                     }
 

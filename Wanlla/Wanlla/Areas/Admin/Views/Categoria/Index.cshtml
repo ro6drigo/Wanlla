@@ -7,7 +7,7 @@
 {
     <div class="row">
         <div class="col-sm-5 text-left">
-            @Html.TextBox("criterio", null, new { type = "text", @class = "form-control", placeholder = "Ingrese nombre" })
+            @Html.TextBox("criterio", null, new { type = "text", @class = "form-control", placeholder = "Ingrese dato a buscar" })
         </div>
         <div class="col-sm-3">
             <button type="submit" class="btn btn-lg btn-default fa fa-search" data-toggle="tooltip" title="Buscar"></button>
@@ -49,3 +49,72 @@
         </tbody>
     </table>
 </div>
+@*<div class="list-group" id="categoria"></div>
+
+<script>
+    $(document).ready(function () {
+        $("#categoria").anexGrid({
+            class: 'table-striped table-hover table-condensed',
+            columnas: [
+                //columna1: ID
+                { leyenda: "id_categoria", columna: "id_categoria", ordenable: true },
+                //columna1: Nombre
+                { leyenda: "nom_categoria", columna: "nom_categoria", ordenable: true },
+                //columna1: Estado
+                { leyenda: "img_categoria", columna: "img_categoria", ordenable: true },
+                //Columnas de los botones
+                { style: 'Width: 80px;' },//Visualizar
+                { style: 'Width: 80px;' },//Modificar
+                { style: 'Width: 80px;' },//Eliminar
+            ],
+
+            modelo: [
+                //campo 1: id_categoria
+                { propiedad: 'id_categoria' },
+                //campo 2: NOMBRE
+                { propiedad: 'nom_categoria' },
+                //Campo 3: ESTADO
+                { propiedad: 'img_categoria' },
+
+                //para los botones
+                //Botón Visualizar
+                {
+                    formato: function (tr, obj, valor) {
+                        return anexGrid_link({
+                            href: '@Url.Content("~/Categoria/Ver/")' + obj.id_categoria,
+                            contenido: '<i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i>',
+                            class: 'btn btn-lg btn-primary'
+                        });
+                    },
+                },
+                //Botón Modificar
+                {
+                    formato: function (tr, obj, valor) {
+                        return anexGrid_link({
+                            href: '@Url.Content("~/Categoria/AgregarEditar/")' + obj.id_categoria,
+                            contenido: '<i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>',
+                            class: 'btn btn-lg btn-info'
+                        });
+                    },
+                },
+                //Botón Eliminar
+                {
+                    formato: function (tr, obj, valor) {
+                        return anexGrid_link({
+                            href: '@Url.Content("~/Categoria/Eliminar/")' + obj.id_categoria,
+                            contenido: '<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>',
+                            class: 'btn btn-lg btn-danger',
+                            attr: [
+                            'onclick="return confirm(\'¿Está seguro de eliminar el registro?\')"'
+                            ]
+                        });
+                    },
+                }
+            ],
+            paginable: true,
+            limite: [10, 20, 50, 100],
+            columna: 'id_categoria',
+            columna_orden: "DESC"
+        });
+    })
+</script>*@

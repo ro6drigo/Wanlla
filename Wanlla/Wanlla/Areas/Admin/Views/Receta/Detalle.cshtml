@@ -1,0 +1,85 @@
+﻿@model Modelo.receta
+@{
+    ViewBag.Title = "Detalle Receta";
+}
+
+<ol class="breadcrumb">
+
+    <li><a href="~/Admin/Receta/">Recetas</a></li>
+    <li class="active">@Model.nom_receta</li>
+</ol>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Información de la Receta
+    </div>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>ID</dt>
+            <dd>@Model.id_receta</dd>
+            <dt>NOMBRE</dt>
+            <dd>@Model.nom_receta</dd>
+            <dt>DESCRIPCIÓN</dt>
+            <dd>@Model.des_receta</dd>
+            <dt>IMAGEN</dt>
+            <dd>@Model.img_receta</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Ingredientes Receta
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="width:50px;">Nombre</th>
+                    <th style="width:50px;">Cantidad</th>
+                    <th style="width:200px;">Unidad Medida</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var i in Model.ingrediente_receta)
+                {
+                    <tr>
+                        <th>@(i.id_ingrediente)</th>
+                        <th>@(i.cant_ingrediente)</th>
+                        <th>@(i.umed_ingrediente)</th>
+                    </tr>
+                }
+            </tbody>
+
+
+        </table>
+    </div>
+</div>
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Pasos Receta
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="width:50px;">Id</th>
+                    <th style="width:200px;">Descripción</th>
+                    <th style="width:50px;">Imagen</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model.paso_receta)
+                {
+                    <tr>
+                        <th>@(p.id_paso)</th>
+                        <th>@(p.des_paso)</th>
+                        <th>@(p.img_paso)</th>
+                    </tr>
+                }
+            </tbody>
+
+
+        </table>
+    </div>
+</div>
