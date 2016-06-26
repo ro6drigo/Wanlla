@@ -105,8 +105,8 @@ namespace Modelo
             {
                 using (var dbwanlla = new db_wanlla())
                 {
-                    recetas = dbwanlla.receta.Include("ingrediente")
-                        .Include("ingrediente_receta")
+                    recetas = dbwanlla.receta
+                        .Include("ingrediente_receta.ingrediente")
                         .Include("paso_receta")
                         //.Include("PRODUCTO.NOMBRE")
                         .Where(x => x.id_receta == id)

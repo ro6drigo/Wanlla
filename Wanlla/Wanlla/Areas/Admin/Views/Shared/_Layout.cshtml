@@ -14,6 +14,10 @@
     <!-- Font Awesome css -->
     <!-- Own Styles css -->
     @Styles.Render("~/Content/css")
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Bootstrap's JavaScript plugins -->
+    @Scripts.Render("~/bundles/js")
 </head>
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -34,23 +38,20 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="wanlla-navbar">
                     <ul class="nav navbar-nav navbar-right">
-                        @if (SessionHelper.ExisteSesion())
-                        {
-                            <li>@Html.ActionLink("Categoria", "Index", "Categoria")</li>
-                            <li>@Html.ActionLink("Distribuidor", "Index", "Distribuidor")</li>
-                            <li>@Html.ActionLink("Ingrediente", "Index", "Ingredient")</li>
-                            <li>@Html.ActionLink("Marca", "Index", "Marca")</li>
-                            <li>@Html.ActionLink("Productos", "Index", "Producto")</li>
-                            <li>@Html.ActionLink("Recetas", "Index", "Receta")</li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@(SessionHelper.Leer<string>("nombre_usuario")) <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li>@Html.ActionLink("Perfil", "", "")</li>
-                                    <li role="separator" class="divider"></li>
-                                    <li>@Html.ActionLink("Cerrar Sesión", "Logout", "LoginAdmin")</li>
-                                </ul>
-                            </li>
-                        }
+                        <li>@Html.ActionLink("Categoria", "Index", "Categoria")</li>
+                        <li>@Html.ActionLink("Distribuidor", "Index", "Distribuidor")</li>
+                        <li>@Html.ActionLink("Ingrediente", "Index", "Ingredient")</li>
+                        <li>@Html.ActionLink("Marca", "Index", "Marca")</li>
+                        <li>@Html.ActionLink("Productos", "Index", "Producto")</li>
+                        <li>@Html.ActionLink("Recetas", "Index", "Receta")</li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@(SessionHelper.Leer<string>("nombre_usuario")) <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Perfil", "", "")</li>
+                                <li role="separator" class="divider"></li>
+                                <li>@Html.ActionLink("Cerrar Sesión", "Logout", "LoginAdmin")</li>
+                            </ul>
+                        </li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             }
@@ -76,8 +77,6 @@
         </div>
     </footer>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <!-- Bootstrap's JavaScript plugins -->
-    @Scripts.Render("~/bundles/js")
+    
 </body>
 </html>

@@ -35,16 +35,16 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th style="width:50px;">Nombre</th>
-                    <th style="width:50px;">Cantidad</th>
-                    <th style="width:200px;">Unidad Medida</th>
+                    <th>Ingrediente</th>
+                    <th>Cantidad</th>
+                    <th>Unidad Medida</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var i in Model.ingrediente_receta)
                 {
                     <tr>
-                        <th>@(i.id_ingrediente)</th>
+                        <th>@(i.ingrediente.nom_ingrediente)</th>
                         <th>@(i.cant_ingrediente)</th>
                         <th>@(i.umed_ingrediente)</th>
                     </tr>
@@ -63,16 +63,17 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th style="width:50px;">Id</th>
-                    <th style="width:200px;">Descripción</th>
-                    <th style="width:50px;">Imagen</th>
+                    <th>Id</th>
+                    <th>Descripción</th>
+                    <th>Imagen</th>
                 </tr>
             </thead>
             <tbody>
+                @{ int count = 1;}
                 @foreach (var p in Model.paso_receta)
                 {
                     <tr>
-                        <th>@(p.id_paso)</th>
+                        <th>@(count++)</th>
                         <th>@(p.des_paso)</th>
                         <th>@(p.img_paso)</th>
                     </tr>

@@ -33,27 +33,26 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th style="width:50px;">Id</th>
-                    <th style="width:200px;">Nombre</th>
-                    <th style="width:200px;">Descripción</th>
-                    <th style="width:50px;">Imagen</th>
-                    <th style="width:200px;">Video</th>
-                    <th style="width:200px;">Dificultad</th>
-                    <th style="width:50px;">Tiempo</th>
-                    <th style="width:50px;"></th>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Imagen</th>
+                    <th>Video</th>
+                    <th>Dificultad</th>
+                    <th>Tiempo</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var r in Model.receta)
                 {
                     <tr>
-                        <th>@(r.id_receta)</th>
-                        <th>@(r.nom_receta)</th>
-                        <th>@(r.des_receta)</th>
-                        <th>@(r.img_receta)</th>
-                        <th>@(r.vid_receta)</th>
-                        <th>@(r.diff_receta)</th>
-                        <th>@(r.time_receta)</th>
+                        <td>@(r.id_receta)</td>
+                        <td>@(r.nom_receta)</td>
+                        <td>@(r.des_receta)</td>
+                        <td>@(r.img_receta)</td>
+                        <td>@(r.vid_receta)</td>
+                        <td>@(r.diff_receta)</td>
+                        <td>@(r.time_receta)</td>
                     </tr>
                 }
             </tbody>
