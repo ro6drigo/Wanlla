@@ -1,0 +1,56 @@
+﻿@model Modelo.ingrediente
+@{
+    ViewBag.Title = "Detalle Ingrediente";
+}
+
+<ol class="breadcrumb">
+
+    <li><a href="~/Admin/Ingredient/">Ingredientes</a></li>
+    <li class="active">@Model.nom_ingrediente</li>
+</ol>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Información del Ingrediente
+    </div>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>ID</dt>
+            <dd>@Model.id_ingrediente</dd>
+            <dt>NOMBRE</dt>
+            <dd>@Model.nom_ingrediente</dd>
+            <dt>IMAGEN</dt>
+            <dd>@Model.tipo_ingrediente</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Recetas
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Imagen</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int count = 1;}
+                @foreach (var r in Model.ingrediente_receta)
+                {
+                    <tr>
+                        <th>@(count++)</th>
+                        <th>@(r.receta.nom_receta)</th>
+                        <th>@(r.receta.des_receta)</th>
+                        <th><img class="img-responsive" src="~/images/@(r.receta.img_receta)" width="35%" height="35%"></th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
