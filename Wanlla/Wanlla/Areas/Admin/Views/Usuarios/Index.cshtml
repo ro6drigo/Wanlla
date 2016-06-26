@@ -1,0 +1,48 @@
+﻿@model List<Modelo.usuario>
+@{
+    ViewBag.Title = "Usuarios";
+}
+
+@using (Html.BeginForm("Index", "Usuarios", FormMethod.Post, new { criterio = "frm-buscar" }))
+{
+    <div class="row">
+        <div class="col-sm-5 text-left">
+            @Html.TextBox("criterio", null, new { type = "text", @class = "form-control", placeholder = "Ingrese dato a buscar" })
+        </div>
+        <div class="col-sm-3">
+            <button type="submit" class="btn btn-lg btn-default fa fa-search" data-toggle="tooltip" title="Buscar"></button>
+        </div>
+    </div>
+}
+<hr />
+<div class="table-responsive">
+    <table class="table table-hover table-bordered text-center">
+        <thead>
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">Nombres</th>
+                <th class="text-center">Apellidos</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Teléfono</th>
+                <th class="text-center">Fecha Nacimiento</th>
+                <th class="text-center">Sexo</th>
+                <th class="text-center">Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td>@m.id_usuario</td>
+                    <td>@m.nom_usuario</td>
+                    <td>@m.ape_usuario</td>
+                    <td>@m.email_usuario</td>
+                    <td>@m.tel_usuario</td>
+                    <td>@m.fecnac_usuario</td>
+                    <td>@m.sex_usuario</td>
+                    <td>@m.tipo_usuario</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

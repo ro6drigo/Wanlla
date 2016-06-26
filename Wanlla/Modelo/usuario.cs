@@ -64,6 +64,53 @@ namespace Modelo
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<receta> receta { get; set; }
 
+
+        public List<usuario> Listar()
+        {
+            var usuarios = new List<usuario>();
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    usuarios = dbwanlla.usuario
+                                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return usuarios;
+        }
+
+        public List<usuario> buscar(string criterio)
+        {
+            var usuarios = new List<usuario>();
+
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    if (id_usuario == 0)
+                    {
+                        usuarios = dbwanlla.usuario
+                                .Where(x => x.nom_usuario.Contains(criterio)
+                                        || x.ape_usuario.Contains(criterio)
+                                        || x.email_usuario.Contains(criterio)
+                                        || x.sex_usuario.Contains(criterio)
+                                        || x.tipo_usuario.Contains(criterio))
+                                .ToList();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return usuarios;
+        }
         /// <summary>
         /// Manteniemiento (Agregar, Modificar) Usuario
         /// </summary>
