@@ -189,6 +189,7 @@
     <Content Include="images\recipe2.jpg" />
     <Content Include="images\recipe3.jpg" />
     <Content Include="images\rocotorelleno.jpg" />
+    <Content Include="images\suspirolimeño.jpg" />
     <Content Include="LICENSE.txt" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
@@ -268,6 +269,7 @@
     <Content Include="Areas\Admin\Views\Receta\Detalle.cshtml" />
     <Content Include="Areas\Admin\Views\Usuarios\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Ingredient\Detalle.cshtml" />
+    <Content Include="Areas\Admin\Views\Receta\Mantenimiento.cshtml" />
     <None Include="Properties\PublishProfiles\Wanlla.pubxml" />
     <Content Include="Areas\Admin\Views\Usuario\Perfil.cshtml" />
     <Content Include="Areas\Admin\Views\Marca\Mantenimiento.cshtml" />

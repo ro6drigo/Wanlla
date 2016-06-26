@@ -50,6 +50,23 @@ namespace Modelo
             return categorias;
         }
 
+        public List<categoria> ListarCategoria()
+        {
+            var tipo = new List<categoria>();
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    tipo = dbwanlla.categoria.OrderBy(x => x.id_categoria).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return tipo;
+        }
+
         public AnexGRIDResponde ListarGrilla(AnexGRID grilla)
         {
 

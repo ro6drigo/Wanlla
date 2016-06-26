@@ -1,0 +1,100 @@
+﻿@model Modelo.receta
+@{
+    ViewBag.Title = (Model.id_receta > 0 ? Model.nom_receta : "Nueva Receta");
+    List<Modelo.categoria> tipo = ViewBag.tipo;
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Receta
+    </div>
+    @using (Html.BeginForm("Guardar", "receta", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.HiddenFor(x => x.id_receta);
+        <div class="form-group">
+            <label for="nom_receta" class="col-sm-4 control-label hidden-xs"><i class="fa fa-cutlery fa-2x" aria-hidden="true"></i></label>
+            <label for="nom_receta" class="col-sm-4 control-label visible-xs">Receta</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.nom_receta, new { type = "text", @class = "form-control", placeholder = "Receta" })
+                @Html.ValidationMessageFor(x => x.nom_receta, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="des_receta" class="col-sm-4 control-label hidden-xs"><i class="fa fa-cutlery fa-2x" aria-hidden="true"></i></label>
+            <label for="des_receta" class="col-sm-4 control-label visible-xs">Descripción</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.des_receta, new { type = "text", @class = "form-control", placeholder = "Descripción" })
+                @Html.ValidationMessageFor(x => x.des_receta, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="img_receta" class="col-sm-4 control-label hidden-xs"><i class="fa fa-picture-o fa-2x" aria-hidden="true"></i></label>
+            <label for="img_receta" class="col-sm-4 control-label visible-xs">Imagen</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.img_receta, new { type = "text", @class = "form-control", placeholder = "Imagen" })
+                @Html.ValidationMessageFor(x => x.img_receta, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="vid_receta" class="col-sm-4 control-label hidden-xs"><i class="fa fa-video-camera fa-2x" aria-hidden="true"></i></label>
+            <label for="vid_receta" class="col-sm-4 control-label visible-xs">Video</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.vid_receta, new { type = "text", @class = "form-control", placeholder = "Video" })
+                @Html.ValidationMessageFor(x => x.vid_receta, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="diff_receta" class="col-sm-4 control-label hidden-xs"><i class="fa fa-tachometer fa-2x" aria-hidden="true"></i></label>
+            <label for="diff_receta" class="col-sm-4 control-label visible-xs">Dificultad</label>
+            <div class="col-sm-4">
+                <select name="diff_receta" class="form-control">
+                    <option>Fácil</option>
+                    <option>Medio</option>
+                    <option>Difícil</option>
+                </select>
+                @*@Html.TextBoxFor(x => x.diff_receta, new { type = "text", @class = "form-control", placeholder = "Dificultad" })
+                    @Html.ValidationMessageFor(x => x.diff_receta, null, new { @class = "label label-danger" })*@
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="time_receta" class="col-sm-4 control-label hidden-xs"><i class="fa fa-hourglass fa-2x" aria-hidden="true"></i></label>
+            <label for="time_receta" class="col-sm-4 control-label visible-xs">Tiempo de Cocción</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.time_receta, new { type = "text", @class = "form-control", placeholder = "Tiempo Cocción" })
+                @Html.ValidationMessageFor(x => x.time_receta, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="id_categoria" class="col-sm-4 control-label hidden-xs"><i class="fa fa-certificate fa-2x" aria-hidden="true"></i></label>
+            <label for="id_categoria" class="col-sm-4 control-label visible-xs">Categoría</label>
+            <div class="col-sm-4">
+                <select name="id_categoria" class="form-control">
+                    @foreach (var t in tipo)
+                {
+                        <option value="@t.id_categoria">@t.nom_categoria</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-4">
+                <button type="submit" class="btn btn-success glyphicon glyphicon-floppy-disk" data-toggle="tooltip" title="Guardar"></button>
+                <button type="button" class="btn btn-danger glyphicon glyphicon-floppy-remove" onclick="javascript:history.back()" data-toggle="tooltip" title="Cancelar"></button>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Ingredientes
+    </div>
+    
+</div>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Pasos
+    </div>
+    
+</div>

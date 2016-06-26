@@ -4,6 +4,7 @@ namespace Modelo
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity;
     using System.Data.Entity.Spatial;
 
     public partial class ingrediente_receta
@@ -26,5 +27,28 @@ namespace Modelo
         public virtual ingrediente ingrediente { get; set; }
 
         public virtual receta receta { get; set; }
+
+        public void mantenimiento()
+        {
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    if (this.id_receta > 0)
+                    {
+                        dbwanlla.Entry(this).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        dbwanlla.Entry(this).State = EntityState.Added;
+                    }
+                    dbwanlla.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

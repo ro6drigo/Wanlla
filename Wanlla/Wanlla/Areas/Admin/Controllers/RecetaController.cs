@@ -12,11 +12,13 @@ namespace Wanlla.Areas.Admin.Controllers
     public class RecetaController : Controller
     {
         private receta receta = new receta();
+        private categoria tipo = new categoria();
         // GET: Admin/Receta
         public ActionResult Index(string criterio)
         {
             if (criterio == null | criterio == "")
             {
+                
                 return View(receta.Listar());
             }
             else
@@ -32,6 +34,7 @@ namespace Wanlla.Areas.Admin.Controllers
 
         public ActionResult Mantenimiento(int id = 0)
         {
+            ViewBag.tipo = tipo.ListarCategoria();
             return View(
                 id == 0 ? new receta() //nueva receta
                         : receta.Obtener(id)
