@@ -85,14 +85,19 @@ namespace Modelo
             return recetas;
         }
 
-        public List<receta> Listar(int cont)
+        public List<receta> listar(int count)
         {
             var recetas = new List<receta>();
             try
             {
                 using (var dbwanlla = new db_wanlla())
                 {
-                    recetas = dbwanlla.receta.ToList();
+                    recetas = dbwanlla.receta
+                                        .Include("categoria")
+                                        .OrderBy(x => x.id_receta)
+                                        .Skip(((count-1)*6))
+                                        .Take((count*6))
+                                        .ToList();
                 }
             }
             catch (Exception ex)
@@ -100,6 +105,27 @@ namespace Modelo
                 throw ex;
             }
             return recetas;
+        }
+
+        public int cantPaginador()
+        {
+            int cantidad = 0;
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    cantidad = dbwanlla.receta
+                                        .Include("categoria")
+                                        .OrderBy(x => x.id_receta)
+                                        .ToList()
+                                        .Count/6;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return cantidad;
         }
 
         public receta Obtener(int id) //retornar es un objeto

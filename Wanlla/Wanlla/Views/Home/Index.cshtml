@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<Modelo.receta>
+@{
     ViewBag.Title = "Inicio";
 }
 
@@ -28,69 +29,70 @@
         <nav align="center">
             <ul class="pagination">
                 <li>
-                    <a href="#" aria-label="Anterior">
+                    <a href="~/Home/Index/@(ViewBag.count > 1 ? (ViewBag.count - 1) : (ViewBag.count))" aria-label="Anterior">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
+
+                @for (int i = 1; i <= ViewBag.cant; i++)
+                {
+                    <li @(ViewBag.count == i ? new HtmlString("class='active'") : null)>@Html.ActionLink(Convert.ToString(i), "Index/" + Convert.ToString(i), "Home")</li>
+                }
+
                 <li>
-                    <a href="#" aria-label="Siguiente">
+                    <a href="~/Home/Index/@(ViewBag.count == ViewBag.cant ? (ViewBag.count) : (ViewBag.count + 1))" aria-label="Siguiente">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
             </ul>
         </nav>
 
-        <div class="row">
+        @{ int count = 1; }
+        @foreach (var m in Model)
+        {
+
+            if (count % 2 != 0)
+            {
+                @(new HtmlString("<" + "div class='row'" + ">"))
+            }
+
             <div class="col-sm-6">
                 <div class="card">
-                    <img src="~/images/recipe1.jpg" alt="Avatar">
+                    <img src="~/images/@m.img_receta" alt="">
                     <div class="container-card">
-                        <h4><strong>Pollo endiablado</strong> <span class="fa fa-star-o favorite-icon-inactive"></span></h4>
-                        <p>Lavar y secar el pollo, y abrirlo cortándolo a lo largo del esternón, a su vez con el lado abierto hacia abajo sobre una tabla de cortar, aplastar bien con un aplastacarne. En un bol mezclar el aceite de...</p>
+                        <h4><strong>@m.nom_receta</strong> <span class="fa fa-star-o favorite-icon-inactive"></span></h4>
+                        <p>@m.des_receta</p>
                     </div>
                 </div>
             </div>
 
-            <div class="col-sm-6">
-                <div class="card">
-                    <img src="~/images/recipe2.jpg" alt="Avatar">
-                    <div class="container-card">
-                        <h4><strong>Mini hamburguesas a la mostaza</strong> <span class="fa fa-star-o favorite-icon-inactive"></span></h4>
-                        <p>Estas mini hamburguesas a la mostaza son ideales para un bocadillo, o para servir en un buffet. Una receta finger food, fácil de hacer y lista en tan sólo 25 minutos,con pocos ingredientes fácilmente...</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+            if (count % 2 == 0)
+            {
+                @(new HtmlString("</" + "div" + ">"))
+            }
 
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="card">
-                    <img src="~/images/recipe3.jpg" alt="Avatar">
-                    <div class="container-card">
-                        <h4><strong>Calamares guisados con aceitunas negras</strong> <span class="fa fa-star-o favorite-icon-inactive"></span></h4>
-                        <p>Limpiar los calamares, dividiendo el cuerpo de los tentáculos y eliminando el pico, ojos, pluma y víceras. Freír en 4-5 cucharadas de aceite de oliva, el apio picado, los dientes de ajo y chile picante...</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+            count++;
+        }
+        @if (Model.Count % 2 != 0)
+        {
+            @(new HtmlString("</" + "div" + ">"))
+        }
+        
         <nav align="center">
             <ul class="pagination">
                 <li>
-                    <a href="#" aria-label="Anterior">
+                    <a href="~/Home/Index/@(ViewBag.count > 1 ? (ViewBag.count - 1) : (ViewBag.count))" aria-label="Anterior">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
+
+                @for (int i = 1; i <= ViewBag.cant; i++)
+                {
+                    <li @(ViewBag.count == i ? new HtmlString("class='active'") : null)>@Html.ActionLink(Convert.ToString(i), "Index/" + Convert.ToString(i), "Home")</li>
+                }
+
                 <li>
-                    <a href="#" aria-label="Siguiente">
+                    <a href="~/Home/Index/@(ViewBag.count == ViewBag.cant ? (ViewBag.count) : (ViewBag.count + 1))" aria-label="Siguiente">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
