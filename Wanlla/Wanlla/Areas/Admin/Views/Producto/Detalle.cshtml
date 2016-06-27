@@ -1,0 +1,29 @@
+﻿@model Modelo.producto
+@{
+    ViewBag.Title = "Detalle Producto";
+}
+
+<ol class="breadcrumb">
+    <li><a href="~/Admin/Producto/">Productos</a></li>
+    <li class="active">@Model.des_producto</li>
+</ol>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Información del producto
+    </div>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>ID</dt>
+            <dd>@Model.id_producto</dd>
+            <dt>DESCRIPCIÓN</dt>
+            <dd>@Model.des_producto</dd>
+            <dt>UNIDAD MEDIDA</dt>
+            <dd>@Model.umed_producto</dd>
+            <dt>CANTIDAD</dt>
+            <dd>@Model.cant_producto</dd>
+            <dt>PRECIO</dt>
+            <dd>@Model.precio_producto</dd>
+        </dl>
+    </div>
+</div>

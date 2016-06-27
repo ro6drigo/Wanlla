@@ -12,6 +12,9 @@ namespace Wanlla.Areas.Admin.Controllers
     public class ProductoController : Controller
     {
         private producto producto = new producto();
+        private ingrediente tipoingrediente = new ingrediente();
+        private distribuidor tipodistribuidor = new distribuidor();
+        private marca tipomarca = new marca();
         // GET: Admin/Producto
         public ActionResult Index(string criterio)
         {
@@ -32,6 +35,9 @@ namespace Wanlla.Areas.Admin.Controllers
 
         public ActionResult Mantenimiento(int id = 0)
         {
+            ViewBag.tipoingrediente = tipoingrediente.ListarIngrediente();
+            ViewBag.tipodistribuidor = tipodistribuidor.ListarDistribuidor();
+            ViewBag.tipomarca = tipomarca.ListarMarca();
             return View(
                 id == 0 ? new producto() //nuevo producto
                         : producto.Obtener(id)

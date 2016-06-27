@@ -20,7 +20,7 @@
             <dt>NOMBRE</dt>
             <dd>@Model.nom_categoria</dd>
             <dt>IMAGEN</dt>
-            <dd>@Model.img_categoria</dd>
+            <dd><img class="img-responsive thumbnail" src="~/images/@Model.img_categoria" width="15%" height="15%"></dd>
         </dl>
     </div>
 </div>
@@ -30,7 +30,7 @@
         Recetas
     </div>
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -43,16 +43,17 @@
                 </tr>
             </thead>
             <tbody>
+                @{ int count = 1;}
                 @foreach (var r in Model.receta)
                 {
                     <tr>
-                        <td>@(r.id_receta)</td>
-                        <td>@(r.nom_receta)</td>
-                        <td>@(r.des_receta)</td>
-                        <td>@(r.img_receta)</td>
-                        <td>@(r.vid_receta)</td>
-                        <td>@(r.diff_receta)</td>
-                        <td>@(r.time_receta)</td>
+                        <th>@(count++)</th>
+                        <th>@(r.nom_receta)</th>
+                        <th>@(r.des_receta)</th>
+                        <th><img class="img-responsive" src="~/images/@(r.img_receta)" width="35%" height="35%"></th>
+                        <th>@(r.vid_receta)</th>
+                        <th>@(r.diff_receta)</th>
+                        <th>@(r.time_receta)</th>
                     </tr>
                 }
             </tbody>

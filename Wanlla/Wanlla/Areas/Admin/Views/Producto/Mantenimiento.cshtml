@@ -1,0 +1,94 @@
+﻿@model Modelo.producto
+@{
+    ViewBag.Title = (Model.id_producto > 0 ? Model.des_producto : "Nuevo Producto");
+    List<Modelo.ingrediente> tipoingrediente = ViewBag.tipoingrediente;
+    List<Modelo.distribuidor> tipodistribuidor = ViewBag.tipodistribuidor;
+    List<Modelo.marca> tipomarca = ViewBag.tipomarca;
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Producto
+    </div>
+    @using (Html.BeginForm("Guardar", "producto", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.HiddenFor(x => x.id_producto);
+        <div class="form-group">
+            <label for="id_ingrediente" class="col-sm-4 control-label hidden-xs"><i class="fa fa-spoon fa-2x" aria-hidden="true"></i></label>
+            <label for="id_ingrediente" class="col-sm-4 control-label visible-xs">Ingrediente</label>
+            <div class="col-sm-4">
+                <select name="id_ingrediente" class="form-control">
+                    @foreach (var t in tipoingrediente)
+                {
+                        <option value="@t.id_ingrediente">@t.nom_ingrediente</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="id_distribuidor" class="col-sm-4 control-label hidden-xs"><i class="fa fa-truck fa-2x" aria-hidden="true"></i></label>
+            <label for="id_distribuidor" class="col-sm-4 control-label visible-xs">Distribuidor</label>
+            <div class="col-sm-4">
+                <select name="id_distribuidor" class="form-control">
+                    @foreach (var t in tipodistribuidor)
+                {
+                        <option value="@t.id_distribuidor">@t.nom_distribuidor</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="id_marca" class="col-sm-4 control-label hidden-xs"><i class="fa fa-star fa-2x" aria-hidden="true"></i></label>
+            <label for="id_marca" class="col-sm-4 control-label visible-xs">Marca</label>
+            <div class="col-sm-4">
+                <select name="id_marca" class="form-control">
+                    @foreach (var t in tipomarca)
+                {
+                        <option value="@t.id_marca">@t.nom_marca</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="des_producto" class="col-sm-4 control-label hidden-xs"><i class="fa fa-leanpub fa-2x" aria-hidden="true"></i></label>
+            <label for="des_producto" class="col-sm-4 control-label visible-xs">Descripción</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.des_producto, new { type = "text", @class = "form-control", placeholder = "Descripción" })
+                @Html.ValidationMessageFor(x => x.des_producto, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="umed_producto" class="col-sm-4 control-label hidden-xs"><i class="fa fa-balance-scale fa-2x" aria-hidden="true"></i></label>
+            <label for="umed_producto" class="col-sm-4 control-label visible-xs">Unidad de Medida</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.umed_producto, new { type = "text", @class = "form-control", placeholder = "Unidad de Medida" })
+                @Html.ValidationMessageFor(x => x.umed_producto, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="cant_producto" class="col-sm-4 control-label hidden-xs"><i class="fa fa-balance-scale fa-2x" aria-hidden="true"></i></label>
+            <label for="cant_producto" class="col-sm-4 control-label visible-xs">Cantidad</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.cant_producto, new { type = "text", @class = "form-control", placeholder = "Cantidad" })
+                @Html.ValidationMessageFor(x => x.cant_producto, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="precio_producto" class="col-sm-4 control-label hidden-xs"><i class="fa fa-money fa-2x" aria-hidden="true"></i></label>
+            <label for="precio_producto" class="col-sm-4 control-label visible-xs">Precio</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.precio_producto, new { type = "text", @class = "form-control", placeholder = "Precio" })
+                @Html.ValidationMessageFor(x => x.precio_producto, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-4">
+                <button type="submit" class="btn btn-success glyphicon glyphicon-floppy-disk" data-toggle="tooltip" title="Guardar"></button>
+                <button type="button" class="btn btn-danger glyphicon glyphicon-floppy-remove" onclick="javascript:history.back()" data-toggle="tooltip" title="Cancelar"></button>
+            </div>
+        </div>
+    }
+</div>
