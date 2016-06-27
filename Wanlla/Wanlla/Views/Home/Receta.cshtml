@@ -38,8 +38,11 @@
         @if (Model.vid_receta != null)
         {
             <hr />
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="@(Model.vid_receta)"></iframe>
+            <div class="os-video-receta">
+                <h3>Video</h3>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="@(Model.vid_receta)"></iframe>
+                </div>
             </div>
         }
         <hr />
