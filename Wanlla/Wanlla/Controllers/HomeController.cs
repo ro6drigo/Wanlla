@@ -12,11 +12,20 @@ namespace Wanlla.Controllers
         private receta receta = new receta();
 
         // GET: Home
-        public ActionResult Index(int id = 1)
+        public ActionResult Index(int id = 1, string buscar = "")
         {
-            ViewBag.count = id;
-            ViewBag.cant = receta.cantPaginador();
-            return View(receta.listar(id));
+            if(buscar == "")
+            {
+                ViewBag.count = id;
+                ViewBag.cant = receta.cantPaginador();
+                return View(receta.listar(id));
+            }
+            else
+            {
+                ViewBag.count = id;
+                ViewBag.cant = receta.cantPaginador(buscar);
+                return View(receta.listar(id, buscar));
+            }
         }
     }
 }

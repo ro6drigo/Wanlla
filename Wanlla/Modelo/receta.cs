@@ -107,6 +107,31 @@ namespace Modelo
             return recetas;
         }
 
+        public List<receta> listar(int count, string buscar)
+        {
+            var recetas = new List<receta>();
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    recetas = dbwanlla.receta
+                                        .Include("categoria")
+                                        .Where(x => x.nom_receta.Contains(buscar)
+                                                || x.des_receta.Contains(buscar)
+                                                || x.categoria.nom_categoria.Contains(buscar))
+                                        .OrderBy(x => x.id_receta)
+                                        .Skip(((count - 1) * 6))
+                                        .Take((count * 6))
+                                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return recetas;
+        }
+
         public int cantPaginador()
         {
             int cantidad = 0;
@@ -114,11 +139,55 @@ namespace Modelo
             {
                 using (var dbwanlla = new db_wanlla())
                 {
-                    cantidad = dbwanlla.receta
+                    int aux = dbwanlla.receta
                                         .Include("categoria")
                                         .OrderBy(x => x.id_receta)
                                         .ToList()
-                                        .Count/6;
+                                        .Count;
+
+                    if(aux % 6 != 0)
+                    {
+                        while (aux % 6 != 0)
+                        {
+                            aux++;
+                        }
+                    }
+
+                    cantidad = aux / 6;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return cantidad;
+        }
+
+        public int cantPaginador(string buscar)
+        {
+            int cantidad = 0;
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    int aux = dbwanlla.receta
+                                        .Include("categoria")
+                                        .Where(x => x.nom_receta.Contains(buscar)
+                                                || x.des_receta.Contains(buscar)
+                                                || x.categoria.nom_categoria.Contains(buscar))
+                                        .OrderBy(x => x.id_receta)
+                                        .ToList()
+                                        .Count;
+
+                    if (aux % 6 != 0)
+                    {
+                        while (aux % 6 != 0)
+                        {
+                            aux++;
+                        }
+                    }
+
+                    cantidad = aux / 6;
                 }
             }
             catch (Exception ex)

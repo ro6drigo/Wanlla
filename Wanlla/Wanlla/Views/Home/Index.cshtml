@@ -3,145 +3,177 @@
     ViewBag.Title = "Inicio";
 }
 
-<div class="os_chipbar">
-    <div class="os_chip">
-        <img src="~/images/ing_pollo.jpg" alt="Pollo">
-        Pollo
-        <span class="os_closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
-    </div>
-    <div class="os_chip">
-        Hamburguesa
-        <span class="os_closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
-    </div>
-    <div class="os_chip">
-        <img src="~/images/ing_pan.jpg" alt="Pan">
-        Pan
-        <span class="os_closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
-    </div>
-    <div class="os_chip">
-        Calamar
-        <span class="os_closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-sm-8">
-        <nav align="center">
-            <ul class="pagination">
-                <li>
-                    <a href="~/Home/Index/@(ViewBag.count > 1 ? (ViewBag.count - 1) : (ViewBag.count))" aria-label="Anterior">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-
-                @for (int i = 1; i <= ViewBag.cant; i++)
-                {
-                    <li @(ViewBag.count == i ? new HtmlString("class='active'") : null)>@Html.ActionLink(Convert.ToString(i), "Index/" + Convert.ToString(i), "Home")</li>
-                }
-
-                <li>
-                    <a href="~/Home/Index/@(ViewBag.count == ViewBag.cant ? (ViewBag.count) : (ViewBag.count + 1))" aria-label="Siguiente">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-        @{ int count = 1; }
-        @foreach (var m in Model)
-        {
-
-            if (count % 2 != 0)
-            {
-                @(new HtmlString("<" + "div class='row'" + ">"))
-            }
-
-            <div class="col-sm-6">
-                <div class="card">
-                    <img src="~/images/@m.img_receta" alt="">
-                    <div class="container-card">
-                        <h4><strong>@m.nom_receta</strong> <span class="fa fa-star-o favorite-icon-inactive"></span></h4>
-                        <p>@m.des_receta</p>
-                    </div>
+@using (Html.BeginForm("Index/1", "Home", FormMethod.Post, new { @class = "form-inline", id = "form-home" }))
+{
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="sr-only" for="buscar">Buscar</label>
+                <div class="input-group">
+                    @Html.TextBox("buscar", null, new { type = "search", @class = "form-control", placeholder = "Buscar", id = "buscar", autocomplete = "off" })
+                    <div class="input-group-addon"><a href="javascript: document.getElementById('form-home').submit();"><span class="fa fa-search"></span></a></div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            if (count % 2 == 0)
+    <br>
+
+    <div class="os_chipbar">
+        <div class="os_chip">
+            <img src="~/images/ing_pollo.jpg" alt="Pollo">
+            Pollo
+            <span class="os_closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+        </div>
+        <div class="os_chip">
+            Hamburguesa
+            <span class="os_closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+        </div>
+        <div class="os_chip">
+            <img src="~/images/ing_pan.jpg" alt="Pan">
+            Pan
+            <span class="os_closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+        </div>
+        <div class="os_chip">
+            Calamar
+            <span class="os_closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-8">
+            <nav align="center">
+                <ul class="pagination">
+                    <li>
+                        <a href="javascript: document.getElementById('form-home').action = '/Home/Index/@(ViewBag.count > 1 ? (ViewBag.count - 1) : (ViewBag.count))'; document.getElementById('form-home').submit();" aria-label="Anterior">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    @for (int i = 1; i <= ViewBag.cant; i++)
+                    {
+                        <li @(ViewBag.count == i ? new HtmlString("class='active'") : null)><a href="javascript: document.getElementById('form-home').action = '/Home/Index/@(i)'; document.getElementById('form-home').submit();">@(i)</a></li>
+                    }
+
+                    <li>
+                        <a href="javascript: document.getElementById('form-home').action = '/Home/Index/@(ViewBag.count == ViewBag.cant ? (ViewBag.count) : (ViewBag.count + 1))'; document.getElementById('form-home').submit();" aria-label="Siguiente">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Inicio lista de recetas -->
+
+            @{ int count = 1; }
+            @foreach (var m in Model)
+            {
+
+                if (count % 2 != 0)
+                {
+                    @(new HtmlString("<" + "div class='row'" + ">"))
+                }
+
+                <div class="col-sm-6">
+                    <div class="card">
+                        <img src="~/images/@m.img_receta" alt="">
+                        <div class="container-card">
+                            <h4><strong>@m.nom_receta</strong> <span class="fa fa-star-o favorite-icon-inactive"></span></h4>
+                            <p>
+                                <b>@(m.categoria.nom_categoria) / @(m.diff_receta) / @(m.time_receta) <span class="fa fa-clock-o" aria-hidden="true"></span></b>
+                                <hr />
+                                @if (m.des_receta.Length > 150)
+                                {
+                                    @(m.des_receta.Substring(0, 150) + "..." )
+                                }
+                                else
+                                {
+                                    @m.des_receta
+                                }
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                if (count % 2 == 0)
+                {
+                    @(new HtmlString("</" + "div" + ">"))
+                }
+
+                count++;
+            }
+            @if (Model.Count % 2 != 0)
             {
                 @(new HtmlString("</" + "div" + ">"))
             }
 
-            count++;
-        }
-        @if (Model.Count % 2 != 0)
-        {
-            @(new HtmlString("</" + "div" + ">"))
-        }
-        
-        <nav align="center">
-            <ul class="pagination">
-                <li>
-                    <a href="~/Home/Index/@(ViewBag.count > 1 ? (ViewBag.count - 1) : (ViewBag.count))" aria-label="Anterior">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
+            <!-- Fin lista de recetas -->
 
-                @for (int i = 1; i <= ViewBag.cant; i++)
-                {
-                    <li @(ViewBag.count == i ? new HtmlString("class='active'") : null)>@Html.ActionLink(Convert.ToString(i), "Index/" + Convert.ToString(i), "Home")</li>
-                }
-
-                <li>
-                    <a href="~/Home/Index/@(ViewBag.count == ViewBag.cant ? (ViewBag.count) : (ViewBag.count + 1))" aria-label="Siguiente">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-
-    <div class="col-sm-4">
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <h3 class="panel-title">Más populares</h3>
-            </div>
-            <div class="panel-body">
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object" src="~/images/media1.jpg" alt="128">
+            <nav align="center">
+                <ul class="pagination">
+                    <li>
+                        <a href="javascript: document.getElementById('form-home').action = '/Home/Index/@(ViewBag.count > 1 ? (ViewBag.count - 1) : (ViewBag.count))'; document.getElementById('form-home').submit();" aria-label="Anterior">
+                            <span aria-hidden="true">&laquo;</span>
                         </a>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">Ají de Gallina</h4>
-                        En una olla poner a sancochar la pechuga de la gallina, una vez sancochada se deberá deshilachar.
-                    </div>
+                    </li>
+
+                    @for (int i = 1; i <= ViewBag.cant; i++)
+                    {
+                        <li @(ViewBag.count == i ? new HtmlString("class='active'") : null)><a href="javascript: document.getElementById('form-home').action = '/Home/Index/@(i)'; document.getElementById('form-home').submit();">@(i)</a></li>
+                    }
+
+                    <li>
+                        <a href="javascript: document.getElementById('form-home').action = '/Home/Index/@(ViewBag.count == ViewBag.cant ? (ViewBag.count) : (ViewBag.count + 1))'; document.getElementById('form-home').submit();" aria-label="Siguiente">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Más populares</h3>
                 </div>
+                <div class="panel-body">
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object" src="~/images/media1.jpg" alt="128">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">Ají de Gallina</h4>
+                            En una olla poner a sancochar la pechuga de la gallina, una vez sancochada se deberá deshilachar.
+                        </div>
+                    </div>
 
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object" src="~/images/media2.jpg" alt="128">
-                        </a>
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object" src="~/images/media2.jpg" alt="128">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">Rocoto Relleno</h4>
+                            Posee un sabor más dulzón, que es muy apreciado principalmente en la región Arequipa pero también extendido en el resto de este país.
+                        </div>
                     </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">Rocoto Relleno</h4>
-                        Posee un sabor más dulzón, que es muy apreciado principalmente en la región Arequipa pero también extendido en el resto de este país.
-                    </div>
-                </div>
 
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object" src="~/images/media3.jpg" alt="128">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">Picarones</h4>
-                        Los picarones son un dulce en forma de anillos hecho con masa de harina de trigo mezclada con zapallo y en ocasiones camote y bañados en chancaca
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object" src="~/images/media3.jpg" alt="128">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">Picarones</h4>
+                            Los picarones son un dulce en forma de anillos hecho con masa de harina de trigo mezclada con zapallo y en ocasiones camote y bañados en chancaca
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+}

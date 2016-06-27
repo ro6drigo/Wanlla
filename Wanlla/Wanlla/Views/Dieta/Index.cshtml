@@ -4,13 +4,13 @@
 }
 <div class="row">
     <div class="col-sm-6">
-        @using (Html.BeginForm("Index", "Dieta", FormMethod.Post, new { @class = "form-inline" }))
+        @using (Html.BeginForm("Index", "Dieta", FormMethod.Post, new { @class = "form-inline", id = "form-dieta" }))
         {
             <div class="form-group">
                 <label class="sr-only" for="buscar">Buscar</label>
                 <div class="input-group">
                     @Html.TextBox("buscar", null, new { type = "search", @class = "form-control", placeholder = "Ingrese nombre", id = "buscar" , autocomplete = "off"})
-                    <div class="input-group-addon"><a href="javascript: document.myform.submit();"><span class="fa fa-search"></span></a></div>
+                    <div class="input-group-addon"><a href="javascript: document.getElementById('form-dieta').submit();"><span class="fa fa-search"></span></a></div>
                 </div>
             </div>
         }
