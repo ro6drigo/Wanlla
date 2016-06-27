@@ -78,7 +78,7 @@
                     <div class="card">
                         <img src="~/images/@m.img_receta" alt="">
                         <div class="container-card">
-                            <h4><strong>@m.nom_receta</strong> <span class="fa fa-star-o favorite-icon-inactive"></span></h4>
+                            <h4><a href="/Home/Receta/@(m.id_receta)" class="os-link"><b>@m.nom_receta</b></a> <span class="fa fa-star-o favorite-icon-inactive"></span></h4>
                             <p>
                                 <b>@(m.categoria.nom_categoria) / @(m.diff_receta) / @(m.time_receta) <span class="fa fa-clock-o" aria-hidden="true"></span></b>
                                 <hr />

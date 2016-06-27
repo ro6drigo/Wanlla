@@ -285,6 +285,7 @@
     <Content Include="Areas\Admin\Views\Usuario\Perfil.cshtml" />
     <Content Include="Areas\Admin\Views\Marca\Mantenimiento.cshtml" />
     <Content Include="Areas\Admin\Views\Marca\Index.cshtml" />
+    <Content Include="Views\Home\Receta.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

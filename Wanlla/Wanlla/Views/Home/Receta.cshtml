@@ -1,0 +1,118 @@
+﻿@model Modelo.receta
+@{
+    ViewBag.Title = Model.nom_receta;
+}
+
+<div class="row">
+    <div class="col-sm-8">
+        <div class="os-img-receta">
+            <img src="~/images/@Model.img_receta" alt="" class="img-rounded">
+        </div>
+        <hr />
+        <div class="os-datos-receta text-center">
+            <div class="row">
+                <div class="col-xs-4">
+                    <h4><b>@(Model.categoria.nom_categoria)</b></h4>
+                </div>
+                <div class="col-xs-4">
+                    <h4><b>@(Model.diff_receta)</b></h4>
+                </div>
+                <div class="col-xs-4">
+                    <h4><b>@(Model.time_receta) <span class="fa fa-clock-o" aria-hidden="true"></span></b></h4>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="os-ingredientes-receta">
+            <h3>Ingredientes</h3>
+            <ul class="list-group">
+                @foreach (var i in Model.ingrediente_receta)
+                {
+                    <li class="list-group-item">
+                        <span class="badge">@i.cant_ingrediente @i.umed_ingrediente</span>
+                        @i.ingrediente.nom_ingrediente
+                    </li>
+                }
+            </ul>
+        </div>
+        @if (Model.vid_receta != null)
+        {
+            <hr />
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="@(Model.vid_receta)"></iframe>
+            </div>
+        }
+        <hr />
+        <div class="os-pasos-receta">
+            <h3>Preparación</h3>
+            <div class="media">
+                <div class="media-left" style="width: 64px"></div>
+                <div class="media-body">
+                    @{ int countPaso = 1;}
+                    @foreach (var p in Model.paso_receta)
+                    {
+                        <div class="media">
+                            @if (p.img_paso != null)
+                            {
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="media-object" src="..." alt="...">
+                                    </a>
+                                </div>
+                            }
+                            <div class="media-body">
+                                <h4 class="media-heading">Paso @(countPaso++)</h4>
+                                @p.des_paso
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Más populares</h3>
+            </div>
+            <div class="panel-body">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object" src="~/images/media1.jpg" alt="128">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Ají de Gallina</h4>
+                        En una olla poner a sancochar la pechuga de la gallina, una vez sancochada se deberá deshilachar.
+                    </div>
+                </div>
+
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object" src="~/images/media2.jpg" alt="128">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Rocoto Relleno</h4>
+                        Posee un sabor más dulzón, que es muy apreciado principalmente en la región Arequipa pero también extendido en el resto de este país.
+                    </div>
+                </div>
+
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object" src="~/images/media3.jpg" alt="128">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Picarones</h4>
+                        Los picarones son un dulce en forma de anillos hecho con masa de harina de trigo mezclada con zapallo y en ocasiones camote y bañados en chancaca
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

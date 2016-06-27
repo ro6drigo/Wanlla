@@ -205,6 +205,7 @@ namespace Modelo
                 using (var dbwanlla = new db_wanlla())
                 {
                     recetas = dbwanlla.receta
+                        .Include("categoria")
                         .Include("ingrediente_receta.ingrediente")
                         .Include("paso_receta")
                         //.Include("PRODUCTO.NOMBRE")

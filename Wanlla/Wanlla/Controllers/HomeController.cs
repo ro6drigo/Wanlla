@@ -27,5 +27,24 @@ namespace Wanlla.Controllers
                 return View(receta.listar(id, buscar));
             }
         }
+
+        public ActionResult Receta(int id = 0)
+        {
+            if (id > 0)
+            {
+                if (receta.Obtener(id) != null)
+                {
+                    return View(receta.Obtener(id));
+                }
+                else
+                {
+                    return Redirect("~/Home/Index/1");
+                }
+            }
+            else
+            {
+                return Redirect("~/Home/Index/1");
+            }
+        }
     }
 }
