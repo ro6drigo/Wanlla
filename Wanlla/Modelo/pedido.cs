@@ -5,7 +5,7 @@ namespace Modelo
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-
+    using System.Linq;
     [Table("pedido")]
     public partial class pedido
     {
@@ -30,5 +30,25 @@ namespace Modelo
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pedido_producto> pedido_producto { get; set; }
+
+        public dieta obtenerDieta(int id, int id_usuario)
+        {
+            var dietas = new dieta();
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    dietas = db.dieta
+                            .Include("dieta_receta.receta.ingrediente_receta.ingrediente")
+                            .Where(x => x.id_dieta == id && x.id_usuario == id_usuario)
+                            .SingleOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return dietas;
+        }
     }
 }

@@ -230,6 +230,7 @@
     <Compile Include="Controllers\FavoritoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Filters\AdminFilters.cs" />
     <Compile Include="Global.asax.cs">
@@ -287,6 +288,7 @@
     <Content Include="Areas\Admin\Views\Marca\Index.cshtml" />
     <Content Include="Views\Home\Receta.cshtml" />
     <Content Include="Views\Dieta\AgregarReceta.cshtml" />
+    <Content Include="Views\Pedido\Dieta.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
