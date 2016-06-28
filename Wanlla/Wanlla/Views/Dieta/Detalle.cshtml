@@ -17,7 +17,12 @@
         }*@
     </div>
     <div class="col-sm-6 text-right">
-        <a class="btn btn-default" href="~/Detalle/Mantenimiento" role="button">Agregar Receta</a>
+        <a class="btn btn-primary" href="~/Pedido/Mantenimiento" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Hacer Pedido" role="button">
+            &nbsp;<span class="fa fa-shopping-cart fa-lg"></span>&nbsp;
+        </a>
+        <a class="btn btn-success" href="~/Detalle/Mantenimiento" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Agregar Receta" role="button">
+            &nbsp;<span class="fa fa-plus-circle fa-lg"></span>&nbsp;
+        </a>
     </div>
 </div>
 
@@ -30,18 +35,25 @@
         {
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Día @(count++)</h3>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h3 class="panel-title">Día @(count++)</h3>
+                        </div>
+                        <div class="col-xs-6">
+                            <h3 class="panel-title text-right"><a onclick="return confirm('¿Eliminar @(r.receta.nom_receta) de la dieta?');" href="~/Dieta/EliminarReceta/@(Model.id_dieta)?rec=@(r.id_receta)" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Eliminar"><span class="fa fa-trash os-ac-icon os-hover-red"></span></a></h3>
+                        </div>
+                    </div>
                 </div>
                 <div class="panel-body">
-                    <div class="media">
-                        <div class="media-left">
-                            <a href="#">
-                                <img class="media-object" src="~/images/media1.jpg" alt="@(r.receta.nom_receta)">
-                            </a>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img class="os-img-rec-dieta" src="~/images/@r.receta.img_receta" alt="@(r.receta.nom_receta)" style="max-width:250px">
                         </div>
-                        <div class="media-body">
-                            <h4 class="media-heading">@(r.receta.nom_receta)</h4>
-                            @(r.receta.des_receta)
+                        <div class="col-sm-9">
+                            <p style="text-align: justify">
+                                <h4><a href="/Home/Receta/@(r.id_receta)" class="os-link"><b>@r.receta.nom_receta</b></a> <span class="fa fa-star-o favorite-icon-inactive"></span></h4>
+                                @(r.receta.des_receta)
+                            </p>
                         </div>
                     </div>
                 </div>

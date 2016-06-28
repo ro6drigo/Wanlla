@@ -76,7 +76,13 @@
 
                 <div class="col-sm-6">
                     <div class="card">
-                        <img src="~/images/@m.img_receta" alt="">
+                        <a href="~/Dieta/AgregarReceta/@(m.id_receta)" class="os-color-blanco os-add-ico-rec os-animacion-ico-rec" data-toggle="tooltip" data-delay='{ "show": 1000, "hide": 50 }' data-placement="bottom" title="Agregar a Dieta">
+                            <span class="fa-stack">
+                                <i class="fa fa-circle fa-stack-1x fa-inverse"></i>
+                                <i class="fa fa-plus-circle fa-stack-1x"></i>
+                            </span>
+                        </a>
+                        <img src="~/images/@m.img_receta" alt="" />
                         <div class="container-card">
                             <h4><a href="/Home/Receta/@(m.id_receta)" class="os-link"><b>@m.nom_receta</b></a> <span class="fa fa-star-o favorite-icon-inactive"></span></h4>
                             <p>

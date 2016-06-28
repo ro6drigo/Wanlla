@@ -12,6 +12,8 @@ namespace Wanlla.Controllers
     public class DietaController : Controller
     {
         private dieta dieta = new dieta();
+        private receta receta = new receta();
+        private dieta_receta dieta_receta = new dieta_receta();
 
         // GET: Dieta
         public ActionResult Index(string buscar = "")
@@ -38,6 +40,44 @@ namespace Wanlla.Controllers
             }
         }
 
+        public ActionResult AgregarReceta(int id = 0)
+        {
+            if (id == 0 || receta.Obtener(id) == null)
+            {
+                return Redirect(Request.UrlReferrer.AbsolutePath);
+            }
+            else
+            {
+                ViewBag.comboDietas = dieta.listar(SessionHelper.Leer<int>("id_usuario"));
+                ViewBag.receta = receta.Obtener(id);
+                return View(new dieta_receta());
+            }
+        }
+
+        public ActionResult GuardarReceta(dieta_receta model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.validarDietaReceta())
+                {
+                    model.guardar();
+                    return Redirect("~/Dieta/Detalle/" + model.id_dieta);
+                }
+                else
+                {
+                    ViewBag.comboDietas = dieta.listar(SessionHelper.Leer<int>("id_usuario"));
+                    ViewBag.receta = receta.Obtener(model.id_receta);
+                    ModelState.AddModelError("id_dieta", "Esta dieta ya tiene este plato agregado");
+                    return View("~/Views/Dieta/AgregarReceta.cshtml", model);
+                }
+                
+            }
+            else
+            {
+                return View("~/Views/Dieta/AgregarReceta.cshtml", model);
+            }
+        }
+
         public ActionResult Mantenimiento(int id = 0)
         {
             return View(
@@ -61,7 +101,6 @@ namespace Wanlla.Controllers
             {
                 return View("~/Views/Dieta/Mantenimiento.cshtml", model);
             }
-
         }
 
         public ActionResult Eliminar(int id)
@@ -69,6 +108,14 @@ namespace Wanlla.Controllers
             dieta.id_dieta = id;
             dieta.eliminar();
             return Redirect("~/Dieta");
+        }
+
+        public ActionResult EliminarReceta(int id, int rec)
+        {
+            dieta_receta.id_dieta = id;
+            dieta_receta.id_receta = rec;
+            dieta_receta.eliminar();
+            return Redirect("~/Dieta/Detalle/" + id);
         }
     }
 }

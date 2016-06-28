@@ -286,6 +286,7 @@
     <Content Include="Areas\Admin\Views\Marca\Mantenimiento.cshtml" />
     <Content Include="Areas\Admin\Views\Marca\Index.cshtml" />
     <Content Include="Views\Home\Receta.cshtml" />
+    <Content Include="Views\Dieta\AgregarReceta.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

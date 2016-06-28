@@ -22,8 +22,8 @@ namespace Modelo
         [Key]
         public int id_usuario { get; set; }
 
-        [Required]
-        [StringLength(250)]
+        [Required(ErrorMessage = "Nombre de usuario obligatorio")]
+        [StringLength(250, ErrorMessage = "250 caracteres como máximo")]
         public string nom_usuario { get; set; }
 
         [Required]
@@ -32,6 +32,7 @@ namespace Modelo
 
         [Required]
         [StringLength(300)]
+        [Index(IsUnique = true)]
         public string email_usuario { get; set; }
 
         [Required]
@@ -78,7 +79,7 @@ namespace Modelo
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
             return usuarios;
         }
@@ -106,36 +107,51 @@ namespace Modelo
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
 
             return usuarios;
         }
-        /// <summary>
-        /// Manteniemiento (Agregar, Modificar) Usuario
-        /// </summary>
-        public void mantenimiento()
+
+        public void registrar()
         {
             try
             {
                 using (var db = new db_wanlla())
                 {
-                    if (this.id_usuario > 0)
-                    {
-                        db.Entry(this).State = EntityState.Modified;
-                    }
-                    else
-                    {
-                        this.pass_usuario = BCrypt.Net.BCrypt.HashPassword(this.pass_usuario, BCrypt.Net.BCrypt.GenerateSalt());
-                        db.Entry(this).State = EntityState.Added;
-                    }
+                    this.pass_usuario = BCrypt.Net.BCrypt.HashPassword(this.pass_usuario, BCrypt.Net.BCrypt.GenerateSalt());
+                    db.Entry(this).State = EntityState.Added;
                     db.SaveChanges();
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
+        }
+
+        public bool validarCorreo()
+        {
+            bool estado = false;
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    var validar = db.usuario
+                                    .Where(x => x.email_usuario == (this.email_usuario))
+                                    .SingleOrDefault();
+
+                    if (validar == null)
+                    {
+                        estado = true;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+            return estado;
         }
 
         public ResponseModel acceder(string email, string pass)
@@ -170,7 +186,7 @@ namespace Modelo
             }
             catch(Exception ex)
             {
-                throw ex;
+                throw;
             }
 
             return rm;
@@ -215,7 +231,7 @@ namespace Modelo
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
 
             return rm;
@@ -238,7 +254,7 @@ namespace Modelo
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
     }

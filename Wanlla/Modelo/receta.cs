@@ -202,15 +202,15 @@ namespace Modelo
             var recetas = new receta();
             try
             {
-                using (var dbwanlla = new db_wanlla())
+                using (var db = new db_wanlla())
                 {
-                    recetas = dbwanlla.receta
-                        .Include("categoria")
-                        .Include("ingrediente_receta.ingrediente")
-                        .Include("paso_receta")
-                        //.Include("PRODUCTO.NOMBRE")
-                        .Where(x => x.id_receta == id)
-                        .SingleOrDefault();
+                    recetas = db.receta
+                            .Include("categoria")
+                            .Include("ingrediente_receta.ingrediente")
+                            .Include("paso_receta")
+                            //.Include("PRODUCTO.NOMBRE")
+                            .Where(x => x.id_receta == id)
+                            .SingleOrDefault();
                 }
             }
             catch (Exception ex)

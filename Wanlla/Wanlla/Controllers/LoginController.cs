@@ -42,12 +42,22 @@ namespace Wanlla.Controllers
             return Redirect("~/");
         }
 
-        public ActionResult Mantenimiento(usuario model)
+        public ActionResult Guardar(usuario model)
         {
+            ModelState.Remove("tipo_usuario");
+            model.tipo_usuario = "Usuario";
             if (ModelState.IsValid)
             {
-                model.mantenimiento();
-                return Redirect("~/Home"); // Devuelve el index
+                if (model.validarCorreo())
+                {
+                    model.registrar();
+                    return Redirect("~/Home"); // Devuelve el index
+                }
+                else
+                {
+                    ModelState.AddModelError("email_usuario", "Ya existe un usuario con este correo electrónico");
+                    return View("~/Views/Login/Registro.cshtml", model);
+                }
             }
             else
             {
