@@ -172,11 +172,16 @@
     <Content Include="images\Bocaditos.png" />
     <Content Include="images\brownies.jpg" />
     <Content Include="images\calamaresguisadosconaceitunas.jpg" />
+    <Content Include="images\CaldoGallina.jpg" />
     <Content Include="images\Carnes.png" />
     <Content Include="images\cevichepescadoperuano.jpg" />
+    <Content Include="images\ChilcanoPescado.jpg" />
     <Content Include="images\comidachina.png" />
     <Content Include="images\comidaperuana.png" />
     <Content Include="images\ensalada.png" />
+    <Content Include="images\EnsaladaQuinua.jpg" />
+    <Content Include="images\EnsaladaRusaPeruana.jpg" />
+    <Content Include="images\EnsaladasPallares.jpg" />
     <Content Include="images\galletasavena.jpg" />
     <Content Include="images\icon_blanco.png" />
     <Content Include="images\icon_verde.png" />
@@ -190,7 +195,9 @@
     <Content Include="images\media3.jpg" />
     <Content Include="images\minihamburguesasalamosataza.jpg" />
     <Content Include="images\Pastas.png" />
+    <Content Include="images\Pavohorno.jpg" />
     <Content Include="images\picante.png" />
+    <Content Include="images\picantetacneño.jpg" />
     <Content Include="images\picarones.jpg" />
     <Content Include="images\polloendiablado.jpg" />
     <Content Include="images\Postres.png" />
@@ -198,6 +205,7 @@
     <Content Include="images\recipe2.jpg" />
     <Content Include="images\recipe3.jpg" />
     <Content Include="images\rocotorelleno.jpg" />
+    <Content Include="images\SopaMinuta.jpg" />
     <Content Include="images\suspirolimeño.jpg" />
     <Content Include="LICENSE.txt" />
     <Content Include="scripts\bootstrap.js" />
