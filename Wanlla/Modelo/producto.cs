@@ -87,7 +87,7 @@ namespace Modelo
             return productos;
         }
 
-        public List<producto> buscar(string criterio)
+        public List<producto> buscar(string buscar)
         {
             var productos = new List<producto>();
 
@@ -95,18 +95,16 @@ namespace Modelo
             {
                 using (var dbwanlla = new db_wanlla())
                 {
-                    if (id_producto == 0)
-                    {
-                        productos = dbwanlla.producto
-                                .Include("ingrediente").Include("distribuidor").Include("marca")
-                                .Where(x => x.ingrediente.nom_ingrediente == criterio
-                                || x.distribuidor.nom_distribuidor == criterio
-                                || x.marca.nom_marca == criterio
-                                || x.des_producto == criterio
-                                || x.umed_producto == criterio)
+                    productos = dbwanlla.producto
+                                .Include("ingrediente")
+                                .Include("distribuidor")
+                                .Include("marca")
+                                .Where(x => x.ingrediente.nom_ingrediente.Contains(buscar)
+                                        || x.distribuidor.nom_distribuidor.Contains(buscar)
+                                        || x.marca.nom_marca.Contains(buscar)
+                                        || x.des_producto.Contains(buscar)
+                                        || x.umed_producto.Contains(buscar))
                                 .ToList();
-                    }
-
                 }
             }
             catch (Exception ex)

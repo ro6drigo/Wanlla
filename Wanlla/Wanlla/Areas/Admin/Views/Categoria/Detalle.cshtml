@@ -47,13 +47,13 @@
                 @foreach (var r in Model.receta)
                 {
                     <tr>
-                        <th>@(count++)</th>
-                        <th>@(r.nom_receta)</th>
-                        <th>@(r.des_receta)</th>
-                        <th><img class="img-responsive" src="~/images/@(r.img_receta)" width="35%" height="35%"></th>
-                        <th>@(r.vid_receta)</th>
-                        <th>@(r.diff_receta)</th>
-                        <th>@(r.time_receta)</th>
+                        <th scope="row">@(count++)</th>
+                        <td>@(r.nom_receta)</td>
+                        <td>@(r.des_receta.Length > 80 ? r.des_receta.Substring(0, 80) + "..." : r.des_receta)</td>
+                        <td>@(r.img_receta != null ? "Si" : "No")</td>
+                        <td>@(r.vid_receta != null ? "Si" : "No")</td>
+                        <td>@(r.diff_receta)</td>
+                        <td>@(r.time_receta)</td>
                     </tr>
                 }
             </tbody>

@@ -14,15 +14,15 @@ namespace Wanlla.Areas.Admin.Controllers
         // GET: Admin/Marca
         private marca marca = new marca();
 
-        public ActionResult Index(string criterio)
+        public ActionResult Index(string buscar = "")
         {
-            if (criterio == null | criterio == "")
+            if (buscar == "")
             {
                 return View(marca.Listar());
             }
             else
             {
-                return View(marca.Buscar(criterio));
+                return View(marca.Buscar(buscar));
             }
         }
 

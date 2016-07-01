@@ -2,22 +2,29 @@
 @{
     ViewBag.Title = "Distribuidores";
 }
-@using (Html.BeginForm("Index", "Distribuidor", FormMethod.Post, new { criterio = "frm-buscar" }))
-{
-    <div class="row">
-        <div class="col-sm-5 text-left">
-            @Html.TextBox("criterio", null, new { type = "text", @class = "form-control", placeholder = "Ingrese distribuidor, e-mail o teléfono" })
-        </div>
-        <div class="col-sm-3">
-            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Buscar</button>
-        </div>
-        <div class="col-sm-4 text-right">
-            <a class="btn btn-info" href="~/Admin/Distribuidor/Mantenimiento/0" role="button"><i class="fa fa-plus"></i> Nuevo Distribuidor</a>
-        </div>
-    </div>
 
-}
-<hr />
+<div class="row">
+    <div class="col-sm-6">
+        @using (Html.BeginForm("Index", "Distribuidor", FormMethod.Post, new { @class = "form-inline", id = "form-dieta" }))
+        {
+            <div class="form-group">
+                <label class="sr-only" for="buscar">Buscar</label>
+                <div class="input-group">
+                    @Html.TextBox("buscar", null, new { type = "search", @class = "form-control", placeholder = "Buscar", id = "buscar", autocomplete = "off" })
+                    <div class="input-group-addon"><a href="javascript: document.getElementById('form-dieta').submit();"><span class="fa fa-search"></span></a></div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-sm-6 text-right">
+        <a class="btn btn-success" href="~/Admin/Distribuidor/Mantenimiento/" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Nueva Marca" role="button">
+            &nbsp;<span class="fa fa-plus-circle fa-lg"></span>&nbsp;
+        </a>
+    </div>
+</div>
+
+<br />
+
 <div class="table-responsive">
     <table class="table table-hover table-bordered text-center">
         <thead>
@@ -40,10 +47,12 @@
                     <td>@m.tel_distribuidor</td>
                     <td>@m.estado_distribuidor</td>
                     <td>
-                        <a class="btn btn-success" href="~/Admin/Distribuidor/Mantenimiento/@m.id_distribuidor"><i class="fa fa-pencil fa-lg"></i> Modificar</a>
-                        <a onclick="return confirm('¿Está seguro de eliminar el registro?');" href="~/Admin/Distribuidor/Eliminar/@m.id_distribuidor" class="btn btn-danger">
-                            <i class="fa fa-trash-o fa-lg"></i>
-                        </a>
+                        <table class="text-center" style="width:100%;">
+                            <tr>
+                                <td><a href="~/Admin/Distribuidor/Mantenimiento/@m.id_distribuidor" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Editar"><span class="fa fa-pencil os-ac-icon os-hover-green"></span></a></td>
+                                <td><a onclick="return confirm('¿Está seguro de eliminar el registro?');" href="~/Admin/Distribuidor/Eliminar/@m.id_distribuidor" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Eliminar"><span class="fa fa-trash os-ac-icon os-hover-red"></span></a></td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
             }

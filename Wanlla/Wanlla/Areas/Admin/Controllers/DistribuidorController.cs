@@ -14,15 +14,15 @@ namespace Wanlla.Areas.Admin.Controllers
         // GET: Admin/Distribuidor
         private distribuidor distribuidor = new distribuidor();
 
-        public ActionResult Index(string criterio)
+        public ActionResult Index(string buscar = "")
         {
-            if (criterio == null | criterio == "")
+            if (buscar == "")
             {
                 return View(distribuidor.Listar());
             }
             else
             {
-                return View(distribuidor.Buscar(criterio));
+                return View(distribuidor.Buscar(buscar));
             }
         }
 

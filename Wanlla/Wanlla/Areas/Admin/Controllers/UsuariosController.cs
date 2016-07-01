@@ -13,15 +13,15 @@ namespace Wanlla.Areas.Admin.Controllers
     {
         private usuario usuario = new usuario();
         // GET: Admin/Usuarios
-        public ActionResult Index(string criterio)
+        public ActionResult Index(string buscar = "")
         {
-            if (criterio == null | criterio == "")
+            if (buscar == "")
             {
                 return View(usuario.Listar());
             }
             else
             {
-                return View(usuario.buscar(criterio));
+                return View(usuario.buscar(buscar));
             }
         }
     }

@@ -158,7 +158,7 @@ namespace Modelo
         /// <param name="nom_ingrediente">Nombre del ingrediente</param>
         /// <param name="tipo_ingrediente">Tipo de ingrediente</param>
         /// <returns></returns>
-        public List<ingrediente> buscar(string criterio)
+        public List<ingrediente> buscar(string buscar)
         {
             var ingredientes = new List<ingrediente>();
 
@@ -169,8 +169,9 @@ namespace Modelo
                     if (id_ingrediente == 0)
                     {
                         ingredientes = dbwanlla.ingrediente
-                                .Where(x => x.nom_ingrediente.Contains(criterio) || x.tipo_ingrediente.Contains(criterio))
-                                .ToList();
+                                    .Where(x => x.nom_ingrediente.Contains(buscar) 
+                                            || x.tipo_ingrediente.Contains(buscar))
+                                    .ToList();
                     }
 
                 }

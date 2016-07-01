@@ -14,16 +14,16 @@ namespace Wanlla.Areas.Admin.Controllers
         private receta receta = new receta();
         private categoria tipo = new categoria();
         // GET: Admin/Receta
-        public ActionResult Index(string criterio)
+        public ActionResult Index(string buscar = "")
         {
-            if (criterio == null | criterio == "")
+            if (buscar == "")
             {
                 
                 return View(receta.Listar());
             }
             else
             {
-                return View(receta.buscar(criterio));
+                return View(receta.buscar(buscar));
             }
         }
 

@@ -138,7 +138,7 @@ namespace Modelo
             return categorias;
         }
 
-        public List<categoria> buscar(string criterio)
+        public List<categoria> buscar(string buscar)
         {
             var categorias = new List<categoria>();
 
@@ -149,8 +149,9 @@ namespace Modelo
                     if (id_categoria == 0)
                     {
                         categorias = dbwanlla.categoria
-                                .Where(x => x.nom_categoria.Contains(criterio) || x.img_categoria.Contains(criterio))
-                                .ToList();
+                                    .Where(x => x.nom_categoria.Contains(buscar)
+                                            || x.img_categoria.Contains(buscar))
+                                    .ToList();
                     }
 
                 }

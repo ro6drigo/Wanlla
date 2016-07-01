@@ -63,7 +63,7 @@ namespace Modelo
             return tipo;
         }
 
-        public List<marca> Buscar(string criterio)
+        public List<marca> Buscar(string buscar)
         {
             var marcas = new List<marca>();
             
@@ -72,7 +72,7 @@ namespace Modelo
                 using (var dbwanlla = new db_wanlla())
                 {
                     marcas = dbwanlla.marca
-                                .Where(x => x.nom_marca.Contains(criterio))
+                                .Where(x => x.nom_marca.Contains(buscar))
                                 .ToList();
                 }
             }

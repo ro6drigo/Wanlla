@@ -16,15 +16,15 @@ namespace Wanlla.Areas.Admin.Controllers
         private distribuidor tipodistribuidor = new distribuidor();
         private marca tipomarca = new marca();
         // GET: Admin/Producto
-        public ActionResult Index(string criterio)
+        public ActionResult Index(string buscar = "")
         {
-            if (criterio == null | criterio == "")
+            if (buscar == "")
             {
                 return View(producto.listar());
             }
             else
             {
-                return View(producto.buscar(criterio));
+                return View(producto.buscar(buscar));
             }
         }
 

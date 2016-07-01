@@ -7,8 +7,8 @@
 {
     @Html.HiddenFor(x => x.id_marca);
     <div class="form-group">
-        <label for="nom_marca" class="col-sm-4 control-label hidden-xs"><span class="fa fa-linux fa-2x" aria-hidden="true"></span></label>
-        <label for="nom_marca" class="col-sm-4 control-label visible-xs">Nombre</label>
+        <label for="nom_marca" class="col-sm-4 control-label hidden-xs"><span class="fa fa-registered fa-2x" aria-hidden="true"></span></label>
+        <label for="nom_marca" class="col-sm-4 control-label visible-xs">Marca</label>
         <div class="col-sm-4">
             @Html.TextBoxFor(x => x.nom_marca, new { type = "text", @class = "form-control", placeholder = "Nombre" })
             @Html.ValidationMessageFor(x => x.nom_marca, null, new { @class = "label label-danger" })

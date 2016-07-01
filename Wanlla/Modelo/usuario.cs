@@ -84,7 +84,7 @@ namespace Modelo
             return usuarios;
         }
 
-        public List<usuario> buscar(string criterio)
+        public List<usuario> buscar(string buscar)
         {
             var usuarios = new List<usuario>();
 
@@ -95,11 +95,11 @@ namespace Modelo
                     if (id_usuario == 0)
                     {
                         usuarios = dbwanlla.usuario
-                                .Where(x => x.nom_usuario.Contains(criterio)
-                                        || x.ape_usuario.Contains(criterio)
-                                        || x.email_usuario.Contains(criterio)
-                                        || x.sex_usuario.Contains(criterio)
-                                        || x.tipo_usuario.Contains(criterio))
+                                .Where(x => x.nom_usuario.Contains(buscar)
+                                        || x.ape_usuario.Contains(buscar)
+                                        || x.email_usuario.Contains(buscar)
+                                        || x.sex_usuario.Contains(buscar)
+                                        || x.tipo_usuario.Contains(buscar))
                                 .ToList();
                     }
 

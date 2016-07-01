@@ -13,15 +13,15 @@ namespace Wanlla.Areas.Admin.Controllers
     {
         private ingrediente ingrediente = new ingrediente();
         // GET: Admin/Ingredient
-        public ActionResult Index(string criterio)
+        public ActionResult Index(string buscar = "")
         {
-            if (criterio == null | criterio == "")
+            if (buscar == "")
             {
                 return View(ingrediente.listar());
             }
             else
             {
-                return View(ingrediente.buscar(criterio));
+                return View(ingrediente.buscar(buscar));
             }
         }
 

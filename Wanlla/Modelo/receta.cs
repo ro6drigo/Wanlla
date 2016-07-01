@@ -226,7 +226,7 @@ namespace Modelo
         /// <param name="des_receta">Descripción de la receta a buscar</param>
         /// <param name="time_receta">Tiempo de cocción de las recetas</param>
         /// <returns></returns>
-        public List<receta> buscar(string criterio)
+        public List<receta> buscar(string buscar)
         {
             var recetas = new List<receta>();
 
@@ -238,9 +238,9 @@ namespace Modelo
                     {
                         recetas = dbwanlla.receta
                                 .Include("categoria")
-                                .Where(x => x.nom_receta == criterio
-                                        || x.des_receta == criterio
-                                        || x.categoria.nom_categoria == criterio)
+                                .Where(x => x.nom_receta.Contains(buscar)
+                                                || x.des_receta.Contains(buscar)
+                                                || x.categoria.nom_categoria.Contains(buscar))
                                 .ToList();
                     }
 

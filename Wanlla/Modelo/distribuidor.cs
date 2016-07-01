@@ -79,7 +79,7 @@ namespace Modelo
             return tipo;
         }
 
-        public List<distribuidor> Buscar(string criterio)
+        public List<distribuidor> Buscar(string buscar)
         {
             var distribuidores = new List<distribuidor>();
 
@@ -88,9 +88,9 @@ namespace Modelo
                 using (var dbwanlla = new db_wanlla())
                 {
                     distribuidores = dbwanlla.distribuidor
-                                .Where(x => x.nom_distribuidor.Contains(criterio) 
-                                       || x.tel_distribuidor.Contains(criterio) 
-                                       || x.email_distribuidor.Contains(criterio))
+                                .Where(x => x.nom_distribuidor.Contains(buscar) 
+                                       || x.tel_distribuidor.Contains(buscar) 
+                                       || x.email_distribuidor.Contains(buscar))
                                 .ToList();
                 }
             }

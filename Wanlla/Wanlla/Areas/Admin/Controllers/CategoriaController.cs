@@ -13,15 +13,15 @@ namespace Wanlla.Areas.Admin.Controllers
     {
         private categoria categoria = new categoria();
         // GET: Admin/Categoria
-        public ActionResult Index(string criterio)
+        public ActionResult Index(string buscar = "")
         {
-            if (criterio == null | criterio == "")
+            if (buscar == "")
             {
                 return View(categoria.listar());
             }
             else
             {
-                return View(categoria.buscar(criterio));
+                return View(categoria.buscar(buscar));
             }
         }
 

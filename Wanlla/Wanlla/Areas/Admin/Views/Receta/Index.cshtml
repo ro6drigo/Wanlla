@@ -3,21 +3,28 @@
     ViewBag.Title = "Recetas";
 }
 
-@using (Html.BeginForm("Index", "Receta", FormMethod.Post, new { criterio = "frm-buscar" }))
-{
-    <div class="row">
-        <div class="col-sm-5 text-left">
-            @Html.TextBox("criterio", null, new { type = "text", @class = "form-control", placeholder = "Ingrese dato a buscar" })
-        </div>
-        <div class="col-sm-3">
-            <button type="submit" class="btn btn-lg btn-default fa fa-search" data-toggle="tooltip" title="Buscar"></button>
-        </div>
-        <div class="col-sm-4 text-right">
-            <a class="btn btn-lg btn-success fa fa-plus" href="~/Admin/Receta/Mantenimiento/0" role="button" data-toggle="tooltip" title="Nueva Receta"></a>
-        </div>
+<div class="row">
+    <div class="col-sm-6">
+        @using (Html.BeginForm("Index", "Receta", FormMethod.Post, new { @class = "form-inline", id = "form-dieta" }))
+        {
+            <div class="form-group">
+                <label class="sr-only" for="buscar">Buscar</label>
+                <div class="input-group">
+                    @Html.TextBox("buscar", null, new { type = "search", @class = "form-control", placeholder = "Buscar", id = "buscar", autocomplete = "off" })
+                    <div class="input-group-addon"><a href="javascript: document.getElementById('form-dieta').submit();"><span class="fa fa-search"></span></a></div>
+                </div>
+            </div>
+        }
     </div>
-}
-<hr />
+    <div class="col-sm-6 text-right">
+        <a class="btn btn-success" href="~/Admin/Receta/Mantenimiento/" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Nueva Receta" role="button">
+            &nbsp;<span class="fa fa-plus-circle fa-lg"></span>&nbsp;
+        </a>
+    </div>
+</div>
+
+<br />
+
 <div class="table-responsive">
     <table class="table table-hover table-bordered text-center">
         <thead>
@@ -28,7 +35,7 @@
                 <th class="text-center">Imagen</th>
                 <th class="text-center">Video</th>
                 <th class="text-center">Dificultad</th>
-                <th class="text-center">Tiempo Cocción</th>
+                <th class="text-center">Tiempo</th>
                 <th class="text-center">Categoría</th>
                 <th class="text-center">Acción</th>
             </tr>
@@ -39,9 +46,9 @@
                 <tr>
                     <td>@m.id_receta</td>
                     <td>@m.nom_receta</td>
-                    <td>@m.des_receta</td>
-                    <td><img class="img-responsive" src="~/images/@m.img_receta" width="35%" height="35%"></td>
-                    <td>@m.vid_receta</td>
+                    <td>@(m.des_receta.Length > 50 ? m.des_receta.Substring(0, 50) + "..." : m.des_receta)</td>
+                    <td>@(m.img_receta != null ? "Si" : "No" )</td>
+                    <td>@(m.vid_receta != null ? "Si" : "No")</td>
                     <td>@m.diff_receta</td>
                     <td>@m.time_receta</td>
                     <td>@m.categoria.nom_categoria</td>
