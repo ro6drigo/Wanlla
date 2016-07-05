@@ -96,7 +96,7 @@ namespace Modelo
                                         .Include("categoria")
                                         .OrderBy(x => x.id_receta)
                                         .Skip(((count-1)*6))
-                                        .Take((count*6))
+                                        .Take(6)
                                         .ToList();
                 }
             }

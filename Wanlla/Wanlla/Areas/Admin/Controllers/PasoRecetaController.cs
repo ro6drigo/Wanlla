@@ -22,7 +22,7 @@ namespace Wanlla.Areas.Admin.Controllers
         {
             return View(
                 id == 0 ? new paso_receta() //nueva paso receta
-                        : paso_receta.Obtener(id)
+                        : pasoreceta.Obtener(id)
             );
         }
     }
