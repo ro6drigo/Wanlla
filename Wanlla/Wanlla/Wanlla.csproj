@@ -229,8 +229,10 @@
     <Compile Include="Areas\Admin\Controllers\CategoriaController.cs" />
     <Compile Include="Areas\Admin\Controllers\DistribuidorController.cs" />
     <Compile Include="Areas\Admin\Controllers\IngredientController.cs" />
+    <Compile Include="Areas\Admin\Controllers\IngredienteRecetaController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\MarcaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PasoRecetaController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductoController.cs" />
     <Compile Include="Areas\Admin\Controllers\RecetaController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsuariosController.cs" />
@@ -307,6 +309,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\IngredienteReceta\" />
+    <Folder Include="Areas\Admin\Views\PasoReceta\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

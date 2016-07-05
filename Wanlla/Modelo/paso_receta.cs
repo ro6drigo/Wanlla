@@ -6,6 +6,7 @@ namespace Modelo
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity;
     using System.Data.Entity.Spatial;
+    using System.Linq;
 
     public partial class paso_receta
     {
@@ -23,13 +24,34 @@ namespace Modelo
 
         public virtual receta receta { get; set; }
 
+        public paso_receta Obtener(int id) //retornar es un objeto
+        {
+            var pasoreceta = new paso_receta();
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    pasoreceta = dbwanlla.paso_receta
+                            .Include("paso")
+                            .Include("receta")
+                            .Where(x => x.id_receta == id)
+                            .SingleOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return pasoreceta;
+        }
+
         public void mantenimiento()
         {
             try
             {
                 using (var dbwanlla = new db_wanlla())
                 {
-                    if (this.id_receta > 0)
+                    if (this.id_paso > 0)
                     {
                         dbwanlla.Entry(this).State = EntityState.Modified;
                     }

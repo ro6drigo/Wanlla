@@ -6,6 +6,7 @@ namespace Modelo
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity;
     using System.Data.Entity.Spatial;
+    using System.Linq;
 
     public partial class ingrediente_receta
     {
@@ -28,13 +29,33 @@ namespace Modelo
 
         public virtual receta receta { get; set; }
 
+        public ingrediente_receta Obtener(int id) //retornar es un objeto
+        {
+            var ingredientereceta = new ingrediente_receta();
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    ingredientereceta = dbwanlla.ingrediente_receta
+                        .Include("receta")
+                        .Where(x => x.id_receta == id)
+                        .SingleOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ingredientereceta;
+        }
+
         public void mantenimiento()
         {
             try
             {
                 using (var dbwanlla = new db_wanlla())
                 {
-                    if (this.id_receta > 0)
+                    if (this.id_ingrediente > 0)
                     {
                         dbwanlla.Entry(this).State = EntityState.Modified;
                     }
