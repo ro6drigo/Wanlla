@@ -9,6 +9,7 @@ using Wanlla.Filters;
 namespace Wanlla.Areas.Admin.Controllers
 {
     [AutenticadoAdmin]
+    
     public class IngredienteRecetaController : Controller
     {
         private ingrediente_receta ingredientereceta = new ingrediente_receta();
@@ -22,7 +23,7 @@ namespace Wanlla.Areas.Admin.Controllers
         {
             return View(
                 id == 0 ? new ingrediente_receta() //nueva ingrediente receta
-                        : ingrediente_receta.Obtener(id)
+                        : ingredientereceta.Obtener(id)
             );
         }
     }
