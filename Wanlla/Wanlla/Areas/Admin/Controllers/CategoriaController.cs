@@ -25,6 +25,11 @@ namespace Wanlla.Areas.Admin.Controllers
             }
         }
 
+        public JsonResult CargarCategoria(AnexGRID grid)
+        {
+            return Json(categoria.ListarGrilla(grid));
+        }
+
         public ActionResult Detalle(int id)
         {
             return View(categoria.Obtener(id));

@@ -36,10 +36,11 @@
             </tr>
         </thead>
         <tbody>
+            @{ int count = 1;}
             @foreach (var m in Model)
             {
                 <tr>
-                    <td>@m.id_categoria</td>
+                    <th scope="row">@(count++)</th>
                     <td>@m.nom_categoria</td>
                     <td>@(m.img_categoria != null ? "Si" : "No")</td>
                     <td>
@@ -58,7 +59,7 @@
 </div>
 <div class="list-group" id="categoria"></div>
 
-@*<script>
+<script>
     $(document).ready(function () {
         $("#categoria").anexGrid({
             class: 'table-striped table-hover table-condensed',
@@ -76,11 +77,11 @@
             ],
 
             modelo: [
-                //campo 1: id_categoria
+                //campo 1: ID
                 { propiedad: 'id_categoria' },
                 //campo 2: NOMBRE
                 { propiedad: 'nom_categoria' },
-                //Campo 3: ESTADO
+                //Campo 3: IMAGEN
                 { propiedad: 'img_categoria' },
 
                 //para los botones
@@ -118,10 +119,11 @@
                     },
                 }
             ],
+            url: '@Url.Content("~/Categoria/CargarCategoria/")',
             paginable: true,
             limite: [10, 20, 50, 100],
             columna: 'id_categoria',
             columna_orden: "DESC"
         });
     })
-</script>*@
+</script>
