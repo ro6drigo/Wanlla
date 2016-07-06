@@ -25,7 +25,7 @@
 
 <br />
 
-<div class="table-responsive">
+@*<div class="table-responsive">
     <table class="table table-hover table-bordered table-condensed text-center">
         <thead>
             <tr>
@@ -52,4 +52,72 @@
             }
         </tbody>
     </table>
+</div>*@
+<div class="table-responsive">
+    <div class="list-group" id="marca"></div>
 </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#marca").anexGrid({
+                class: 'table-striped table-hover table-condensed',
+                columnas: [
+                    //columna1: ID
+                    { leyenda: "#", columna: "id_marca", ordenable: true, class: "text-center" },
+                    //columna1: Nombre
+                    { leyenda: "Nombre", columna: "nom_marca", ordenable: true, class: "text-center" },
+                    //Columnas de los botones
+                    { style: 'Width: 80px;' },//Visualizar
+                    { style: 'Width: 80px;' },//Modificar
+                    { style: 'Width: 80px;' },//Eliminar
+                ],
+
+                modelo: [
+                    //campo 1: ID
+                    { propiedad: 'id_marca', class: "text-center" },
+                    //campo 2: NOMBRE
+                    { propiedad: 'nom_marca', class: "text-center" },
+
+                    //para los botones
+                    //Botón Visualizar
+                    {
+                        formato: function (tr, obj, valor) {
+                            return anexGrid_link({
+                                href: '@Url.Content("~/Admin/Marca/Detalle/")' + obj.id_marca,
+                                contenido: '<span class="fa fa-eye os-ac-icon os-hover-yellow"></span>'
+                                //class: 'fa fa-eye os-ac-icon os-hover-yellow'
+                            });
+                        },
+                    },
+                    //Botón Modificar
+                    {
+                        formato: function (tr, obj, valor) {
+                            return anexGrid_link({
+                                href: '@Url.Content("~/Admin/Marca/Mantenimiento/")' + obj.id_marca,
+                                contenido: '<span class="fa fa-pencil os-ac-icon os-hover-green"></span>'
+                                //class: 'fa fa-pencil os-ac-icon os-hover-green'
+                            });
+                        },
+                    },
+                    //Botón Eliminar
+                    {
+                        formato: function (tr, obj, valor) {
+                            return anexGrid_link({
+                                href: '@Url.Content("~/Admin/Marca/Eliminar/")' + obj.id_marca,
+                                contenido: '<span class="fa fa-trash os-ac-icon os-hover-red"></span>',
+                                //class: 'fa fa-trash os-ac-icon os-hover-red',
+                                attr: [
+                                'onclick="return confirm(\'¿Está seguro de eliminar el registro?\')"'
+                                ]
+                            });
+                        },
+                    }
+                ],
+                url: '@Url.Content("~/Marca/CargarMarca/")',
+                paginable: true,
+                limite: [10, 20, 50, 100],
+                columna: 'id_marca',
+                columna_orden: "DESC"
+            });
+        })
+    </script>

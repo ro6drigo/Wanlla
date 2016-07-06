@@ -63,6 +63,51 @@ namespace Modelo
             return tipo;
         }
 
+        public AnexGRIDResponde ListarGrilla(AnexGRID grilla)
+        {
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    grilla.Inicializar();
+
+                    var query = db.marca.Where(x => x.id_marca > 0);
+
+                    //ordenar por columnas
+                    if (grilla.columna == "id_marca")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.id_marca)
+                            : query.OrderBy(x => x.id_marca);
+                    }
+                    if (grilla.columna == "nom_marca")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.nom_marca)
+                            : query.OrderBy(x => x.nom_marca);
+                    }
+
+                    var marcas = query.Skip(grilla.pagina).Take(grilla.limite).ToList();
+
+                    var total = query.Count();
+
+                    //enviamos a la grilla
+                    grilla.SetData(
+                        from m in marcas
+                        select new
+                        {
+                            m.id_marca,
+                            m.nom_marca
+                        },
+                        total
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return grilla.responde();
+        }
+
         public List<marca> Buscar(string buscar)
         {
             var marcas = new List<marca>();

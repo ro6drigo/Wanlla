@@ -69,7 +69,6 @@ namespace Modelo
 
         public AnexGRIDResponde ListarGrilla(AnexGRID grilla)
         {
-
             try
             {
                 using (var db = new db_wanlla())

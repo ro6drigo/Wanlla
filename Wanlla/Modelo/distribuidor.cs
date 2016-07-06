@@ -79,6 +79,69 @@ namespace Modelo
             return tipo;
         }
 
+        public AnexGRIDResponde ListarGrilla(AnexGRID grilla)
+        {
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    grilla.Inicializar();
+
+                    var query = db.distribuidor.Where(x => x.id_distribuidor > 0);
+
+                    //ordenar por columnas
+                    if (grilla.columna == "id_distribuidor")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.id_distribuidor)
+                            : query.OrderBy(x => x.id_distribuidor);
+                    }
+                    if (grilla.columna == "nom_distribuidor")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.nom_distribuidor)
+                            : query.OrderBy(x => x.nom_distribuidor);
+                    }
+                    if (grilla.columna == "email_distribuidor")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.email_distribuidor)
+                            : query.OrderBy(x => x.email_distribuidor);
+                    }
+                    if (grilla.columna == "tel_distribuidor")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.tel_distribuidor)
+                            : query.OrderBy(x => x.tel_distribuidor);
+                    }
+                    if (grilla.columna == "estado_distribuidor")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.estado_distribuidor)
+                            : query.OrderBy(x => x.estado_distribuidor);
+                    }
+
+                    var distribuidores = query.Skip(grilla.pagina).Take(grilla.limite).ToList();
+
+                    var total = query.Count();
+
+                    //enviamos a la grilla
+                    grilla.SetData(
+                        from d in distribuidores
+                        select new
+                        {
+                            d.id_distribuidor,
+                            d.nom_distribuidor,
+                            d.email_distribuidor,
+                            d.tel_distribuidor,
+                            d.estado_distribuidor
+                        },
+                        total
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return grilla.responde();
+        }
+
         public List<distribuidor> Buscar(string buscar)
         {
             var distribuidores = new List<distribuidor>();

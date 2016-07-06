@@ -84,6 +84,87 @@ namespace Modelo
             return usuarios;
         }
 
+        public AnexGRIDResponde ListarGrilla(AnexGRID grilla)
+        {
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    grilla.Inicializar();
+
+                    var query = db.usuario.Where(x => x.id_usuario > 0);
+
+                    //ordenar por columnas
+                    if (grilla.columna == "id_usuario")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.id_usuario)
+                            : query.OrderBy(x => x.id_usuario);
+                    }
+                    if (grilla.columna == "nom_usuario")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.nom_usuario)
+                            : query.OrderBy(x => x.nom_usuario);
+                    }
+                    if (grilla.columna == "ape_usuario")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.ape_usuario)
+                            : query.OrderBy(x => x.ape_usuario);
+                    }
+                    if (grilla.columna == "email_usuario")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.email_usuario)
+                            : query.OrderBy(x => x.email_usuario);
+                    }
+                    if (grilla.columna == "tel_usuario")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.tel_usuario)
+                            : query.OrderBy(x => x.tel_usuario);
+                    }
+                    if (grilla.columna == "fecnac_usuario")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.fecnac_usuario)
+                            : query.OrderBy(x => x.fecnac_usuario);
+                    }
+                    if (grilla.columna == "sex_usuario")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.sex_usuario)
+                            : query.OrderBy(x => x.sex_usuario);
+                    }
+                    if (grilla.columna == "tipo_usuario")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.tipo_usuario)
+                            : query.OrderBy(x => x.tipo_usuario);
+                    }
+
+                    var usuarios = query.Skip(grilla.pagina).Take(grilla.limite).ToList();
+
+                    var total = query.Count();
+
+                    //enviamos a la grilla
+                    grilla.SetData(
+                        from u in usuarios
+                        select new
+                        {
+                            u.id_usuario,
+                            u.nom_usuario,
+                            u.ape_usuario,
+                            u.email_usuario,
+                            u.tel_usuario,
+                            u.fecnac_usuario,
+                            u.sex_usuario,
+                            u.tipo_usuario
+                        },
+                        total
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return grilla.responde();
+        }
+
         public List<usuario> buscar(string buscar)
         {
             var usuarios = new List<usuario>();
