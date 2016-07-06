@@ -32,7 +32,6 @@ namespace Modelo
                 using (var dbwanlla = new db_wanlla())
                 {
                     pasoreceta = dbwanlla.paso_receta
-                            .Include("paso")
                             .Include("receta")
                             .Where(x => x.id_receta == id)
                             .SingleOrDefault();
@@ -59,6 +58,22 @@ namespace Modelo
                     {
                         dbwanlla.Entry(this).State = EntityState.Added;
                     }
+                    dbwanlla.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void eliminar()
+        {
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    dbwanlla.Entry(this).State = System.Data.Entity.EntityState.Deleted;
                     dbwanlla.SaveChanges();
                 }
             }

@@ -71,5 +71,21 @@ namespace Modelo
                 throw ex;
             }
         }
+
+        public void eliminar()
+        {
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    dbwanlla.Entry(this).State = System.Data.Entity.EntityState.Deleted;
+                    dbwanlla.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

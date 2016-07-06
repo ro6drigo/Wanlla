@@ -1,0 +1,37 @@
+﻿@model Modelo.paso_receta
+@{
+    ViewBag.Title = (Model.id_receta > 0 ? Model.receta.nom_receta : "Nuevos Pasos");
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Pasos Receta
+    </div>
+    @using (Html.BeginForm("Guardar", "paso_receta", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.HiddenFor(x => x.id_paso);
+        @Html.HiddenFor(x => x.id_receta);
+        <div class="form-group">
+            <label for="des_paso" class="col-sm-4 control-label hidden-xs"><i class="fa fa-cutlery fa-2x" aria-hidden="true"></i></label>
+            <label for="des_paso" class="col-sm-4 control-label visible-xs">Descripción</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.des_paso, new { type = "text", @class = "form-control", placeholder = "Descripción" })
+                @Html.ValidationMessageFor(x => x.des_paso, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="img_paso" class="col-sm-4 control-label hidden-xs"><i class="fa fa-picture-o fa-2x" aria-hidden="true"></i></label>
+            <label for="img_paso" class="col-sm-4 control-label visible-xs">Imagen</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.img_paso, new { type = "text", @class = "form-control", placeholder = "Imagen" })
+                @Html.ValidationMessageFor(x => x.img_paso, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-4">
+                <button type="submit" class="btn btn-success glyphicon glyphicon-floppy-disk" data-toggle="tooltip" title="Guardar"></button>
+                <button type="button" class="btn btn-danger glyphicon glyphicon-floppy-remove" onclick="javascript:history.back()" data-toggle="tooltip" title="Cancelar"></button>
+            </div>
+        </div>
+    }
+</div>

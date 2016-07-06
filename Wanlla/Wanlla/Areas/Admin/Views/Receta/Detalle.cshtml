@@ -34,9 +34,10 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Ingrediente</th>
-                    <th>Cantidad</th>
-                    <th>Unidad Medida</th>
+                    <th class="text-center">Ingrediente</th>
+                    <th class="text-center">Cantidad</th>
+                    <th class="text-center">Unidad Medida</th>
+                    <th class="text-center">Acción</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,6 +47,8 @@
                         <td>@(i.ingrediente.nom_ingrediente)</td>
                         <td>@(i.cant_ingrediente)</td>
                         <td>@(i.umed_ingrediente)</td>
+                        <td><a href="~/Admin/IngredienteReceta/Mantenimiento/@i.id_receta" data-toggle="tooltip" data-placement="bottom" title="Editar"><span class="fa fa-pencil os-ac-icon os-hover-green"></span></a></td>
+                        <td><a onclick="return confirm('¿Está seguro de eliminar el registro?');" href="~/Admin/IngredienteReceta/Eliminar/@i.id_receta" data-toggle="tooltip" data-placement="bottom" title="Eliminar"><span class="fa fa-trash os-ac-icon os-hover-red"></span></a></td>
                     </tr>
                 }
             </tbody>
@@ -62,9 +65,10 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Descripción</th>
-                    <th>Imagen</th>
+                    <th class="text-center">Id</th>
+                    <th class="text-center">Descripción</th>
+                    <th class="text-center">Imagen</th>
+                    <th class="text-center">Acción</th>
                 </tr>
             </thead>
             <tbody>
@@ -75,6 +79,8 @@
                         <th scope="row">@(count++)</th>
                         <td>@(p.des_paso)</td>
                         <td>@(p.img_paso != null ? "Si" : "No" )</td>
+                        <td><a href="~/Admin/PasoReceta/Mantenimiento/@p.id_receta" data-toggle="tooltip" data-placement="bottom" title="Editar"><span class="fa fa-pencil os-ac-icon os-hover-green"></span></a></td>
+                        <td><a onclick="return confirm('¿Está seguro de eliminar el registro?');" href="~/Admin/PasoReceta/Eliminar/@p.id_receta" data-toggle="tooltip" data-placement="bottom" title="Eliminar"><span class="fa fa-trash os-ac-icon os-hover-red"></span></a></td>
                     </tr>
                 }
             </tbody>
