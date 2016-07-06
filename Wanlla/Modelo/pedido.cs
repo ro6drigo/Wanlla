@@ -50,5 +50,26 @@ namespace Modelo
             }
             return dietas;
         }
+
+        public List<ingrediente_receta> obtenerTotalIng(int id)
+        {
+            List<ingrediente_receta> ing_rec = new List<ingrediente_receta>();
+
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    ing_rec = db.ingrediente_receta
+                                .Include("receta.dieta_receta")
+                                .ToList();        
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return ing_rec;
+        }
     }
 }

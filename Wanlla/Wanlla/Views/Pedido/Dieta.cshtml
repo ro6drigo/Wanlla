@@ -1,17 +1,80 @@
 ﻿@model Modelo.dieta
 @{
-    Layout = null;
+    ViewBag.Title = "Hacer un pedido";
 }
 
-<!DOCTYPE html>
+@{
+    int count = 1;
+}
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Dieta</title>
-</head>
-<body>
-    <div> 
+<div class="row">
+    <div class="col-sm-12">
+        @foreach (var dr in Model.dieta_receta)
+            {
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h3 class="panel-title"><b>Receta @(count++)</b></h3>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="text-right">
+                                <b>Cant. @(dr.cant_persona)</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img class="os-img-rec-dieta" src="~/images/@dr.receta.img_receta" alt="@(dr.receta.nom_receta)" style="max-width:250px">
+                        </div>
+                        <div class="col-sm-9">
+                            <p style="text-align: justify">
+                                <h4><b>@dr.receta.nom_receta</b> <small><a href="#ing@(dr.id_receta)" data-toggle="collapse" aria-expanded="false" aria-controls="ing@(dr.id_receta)">Detalle</a></small></h4>
+                                <ul class="list-group collapse" id="ing@(dr.id_receta)">
+                                    @foreach (var ir in dr.receta.ingrediente_receta)
+                                    {
+                                        <li class="list-group-item">
+                                            <span class="badge">@(ir.cant_ingrediente * dr.cant_persona) @(ir.umed_ingrediente)</span>
+                                            @(ir.ingrediente.nom_ingrediente)
+                                        </li>
+                                    }
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 class="panel-title"><b>Resumen Total</b></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <p style="text-align: justify">
+                            <h4><b>Ingredientes</b> <small><a href="#resumen" data-toggle="collapse" aria-expanded="false" aria-controls="resumen">Detalle</a></small></h4>
+                            <ul class="list-group collapse" id="resumen">
+                                @foreach (var ir in dr.receta.ingrediente_receta)
+                                {
+                                    <li class="list-group-item">
+                                        <span class="badge">@(ir.cant_ingrediente * dr.cant_persona) @(ir.umed_ingrediente)</span>
+                                        @(ir.ingrediente.nom_ingrediente)
+                                    </li>
+                                }
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-</body>
-</html>
+</div>
