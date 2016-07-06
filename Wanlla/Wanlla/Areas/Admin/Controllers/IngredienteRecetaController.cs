@@ -13,6 +13,7 @@ namespace Wanlla.Areas.Admin.Controllers
     public class IngredienteRecetaController : Controller
     {
         private ingrediente_receta ingredientereceta = new ingrediente_receta();
+        private ingrediente tipoingrediente = new ingrediente();
         // GET: Admin/IngredienteReceta
         public ActionResult Index()
         {
@@ -21,10 +22,36 @@ namespace Wanlla.Areas.Admin.Controllers
 
         public ActionResult Mantenimiento(int id = 0)
         {
-            return View(
-                id == 0 ? new ingrediente_receta() //nueva ingrediente receta
-                        : ingredientereceta.Obtener(id)
-            );
+            if (id != 0)
+            {
+                ViewBag.tipoingrediente = tipoingrediente.ListarIngrediente();
+                return View(new ingrediente_receta());
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Guardar(ingrediente_receta model)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                model.mantenimiento();
+                return Redirect("~/Admin/Receta/");
+            }
+            else
+            {
+                return View("~/Admin/IngredienteReceta/Mantenimiento.cshtml", model);
+            }
+        }
+
+        public ActionResult Eliminar(int id)
+        {
+            ingredientereceta.id_receta = id;
+            ingredientereceta.eliminar();
+            return Redirect("~/Admin/Receta/");
         }
     }
 }

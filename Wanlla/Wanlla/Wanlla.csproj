@@ -292,6 +292,8 @@
     <Content Include="Areas\Admin\Views\Receta\Mantenimiento.cshtml" />
     <Content Include="Areas\Admin\Views\Producto\Mantenimiento.cshtml" />
     <Content Include="Areas\Admin\Views\Producto\Detalle.cshtml" />
+    <Content Include="Areas\Admin\Views\IngredienteReceta\Mantenimiento.cshtml" />
+    <Content Include="Areas\Admin\Views\PasoReceta\Mantenimiento.cshtml" />
     <None Include="Properties\PublishProfiles\Wanlla.pubxml" />
     <Content Include="Areas\Admin\Views\Usuario\Perfil.cshtml" />
     <Content Include="Areas\Admin\Views\Marca\Mantenimiento.cshtml" />
@@ -309,8 +311,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\IngredienteReceta\" />
-    <Folder Include="Areas\Admin\Views\PasoReceta\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

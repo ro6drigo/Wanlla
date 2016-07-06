@@ -20,10 +20,34 @@ namespace Wanlla.Areas.Admin.Controllers
 
         public ActionResult Mantenimiento(int id = 0)
         {
-            return View(
-                id == 0 ? new paso_receta() //nueva paso receta
-                        : pasoreceta.Obtener(id)
-            );
+            if(id != 0)
+            {
+                return View( new paso_receta());
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Guardar(paso_receta model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.mantenimiento();
+                return Redirect("~/Admin/Receta/");
+            }
+            else
+            {
+                return View("~/Admin/PasoReceta/Mantenimiento.cshtml", model);
+            }
+        }
+
+        public ActionResult Eliminar(int id)
+        {
+            pasoreceta.id_paso = id;
+            pasoreceta.eliminar();
+            return Redirect("~/Admin/Receta/");
         }
     }
 }

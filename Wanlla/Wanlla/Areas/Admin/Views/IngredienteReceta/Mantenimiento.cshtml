@@ -1,0 +1,53 @@
+﻿@model Modelo.ingrediente_receta
+@{
+    ViewBag.Title = (Model.id_receta > 0 ? Model.receta.nom_receta : "Nuevos Ingredientes");
+    List<Modelo.ingrediente> tipoingrediente = ViewBag.tipoingrediente;
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Ingredientes Receta
+    </div>
+    @using (Html.BeginForm("Guardar", "ingrediente_receta", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.HiddenFor(x => x.id_receta);
+        <div class="form-group">
+            <label for="id_ingrediente" class="col-sm-4 control-label hidden-xs"><i class="fa fa-spoon fa-2x" aria-hidden="true"></i></label>
+            <label for="id_ingrediente" class="col-sm-4 control-label visible-xs">Ingrediente</label>
+            <div class="col-sm-4">
+                <select name="id_ingrediente" class="form-control">
+                    @foreach (var t in tipoingrediente)
+                {
+                        <option value="@t.id_ingrediente">@t.nom_ingrediente</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="cant_ingrediente" class="col-sm-4 control-label hidden-xs"><i class="fa fa-balance-scale fa-2x" aria-hidden="true"></i></label>
+            <label for="cant_ingrediente" class="col-sm-4 control-label visible-xs">Cantidad</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.cant_ingrediente, new { type = "text", @class = "form-control", placeholder = "Cantidad" })
+                @Html.ValidationMessageFor(x => x.cant_ingrediente, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="umed_ingrediente" class="col-sm-4 control-label hidden-xs"><i class="fa fa-tachometer fa-2x" aria-hidden="true"></i></label>
+            <label for="umed_ingrediente" class="col-sm-4 control-label visible-xs">Unidad de Medida</label>
+            <div class="col-sm-4">
+                <select name="umed_ingrediente" class="form-control">
+                    <option>g</option>
+                    <option>l</option>
+                    <option>ml</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-4">
+                <button type="submit" class="btn btn-success glyphicon glyphicon-floppy-disk" data-toggle="tooltip" title="Guardar"></button>
+                <button type="button" class="btn btn-danger glyphicon glyphicon-floppy-remove" onclick="javascript:history.back()" data-toggle="tooltip" title="Cancelar"></button>
+            </div>
+        </div>
+    }
+</div>
