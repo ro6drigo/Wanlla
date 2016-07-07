@@ -60,20 +60,48 @@ namespace Modelo
             {
                 using (var db = new db_wanlla())
                 {
+                    //SELECT  ir.id_ingrediente,
+                    //  i.nom_ingrediente,
+                    //  SUM(ir.cant_ingrediente * dr.cant_persona) AS cant_ingrediente,
+                    //        ir.umed_ingrediente
+                    //FROM ingrediente_receta AS ir
+                    //JOIN receta AS r ON r.id_receta = ir.id_receta
+                    //JOIN dieta_receta AS dr ON dr.id_receta = r.id_receta
+                    //JOIN ingrediente AS i ON i.id_ingrediente = ir.id_ingrediente
+                    //WHERE dr.id_dieta = id
+                    //GROUP BY ir.id_ingrediente, i.nom_ingrediente, ir.umed_ingrediente
+
+                    //PRIMER INTENTO :D
+                    //var con = (from ir in db.ingrediente_receta
+                    //           join r in db.receta on ir.id_receta equals r.id_receta
+                    //           join dr in db.dieta_receta on r.id_receta equals dr.id_receta
+                    //           join i in db.ingrediente on ir.id_ingrediente equals i.id_ingrediente
+                    //           where dr.id_dieta == id
+                    //           group ir by new { ir.id_ingrediente, i.nom_ingrediente, ir.umed_ingrediente, dr.cant_persona } into g
+                    //           select new
+                    //           {
+                    //               id_ingrediente = g.Key.id_ingrediente,
+                    //               nom_ingrediente = g.Key.nom_ingrediente,
+                    //               cant_ingrediente = g.Sum(t => (t.cant_ingrediente * g.Key.cant_persona)),
+                    //               umed_ingrediente = g.Key.umed_ingrediente
+                    //           }).ToList();
 
                     var con = (from ir in db.ingrediente_receta
-                               join r in db.receta on ir.id_receta equals r.id_receta
-                               join dr in db.dieta_receta on r.id_receta equals dr.id_receta
-                               join i in db.ingrediente on ir.id_ingrediente equals i.id_ingrediente
-                               where dr.id_dieta == id
-                               group ir by new { ir.id_ingrediente, i.nom_ingrediente, ir.umed_ingrediente, dr.cant_persona } into g
-                               select new
-                               {
-                                   id_ingrediente = g.Key.id_ingrediente,
-                                   nom_ingrediente = g.Key.nom_ingrediente,
-                                   cant_ingrediente = g.Sum(t => (t.cant_ingrediente * g.Key.cant_persona)),
-                                   umed_ingrediente = g.Key.umed_ingrediente
-                               }).ToList();
+                              join dr in db.dieta_receta on ir.receta.id_receta equals dr.id_receta
+                              where dr.id_dieta == id
+                              group new { ir, ir.ingrediente, dr } by new
+                              {
+                                  ir.id_ingrediente,
+                                  ir.ingrediente.nom_ingrediente,
+                                  ir.umed_ingrediente
+                              } into g
+                              select new
+                              {
+                                  g.Key.id_ingrediente,
+                                  g.Key.nom_ingrediente,
+                                  cant_ingrediente = (decimal?)g.Sum(p => p.ir.cant_ingrediente * p.dr.cant_persona),
+                                  g.Key.umed_ingrediente
+                              }).ToList();
 
                     ing_rec = new string[con.Count(), 4];
 
@@ -95,6 +123,44 @@ namespace Modelo
             }
 
             return ing_rec;
+        }
+
+        public List<producto> obtenerProductosIng(int id_ingrediente)
+        {
+            var producto = new List<producto>();
+
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    producto =  db.producto
+                                .Include("ingrediente")
+                                .Include("marca")
+                                .Include("distribuidor")
+                                .Where(x => x.id_ingrediente == id_ingrediente)
+                                .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return producto;
+        }
+
+        public int obtenerCantPro (decimal necesario, decimal unidad)
+        {
+            int cantidad = 1;
+            decimal parcial = unidad;
+
+            while (parcial < necesario)
+            {
+                parcial += unidad;
+                cantidad ++;
+            }
+
+            return cantidad;
         }
     }
 }
