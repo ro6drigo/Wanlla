@@ -66,3 +66,96 @@
         </tbody>
     </table>
 </div>
+
+@*<div class="table-responsive">
+    <div class="list-group" id="producto"></div>
+</div>
+
+<script>
+        $(document).ready(function () {
+            $("#producto").anexGrid({
+                class: 'table-striped table-hover table-condensed',
+                columnas: [
+                    //columna1: ID
+                    { leyenda: "#", columna: "id_producto", ordenable: true, class: "text-center" },
+                    //columna1: Nombre
+                    { leyenda: "Ingrediente", columna: "id_ingrediente", ordenable: true, class: "text-center" },
+
+                    { leyenda: "Distribuidor", columna: "id_distribuidor", ordenable: true, class: "text-center" },
+
+                    { leyenda: "Marca", columna: "id_marca", ordenable: true, class: "text-center" },
+                    
+                    { leyenda: "Descripción", columna: "des_producto", ordenable: true, class: "text-center" },
+
+                    { leyenda: "Unidad Medida", columna: "umed_producto", ordenable: true, class: "text-center" },
+
+                    { leyenda: "Cantidad", columna: "cant_producto", ordenable: true, class: "text-center" },
+
+                    { leyenda: "Precio", columna: "precio_producto", ordenable: true, class: "text-center" },
+                    //Columnas de los botones
+                    { style: 'Width: 80px;' },//Visualizar
+                    { style: 'Width: 80px;' },//Modificar
+                    { style: 'Width: 80px;' },//Eliminar
+                ],
+
+                modelo: [
+                    //campo 1: ID
+                    { propiedad: 'id_producto', class: "text-center" },
+
+                    { propiedad: 'id_ingrediente', class: "text-center" },
+
+                    { propiedad: 'id_distribuidor', class: "text-center" },
+
+                    { propiedad: 'id_marca', class: "text-center" },
+
+                    { propiedad: 'des_producto', class: "text-center" },
+
+                    { propiedad: 'umed_producto', class: "text-center" },
+
+                    { propiedad: 'cant_producto', class: "text-center" },
+
+                    { propiedad: 'precio_producto', class: "text-center" },
+
+                    //para los botones
+                    //Botón Visualizar
+                    {
+                        formato: function (tr, obj, valor) {
+                            return anexGrid_link({
+                                href: '@Url.Content("~/Admin/Producto/Detalle/")' + obj.id_producto,
+                                contenido: '<span class="fa fa-eye os-ac-icon os-hover-yellow"></span>'
+                                //class: 'fa fa-eye os-ac-icon os-hover-yellow'
+                            });
+                        },
+                    },
+                    //Botón Modificar
+                    {
+                        formato: function (tr, obj, valor) {
+                            return anexGrid_link({
+                                href: '@Url.Content("~/Admin/Producto/Mantenimiento/")' + obj.id_producto,
+                                contenido: '<span class="fa fa-pencil os-ac-icon os-hover-green"></span>'
+                                //class: 'fa fa-pencil os-ac-icon os-hover-green'
+                            });
+                        },
+                    },
+                    //Botón Eliminar
+                    {
+                        formato: function (tr, obj, valor) {
+                            return anexGrid_link({
+                                href: '@Url.Content("~/Admin/Producto/Eliminar/")' + obj.id_producto,
+                                contenido: '<span class="fa fa-trash os-ac-icon os-hover-red"></span>',
+                                //class: 'fa fa-trash os-ac-icon os-hover-red',
+                                attr: [
+                                'onclick="return confirm(\'¿Está seguro de eliminar el registro?\')"'
+                                ]
+                            });
+                        },
+                    }
+                ],
+                url: '@Url.Content("~/Producto/CargarProducto/")',
+                paginable: true,
+                limite: [10, 20, 50, 100],
+                columna: 'id_producto',
+                columna_orden: "DESC"
+            });
+        })
+</script>*@

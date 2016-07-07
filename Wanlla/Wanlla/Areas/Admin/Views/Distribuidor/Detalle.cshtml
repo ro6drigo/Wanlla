@@ -1,0 +1,62 @@
+﻿@model Modelo.distribuidor
+@{
+    ViewBag.Title = "Detalle Distribuidor";
+}
+
+<ol class="breadcrumb">
+
+    <li><a href="~/Admin/Distribuidor/">Distribuidores</a></li>
+    <li class="active">@Model.nom_distribuidor</li>
+</ol>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Información del Distribuidor
+    </div>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>ID</dt>
+            <dd>@Model.id_distribuidor</dd>
+            <dt>NOMBRE</dt>
+            <dd>@Model.nom_distribuidor</dd>
+            <dt>EMAIL</dt>
+            <dd>@Model.email_distribuidor</dd>
+            <dt>TELÉFONO</dt>
+            <dd>@Model.tel_distribuidor</dd>
+            <dt>ESTADO</dt>
+            <dd>@Model.estado_distribuidor</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Productos
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Descripción</th>
+                    <th>Unidad Medida</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int count = 1;}
+                @foreach (var p in Model.producto)
+                {
+                    <tr>
+                        <th scope="row">@(count++)</th>
+                        <td>@(p.des_producto)</td>
+                        <td>@(p.umed_producto)</td>
+                        <td>@(p.cant_producto)</td>
+                        <td>@(p.precio_producto)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

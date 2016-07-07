@@ -17,7 +17,7 @@
         }
     </div>
     <div class="col-sm-6 text-right">
-        <a class="btn btn-success" href="~/Admin/Categoria/Mantenimiento/" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Nueva Marca" role="button">
+        <a class="btn btn-success" href="~/Admin/Categoria/Mantenimiento/" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Nueva Categoría" role="button">
             &nbsp;<span class="fa fa-plus-circle fa-lg"></span>&nbsp;
         </a>
     </div>
@@ -25,7 +25,7 @@
 
 <br />
 
-<div class="table-responsive">
+@*<div class="table-responsive">
     <table class="table table-hover table-bordered table-condensed text-center">
         <thead>
             <tr>
@@ -56,74 +56,81 @@
             }
         </tbody>
     </table>
+</div>*@
+
+<div class="table-responsive">
+    <div class="list-group" id="categoria"></div>
 </div>
-<div class="list-group" id="categoria"></div>
 
-<script>
-    $(document).ready(function () {
-        $("#categoria").anexGrid({
-            class: 'table-striped table-hover table-condensed',
-            columnas: [
-                //columna1: ID
-                { leyenda: "id_categoria", columna: "id_categoria", ordenable: true },
-                //columna1: Nombre
-                { leyenda: "nom_categoria", columna: "nom_categoria", ordenable: true },
-                //columna1: Estado
-                { leyenda: "img_categoria", columna: "img_categoria", ordenable: true },
-                //Columnas de los botones
-                { style: 'Width: 80px;' },//Visualizar
-                { style: 'Width: 80px;' },//Modificar
-                { style: 'Width: 80px;' },//Eliminar
-            ],
+    <script>
+        $(document).ready(function () {
+            $("#categoria").anexGrid({
+                class: 'table-striped table-hover table-condensed',
+                columnas: [
+                    //columna1: ID
+                    { leyenda: "#", columna: "id_categoria", ordenable: true, class: "text-center" },
+                    //columna1: Nombre
+                    { leyenda: "Nombre", columna: "nom_categoria", ordenable: true, class: "text-center" },
+                    //columna1: Estado
+                    { leyenda: "Imagen", columna: "img_categoria", ordenable: true, class: "text-center" },
+                    //Columnas de los botones
+                    { style: 'Width: 80px;' },//Visualizar
+                    { style: 'Width: 80px;' },//Modificar
+                    { style: 'Width: 80px;' },//Eliminar
+                ],
 
-            modelo: [
-                //campo 1: ID
-                { propiedad: 'id_categoria' },
-                //campo 2: NOMBRE
-                { propiedad: 'nom_categoria' },
-                //Campo 3: IMAGEN
-                { propiedad: 'img_categoria' },
+                modelo: [
+                    //campo 1: ID
+                    { propiedad: 'id_categoria', class: "text-center" },
+                    //campo 2: NOMBRE
+                    { propiedad: 'nom_categoria', class: "text-center" },
+                    //Campo 3: IMAGEN
+                    {
+                        propiedad: 'img_categoria', class: "text-center", formato: function (tr, obj, valor) {
+                            return valor != null ? "Si" : "No"
+                        }
+                    },
 
-                //para los botones
-                //Botón Visualizar
-                {
-                    formato: function (tr, obj, valor) {
-                        return anexGrid_link({
-                            href: '@Url.Content("~/Categoria/Ver/")' + obj.id_categoria,
-                            contenido: '<i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i>',
-                            class: 'btn btn-lg btn-primary'
-                        });
+                    //para los botones
+                    //Botón Visualizar
+                    {
+                        formato: function (tr, obj, valor) {
+                            return anexGrid_link({
+                                href: '@Url.Content("~/Admin/Categoria/Detalle/")' + obj.id_categoria,
+                                contenido: '<span class="fa fa-eye os-ac-icon os-hover-yellow"></span>'
+                                //class: 'fa fa-eye os-ac-icon os-hover-yellow'
+                            });
+                        },
                     },
-                },
-                //Botón Modificar
-                {
-                    formato: function (tr, obj, valor) {
-                        return anexGrid_link({
-                            href: '@Url.Content("~/Categoria/AgregarEditar/")' + obj.id_categoria,
-                            contenido: '<i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>',
-                            class: 'btn btn-lg btn-info'
-                        });
+                    //Botón Modificar
+                    {
+                        formato: function (tr, obj, valor) {
+                            return anexGrid_link({
+                                href: '@Url.Content("~/Admin/Categoria/Mantenimiento/")' + obj.id_categoria,
+                                contenido: '<span class="fa fa-pencil os-ac-icon os-hover-green"></span>'
+                                //class: 'fa fa-pencil os-ac-icon os-hover-green'
+                            });
+                        },
                     },
-                },
-                //Botón Eliminar
-                {
-                    formato: function (tr, obj, valor) {
-                        return anexGrid_link({
-                            href: '@Url.Content("~/Categoria/Eliminar/")' + obj.id_categoria,
-                            contenido: '<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>',
-                            class: 'btn btn-lg btn-danger',
-                            attr: [
-                            'onclick="return confirm(\'¿Está seguro de eliminar el registro?\')"'
-                            ]
-                        });
-                    },
-                }
-            ],
-            url: '@Url.Content("~/Categoria/CargarCategoria/")',
-            paginable: true,
-            limite: [10, 20, 50, 100],
-            columna: 'id_categoria',
-            columna_orden: "DESC"
-        });
-    })
-</script>
+                    //Botón Eliminar
+                    {
+                        formato: function (tr, obj, valor) {
+                            return anexGrid_link({
+                                href: '@Url.Content("~/Admin/Categoria/Eliminar/")' + obj.id_categoria,
+                                contenido: '<span class="fa fa-trash os-ac-icon os-hover-red"></span>',
+                                //class: 'fa fa-trash os-ac-icon os-hover-red',
+                                attr: [
+                                'onclick="return confirm(\'¿Está seguro de eliminar el registro?\')"'
+                                ]
+                            });
+                        },
+                    }
+                ],
+                url: '@Url.Content("~/Categoria/CargarCategoria/")',
+                paginable: true,
+                limite: [10, 20, 50, 100],
+                columna: 'id_categoria',
+                columna_orden: "DESC"
+            });
+        })
+    </script>

@@ -263,6 +263,10 @@ body { padding-top: 50px; }
     color: #e6e600;
 }
 
+.os-hover-blue:hover {
+    color: #1561cb;
+}
+
 /* ----------------------------------------------- */
 
 /* Own Links

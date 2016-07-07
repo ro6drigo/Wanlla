@@ -24,5 +24,10 @@ namespace Wanlla.Areas.Admin.Controllers
                 return View(usuario.buscar(buscar));
             }
         }
+
+        public JsonResult CargarUsuario(AnexGRID grid)
+        {
+            return Json(usuario.ListarGrilla(grid));
+        }
     }
 }

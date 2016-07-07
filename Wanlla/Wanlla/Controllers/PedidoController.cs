@@ -4,12 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Modelo;
+using Wanlla.Filters;
 
 namespace Wanlla.Controllers
 {
+    [Autenticado]
     public class PedidoController : Controller
     {
         private pedido pedido = new pedido();
+        private dieta dieta = new dieta();
 
         // GET: Pedido
         public ActionResult Index()
@@ -21,6 +24,7 @@ namespace Wanlla.Controllers
         {
             if(pedido.obtenerDieta(id, SessionHelper.Leer<int>("id_usuario")) != null)
             {
+                ViewBag.TotalIng = "";
                 return View(pedido.obtenerDieta(id, SessionHelper.Leer<int>("id_usuario")));
             }
             else

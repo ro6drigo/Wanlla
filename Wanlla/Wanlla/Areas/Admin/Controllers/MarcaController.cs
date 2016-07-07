@@ -26,6 +26,16 @@ namespace Wanlla.Areas.Admin.Controllers
             }
         }
 
+        public JsonResult CargarMarca(AnexGRID grid)
+        {
+            return Json(marca.ListarGrilla(grid));
+        }
+
+        public ActionResult Detalle(int id)
+        {
+            return View(marca.Obtener(id));
+        }
+
         public ActionResult Mantenimiento(int id = 0)
         {
             return View(

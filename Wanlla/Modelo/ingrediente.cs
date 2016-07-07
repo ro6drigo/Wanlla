@@ -79,7 +79,6 @@ namespace Modelo
         /// <returns></returns>
         public AnexGRIDResponde ListarGrilla(AnexGRID grilla)
         {
-
             try
             {
                 using (var db = new db_wanlla())
@@ -111,12 +110,12 @@ namespace Modelo
 
                     //enviamos a la grilla
                     grilla.SetData(
-                        from t in ingredientes
+                        from i in ingredientes
                         select new
                         {
-                            t.id_ingrediente,
-                            t.nom_ingrediente,
-                            t.tipo_ingrediente
+                            i.id_ingrediente,
+                            i.nom_ingrediente,
+                            i.tipo_ingrediente
                         },
                         total
                     );

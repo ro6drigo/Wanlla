@@ -67,6 +67,88 @@ namespace Modelo
             return productos;
         }
 
+        public AnexGRIDResponde ListarGrilla(AnexGRID grilla)
+        {
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    grilla.Inicializar();
+
+                    var query = db.producto
+                        .Where(x => x.id_producto > 0);
+
+                    //ordenar por columnas
+                    if (grilla.columna == "id_producto")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.id_producto)
+                            : query.OrderBy(x => x.id_producto);
+                    }
+                    if (grilla.columna == "id_ingrediente")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.id_ingrediente)
+                            : query.OrderBy(x => x.id_ingrediente);
+                    }
+                    if (grilla.columna == "id_distribuidor")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.id_distribuidor)
+                            : query.OrderBy(x => x.id_distribuidor);
+                    }
+                    if (grilla.columna == "id_marca")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.id_marca)
+                            : query.OrderBy(x => x.id_marca);
+                    }
+                    if (grilla.columna == "des_producto")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.des_producto)
+                            : query.OrderBy(x => x.des_producto);
+                    }
+                    if (grilla.columna == "umed_producto")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.umed_producto)
+                            : query.OrderBy(x => x.umed_producto);
+                    }
+                    if (grilla.columna == "cant_producto")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.cant_producto)
+                            : query.OrderBy(x => x.cant_producto);
+                    }
+                    if (grilla.columna == "precio_producto")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.precio_producto)
+                            : query.OrderBy(x => x.precio_producto);
+                    }
+
+                    var productos = query.Skip(grilla.pagina).Take(grilla.limite).ToList();
+
+                    var total = query.Count();
+
+                    //enviamos a la grilla
+                    grilla.SetData(
+                        from p in productos
+                        select new
+                        {
+                            p.id_producto,
+                            p.id_ingrediente,
+                            p.id_distribuidor,
+                            p.id_marca,
+                            p.des_producto,
+                            p.umed_producto,
+                            p.cant_producto,
+                            p.precio_producto
+                        },
+                        total
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return grilla.responde();
+        }
+
         public producto Obtener(int id) //retornar es un objeto
         {
             var productos = new producto();

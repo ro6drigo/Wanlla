@@ -54,8 +54,19 @@ namespace Wanlla.Areas.Admin.Controllers
             {
                 return View("~/Admin/Categoria/Mantenimiento.cshtml", model);
             }
-
         }
+
+        //public JsonResult Guardar(categoria model, HttpPostedFileBase Foto)
+        //{
+        //    var rm = new ResponseModel();
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        model.mantenimiento();
+        //        rm = model.GuardarFoto(Foto);
+        //    }
+        //    return Json(rm);
+        //}
 
         public ActionResult Eliminar(int id)
         {

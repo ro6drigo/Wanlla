@@ -202,6 +202,87 @@ namespace Modelo
             return cantidad;
         }
 
+        public AnexGRIDResponde ListarGrilla(AnexGRID grilla)
+        {
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    grilla.Inicializar();
+
+                    var query = db.receta.Where(x => x.id_receta > 0);
+
+                    //ordenar por columnas
+                    if (grilla.columna == "id_receta")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.id_receta)
+                            : query.OrderBy(x => x.id_receta);
+                    }
+                    if (grilla.columna == "nom_receta")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.nom_receta)
+                            : query.OrderBy(x => x.nom_receta);
+                    }
+                    if (grilla.columna == "des_receta")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.des_receta)
+                            : query.OrderBy(x => x.des_receta);
+                    }
+                    if (grilla.columna == "img_receta")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.img_receta)
+                            : query.OrderBy(x => x.img_receta);
+                    }
+                    if (grilla.columna == "vid_receta")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.vid_receta)
+                            : query.OrderBy(x => x.vid_receta);
+                    }
+                    if (grilla.columna == "diff_receta")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.diff_receta)
+                            : query.OrderBy(x => x.diff_receta);
+                    }
+                    if (grilla.columna == "time_receta")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.time_receta)
+                            : query.OrderBy(x => x.time_receta);
+                    }
+                    if (grilla.columna == "id_categoria")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.id_categoria)
+                            : query.OrderBy(x => x.id_categoria);
+                    }
+
+                    var recetas = query.Skip(grilla.pagina).Take(grilla.limite).ToList();
+
+                    var total = query.Count();
+
+                    //enviamos a la grilla
+                    grilla.SetData(
+                        from r in recetas
+                        select new
+                        {
+                            r.id_receta,
+                            r.nom_receta,
+                            r.des_receta,
+                            r.img_receta,
+                            r.vid_receta,
+                            r.diff_receta,
+                            r.time_receta,
+                            r.id_categoria
+                        },
+                        total
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return grilla.responde();
+        }
+
         public receta Obtener(int id) //retornar es un objeto
         {
             var recetas = new receta();

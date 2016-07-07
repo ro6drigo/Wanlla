@@ -205,6 +205,7 @@
     <Content Include="images\recipe2.jpg" />
     <Content Include="images\recipe3.jpg" />
     <Content Include="images\rocotorelleno.jpg" />
+    <Content Include="images\sopa.png" />
     <Content Include="images\SopaMinuta.jpg" />
     <Content Include="images\suspirolimeño.jpg" />
     <Content Include="LICENSE.txt" />
@@ -292,6 +293,12 @@
     <Content Include="Areas\Admin\Views\Receta\Mantenimiento.cshtml" />
     <Content Include="Areas\Admin\Views\Producto\Mantenimiento.cshtml" />
     <Content Include="Areas\Admin\Views\Producto\Detalle.cshtml" />
+    <Content Include="Areas\Admin\Views\IngredienteReceta\Mantenimiento.cshtml" />
+    <Content Include="Areas\Admin\Views\PasoReceta\Mantenimiento.cshtml" />
+    <Content Include="Areas\Admin\Views\Distribuidor\Detalle.cshtml" />
+    <Content Include="Areas\Admin\Views\Marca\Detalle.cshtml" />
+    <None Include="Properties\PublishProfiles\Wanlla - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\Wanlla - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Wanlla.pubxml" />
     <Content Include="Areas\Admin\Views\Usuario\Perfil.cshtml" />
     <Content Include="Areas\Admin\Views\Marca\Mantenimiento.cshtml" />
@@ -311,8 +318,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\IngredienteReceta\" />
-    <Folder Include="Areas\Admin\Views\PasoReceta\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

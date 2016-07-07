@@ -26,12 +26,22 @@ namespace Wanlla.Areas.Admin.Controllers
             }
         }
 
+        public JsonResult CargarDistribuidor(AnexGRID grid)
+        {
+            return Json(distribuidor.ListarGrilla(grid));
+        }
+
         public ActionResult Mantenimiento(int id = 0)
         {
             return View(
                 id == 0 ? new distribuidor() //nueva distribuidor
                         : distribuidor.Obtener(id)
             );
+        }
+
+        public ActionResult Detalle(int id)
+        {
+            return View(distribuidor.Obtener(id));
         }
 
         public ActionResult Guardar(distribuidor model)
