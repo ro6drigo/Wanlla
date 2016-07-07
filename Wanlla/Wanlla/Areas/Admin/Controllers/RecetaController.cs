@@ -27,6 +27,11 @@ namespace Wanlla.Areas.Admin.Controllers
             }
         }
 
+        public ActionResult Consulta()
+        {
+            return View(receta.Consulta());
+        }
+
         public JsonResult CargarReceta(AnexGRID grid)
         {
             return Json(receta.ListarGrilla(grid));
