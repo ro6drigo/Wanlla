@@ -233,12 +233,12 @@ namespace Modelo
             modelBuilder.Entity<usuario>()
                 .HasMany(e => e.favorito)
                 .WithRequired(e => e.usuario)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
             
             modelBuilder.Entity<receta>()
                 .HasMany(e => e.favorito)
                 .WithRequired(e => e.receta)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
         }
     }
 }

@@ -71,14 +71,21 @@ namespace Modelo
             }
             return favoritos;
         }
-
         public void Guardar()
+        {
+                using (var db = new db_wanlla())
+                {
+                    db.Entry(this).State = EntityState.Added;
+                    db.SaveChanges();
+                }
+        }
+        public void Eliminar()
         {
             try
             {
                 using (var db = new db_wanlla())
                 {
-                    db.Entry(this).State = EntityState.Added;
+                    db.Entry(this).State = EntityState.Deleted;
                     db.SaveChanges();
                 }
             }

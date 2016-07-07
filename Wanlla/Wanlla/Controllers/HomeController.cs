@@ -10,11 +10,17 @@ namespace Wanlla.Controllers
     public class HomeController : Controller
     {
         private receta receta = new receta();
+        private favorito favorito = new favorito();
 
         // GET: Home
         public ActionResult Index(int id = 1, string buscar = "")
         {
-            if(buscar == "")
+            if (SessionHelper.ExisteSesion())
+            {
+                ViewBag.favoritolist = favorito.Listar(SessionHelper.Leer<int>("id_usuario"));
+            }
+
+            if (buscar == "")
             {
                 ViewBag.count = id;
                 ViewBag.cant = receta.cantPaginador();

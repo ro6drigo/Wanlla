@@ -25,13 +25,19 @@ namespace Wanlla.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.id_usuario = SessionHelper.Leer<int>("id_usuario");
                 model.Guardar();
                 return Redirect("~/Home");
             }
             else
             {
-                return View("~/Views/Dieta/AgregarReceta.cshtml", model);
+                return View("~/Home", model);
             }
+        }
+        public ActionResult Eliminar(int id)
+        {
+            favorito.Eliminar();
+            return Redirect("~/Favorito");
         }
     }
 }

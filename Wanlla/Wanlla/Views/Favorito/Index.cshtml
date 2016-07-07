@@ -57,9 +57,13 @@
                     <div class="card">
                         <img src="~/images/@m.receta.img_receta" alt="" />
                         <div class="container-card">
-                            <h4><a href="/Home/Receta/@(m.id_receta)" class="os-link"><b>@m.receta.nom_receta</b></a> <span class="fa fa-star-o favorite-icon-inactive"></span></h4>
+                            <h4><a href="/Home/Receta/@(m.receta.id_receta)" class="os-link"><b>@m.receta.nom_receta</b></a>
+                                <a href="~/Favorito/Eliminar/@(m.id_receta)"> @* Eliminar un favorito *@
+                                    <span class="fa fa-star favorite-icon-active"></span>
+                                </a>
+                            </h4>
                             <p>
-                                <b>@(m.receta.diff_receta) / @(m.receta.time_receta) <span class="fa fa-clock-o" aria-hidden="true"></span></b>
+                                <b>@(m.receta.diff_receta) / @(m.receta.time_receta)<span class="fa fa-clock-o" aria-hidden="true"></span></b>
                                 <hr />
                                 @if (m.receta.des_receta.Length > 150)
                                 {

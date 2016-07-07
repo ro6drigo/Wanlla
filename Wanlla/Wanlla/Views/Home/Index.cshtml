@@ -1,9 +1,11 @@
-﻿@model List<Modelo.receta>
+﻿@using Modelo;
+@model List<receta>
 @{
     ViewBag.Title = "Inicio";
+    List<favorito> favorito = ViewBag.favoritolist;
 }
 
-@using (Html.BeginForm("Index/1", "Home", FormMethod.Post, new { @class = "form-inline", id = "form-home" }))
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "form-inline", id = "form-home" }))
 {
     <div class="row">
         <div class="col-sm-12">
@@ -16,7 +18,7 @@
             </div>
         </div>
     </div>
-
+}
     <br>
 
     <div class="os_chipbar">
@@ -84,7 +86,43 @@
                         </a>
                         <img src="~/images/@m.img_receta" alt="" />
                         <div class="container-card">
-                            <h4><a href="/Home/Receta/@(m.id_receta)" class="os-link"><b>@m.nom_receta</b></a> <span class="fa fa-star-o favorite-icon-inactive"></span></h4>
+                            @using (Html.BeginForm("GuardarFavorito","Favorito",FormMethod.Post, new { @class = "form-inline", id = "form-favorito" }))
+                            {
+                            <h4><a href="/Home/Receta/@(m.id_receta)" class="os-link"><b>@m.nom_receta</b></a>
+                                @*<a href="javascript: document.getElementByID('form-favorito').action = '/Favorito/GuardarFavorito/@(m.id_receta)'; document.getElementByID('form-favorito').submit();">
+                                    @Html.Hidden("id_receta",m.id_receta)
+                                    
+                                </a>*@
+                                @Html.Hidden("id_receta",m.id_receta)
+                                
+                                    @if (SessionHelper.ExisteSesion())
+                                    {
+                                        var existefavorito = 0;
+                                        foreach (var f in favorito)
+                                        {
+                                            if (m.id_receta == f.id_receta)
+                                            {
+                                                existefavorito = 1;
+                                            }
+                                        }
+
+                                        if (existefavorito == 1)
+                                        {
+                                            <span class="fa fa-star favorite-icon-active"></span>
+                                        }
+                                        else
+                                        {
+                                            <button type="submit" style="border:0px; background-color: transparent;">
+                                                <span class="fa fa-star-o favorite-icon-inactive"></span>
+                                            </button>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <a href="~/Login"><span class="fa fa-star-o favorite-icon-inactive"></span></a>
+                                    }
+                            </h4>
+                            }
                             <p>
                                 <b>@(m.categoria.nom_categoria) / @(m.diff_receta) / @(m.time_receta) <span class="fa fa-clock-o" aria-hidden="true"></span></b>
                                 <hr />
@@ -182,4 +220,3 @@
             </div>
         </div>
     </div>
-}
