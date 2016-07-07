@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Hacer un pedido";
     string[,] totalIng =  ViewBag.TotalIng;
+    Modelo.pedido pedido = new Modelo.pedido();
 }
 
 @{
@@ -61,11 +62,10 @@
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-2">
                         <p style="text-align: justify">
-                            <h4><b>Ingredientes Necesarios</b> <small><a href="#resumen" data-toggle="collapse" aria-expanded="false" aria-controls="resumen">Detalle</a></small></h4>
-                            <ul class="list-group collapse" id="resumen">
-
-                                @{ int cant = totalIng.GetUpperBound(0); }
-                                @for (int i = 0; i <= cant; i++)
+                            <h4><b>Ingredientes Necesarios</b> <small><a href="#resumenIng" data-toggle="collapse" aria-expanded="false" aria-controls="resumenIng">Detalle</a></small></h4>
+                            <ul class="list-group collapse" id="resumenIng">
+                                @{ int total = totalIng.GetUpperBound(0); }
+                                @for (int i = 0; i <= total; i++)
                                 {
                                     <li class="list-group-item">
                                         <span class="badge">@(totalIng[i, 2]) @(totalIng[i, 3])</span>
@@ -73,6 +73,69 @@
                                     </li>
                                 }
                             </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 class="panel-title"><b>Resumen del Pedido</b></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1">
+                        <p style="text-align: justify">
+                            @using (Html.BeginForm("Crear", "Pedido", FormMethod.Post, new { @class = "form-horizontal", id = "form-pedido" }))
+                            {
+                                <h4><b>Productos a pedir</b> <small><a href="#resumenPro" data-toggle="collapse" aria-expanded="false" aria-controls="resumenPro">Detalle</a></small></h4>
+                                <ul class="list-group collapse" id="resumenPro">
+                                    @for (int i = 0; i <= total; i++)
+                                    {
+                                        var totalPro = pedido.obtenerProductosIng(Convert.ToInt16(totalIng[i, 0]));
+
+                                        <li class="list-group-item">
+                                            <span class="badge">@(totalIng[i, 2]) @(totalIng[i, 3])</span>
+                                            @(totalIng[i, 1])
+
+                                            @if (totalPro.Count() > 0)
+                                            {
+                                                <ul style="list-style-type: none">
+                                                    @foreach (var p in totalPro)
+                                                    {
+                                                        int cant = pedido.obtenerCantPro(Convert.ToDecimal(totalIng[i, 2]), p.cant_producto);
+
+                                                        <li>
+                                                            <div class="radio form-group" style="width:100%">
+                                                                <label class="col-xs-12 col-sm-8 control-label">
+                                                                    <input type="radio" name="proIng@(p.id_ingrediente)" id="proIng@(p.id_producto)" value="@(p.id_producto)"> @(p.distribuidor.nom_distribuidor) - @(p.marca.nom_marca) @(p.cant_producto + p.umed_producto) - S/ @(p.precio_producto) c/u
+                                                                </label>
+                                                                <div class="col-xs-12 col-sm-4 input-group">
+                                                                    <input type="number" class="form-control" id="cantPro@(p.id_producto)" min="1" step="1" value="@(cant)">
+                                                                    <div class="input-group-addon">Unidades</div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            }
+                                            else
+                                            {
+                                                @(" - Sin Productos Registrados")
+                                            }
+                                        </li>
+                                    }
+                                    <br />
+                                    <div class="text-right">
+                                        <button type="submit" class="btn btn-default">Hacer Pedido</button>
+                                    </div>
+                                </ul>
+                            }
                         </p>
                     </div>
                 </div>
