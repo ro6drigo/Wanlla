@@ -54,6 +54,19 @@ namespace Wanlla.Controllers
             }
         }
 
+        public ActionResult EditarReceta(int id, int rec)
+        {
+            if (id == 0 || dieta_receta.obtener(id, rec) == null)
+            {
+                return Redirect(Request.UrlReferrer.AbsolutePath);
+            }
+            else
+            {
+                ViewBag.comboDietas = dieta.listar(SessionHelper.Leer<int>("id_usuario"));
+                return View(dieta_receta.obtener(id, rec));
+            }
+        }
+
         public ActionResult GuardarReceta(dieta_receta model)
         {
             if (ModelState.IsValid)
@@ -71,6 +84,29 @@ namespace Wanlla.Controllers
                     return View("~/Views/Dieta/AgregarReceta.cshtml", model);
                 }
                 
+            }
+            else
+            {
+                return View("~/Views/Dieta/AgregarReceta.cshtml", model);
+            }
+        }
+
+        public ActionResult GuardarEReceta(dieta_receta model)
+        {
+            if (ModelState.IsValid)
+            {
+                //if (model.validarDietaReceta())
+                //{
+                    model.actualizar();
+                    return Redirect("~/Dieta/Detalle/" + model.id_dieta);
+                //}
+                //else
+                //{
+                //    ViewBag.comboDietas = dieta.listar(SessionHelper.Leer<int>("id_usuario"));
+                //    ModelState.AddModelError("id_dieta", "Esta dieta ya tiene este plato agregado");
+                //    return View("~/Views/Dieta/AgregarReceta.cshtml", model);
+                //}
+
             }
             else
             {

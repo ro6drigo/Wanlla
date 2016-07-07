@@ -1,0 +1,46 @@
+﻿@model Modelo.dieta_receta
+@{
+    List<Modelo.dieta> comboDietas = ViewBag.comboDietas;
+    ViewBag.Title = "Editar " + Model.receta.nom_receta + " a ...";
+}
+
+@using (Html.BeginForm("GuardarEReceta", "Dieta", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(x => x.id_receta)
+    <div class="form-group">
+        <label for="id_dieta" class="col-sm-4 control-label hidden-xs"><span class="fa fa-cutlery fa-2x" aria-hidden="true"></span></label>
+        <label for="id_dieta" class="col-sm-4 control-label visible-xs">Dieta</label>
+        <div class="col-sm-4">
+            <select name="id_dieta" class="form-control">
+                @foreach (var d in comboDietas)
+                {
+                    if (Model.id_dieta == d.id_dieta)
+                    {
+                        <option value="@(d.id_dieta)" selected>@(d.nom_dieta)</option>
+                    }
+                    else
+                    {
+                        <option value="@(d.id_dieta)">@(d.nom_dieta)</option>
+                    }
+                }
+            </select>
+            @Html.ValidationMessageFor(x => x.id_dieta, null, new { @class = "label label-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="cant_persona" class="col-sm-4 control-label hidden-xs"><span class="fa fa-users fa-2x" aria-hidden="true"></span></label>
+        <label for="cant_persona" class="col-sm-4 control-label visible-xs">Para</label>
+        <div class="col-sm-4">
+            <div class="input-group">
+                @Html.TextBoxFor(x => x.cant_persona, new { type = "number", @class = "form-control", placeholder = "cantidad", value = "" })
+                <div class="input-group-addon">Personas</div>
+            </div>
+            @Html.ValidationMessageFor(x => x.cant_persona, null, new { @class = "label label-danger" })
+        </div>
+    </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-4">
+                <button type="submit" class="btn btn-default">Actualizar</button>
+            </div>
+        </div>
+}

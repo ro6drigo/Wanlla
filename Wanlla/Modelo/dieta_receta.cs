@@ -28,6 +28,28 @@ namespace Modelo
         public virtual receta receta { get; set; }
 
 
+        public dieta_receta obtener(int id_dieta, int id_receta)
+        {
+            var dieta_receta = new dieta_receta();
+
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    dieta_receta =  db.dieta_receta
+                                    .Include("dieta")
+                                    .Include("receta")
+                                    .Where(x => x.id_dieta == id_dieta && x.id_receta == id_receta)
+                                    .SingleOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return dieta_receta;
+        }
+
         public void guardar()
         {
             try
@@ -41,6 +63,22 @@ namespace Modelo
             catch (Exception ex)
             {
                 throw;
+            }
+        }
+
+        public void actualizar()
+        {
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    db.Entry(this).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 

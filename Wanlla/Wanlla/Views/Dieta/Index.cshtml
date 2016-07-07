@@ -16,7 +16,7 @@
         }
     </div>
     <div class="col-sm-6 text-right">
-        <a class="btn btn-success" href="~/Dieta/Mantenimiento" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Agregar Receta" role="button">
+        <a class="btn btn-success" href="~/Dieta/Mantenimiento" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Agregar Dieta" role="button">
             &nbsp;<span class="fa fa-plus-circle fa-lg"></span>&nbsp;
         </a>
     </div>
@@ -52,7 +52,7 @@ else
                             <table class="text-center" style="width:100%;">
                                 <tr>
                                     <td><a href="~/Dieta/Detalle/@(m.id_dieta)" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Detalle"><span class="fa fa-eye os-ac-icon os-hover-yellow"></span></a></td>
-                                    <td><a href="~/Pedido/Dieta/@(m.id_dieta)" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Detalle"><span class="fa fa-shopping-cart os-ac-icon os-hover-blue"></span></a></td>
+                                    <td><a href="~/Pedido/Dieta/@(m.id_dieta)" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Hacer Pedido"><span class="fa fa-shopping-cart os-ac-icon os-hover-blue"></span></a></td>
                                     <td><a href="~/Dieta/Mantenimiento/@(m.id_dieta)" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Editar"><span class="fa fa-pencil os-ac-icon os-hover-green"></span></a></td>
                                     <td><a onclick="return confirm('¿Si elimina la dieta @(m.nom_dieta), perderá todas las recetas guardadas?');" href="~/Dieta/Eliminar/@(m.id_dieta)" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Eliminar"><span class="fa fa-trash os-ac-icon os-hover-red"></span></a></td>
                                 </tr>

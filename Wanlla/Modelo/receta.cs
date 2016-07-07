@@ -340,7 +340,7 @@ namespace Modelo
             return recetas;
         }
         /// <summary>
-        /// Mantenimiento tabla Receta: Agregar / Actulizar
+        /// Mantenimiento tabla Receta: Agregar / Actualizar
         /// </summary>
         public void mantenimiento()
         {

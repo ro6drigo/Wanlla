@@ -20,9 +20,6 @@
         <a class="btn btn-primary" href="~/Pedido/Dieta/@(Model.id_dieta)" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Hacer Pedido" role="button">
             &nbsp;<span class="fa fa-shopping-cart fa-lg"></span>&nbsp;
         </a>
-        <a class="btn btn-success" href="#" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Agregar Receta" role="button">
-            &nbsp;<span class="fa fa-plus-circle fa-lg"></span>&nbsp;
-        </a>
     </div>
 </div>
 
@@ -40,7 +37,14 @@
                             <h3 class="panel-title">Día @(count++)</h3>
                         </div>
                         <div class="col-xs-6">
-                            <h3 class="panel-title text-right"><a onclick="return confirm('¿Eliminar @(r.receta.nom_receta) de la dieta?');" href="~/Dieta/EliminarReceta/@(Model.id_dieta)?rec=@(r.id_receta)" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Eliminar"><span class="fa fa-trash os-ac-icon os-hover-red"></span></a></h3>
+                            <h3 class="panel-title text-right">
+                                <a href="~/Dieta/EditarReceta/@(Model.id_dieta)?rec=@(r.id_receta)" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Editar">
+                                    <span class="fa fa-pencil os-ac-icon os-hover-green"></span>
+                                </a>
+                                <a onclick="return confirm('¿Eliminar @(r.receta.nom_receta) de la dieta?');" href="~/Dieta/EliminarReceta/@(Model.id_dieta)?rec=@(r.id_receta)" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Eliminar">
+                                    <span class="fa fa-trash os-ac-icon os-hover-red"></span>
+                                </a>
+                            </h3>
                         </div>
                     </div>
                 </div>

@@ -38,6 +38,14 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="dir_usuario" class="col-sm-4 control-label hidden-xs"><span class="fa fa-home fa-2x" aria-hidden="true"></span></label>
+        <label for="dir_usuario" class="col-sm-4 control-label visible-xs">Dirección</label>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(x => x.dir_usuario, new { type = "text", @class = "form-control", placeholder = "Dirección" })
+            @Html.ValidationMessageFor(x => x.dir_usuario, null, new { @class = "label label-danger" })
+        </div>
+    </div>
+    <div class="form-group">
         <label for="fecnac_usuario" class="col-sm-4 control-label hidden-xs"><span class="fa fa-calendar fa-2x"></span></label>
         <label for="fecnac_usuario" class="col-sm-4 control-label visible-xs">Fecha de Nacimiento</label>
         <div class="col-sm-4">
