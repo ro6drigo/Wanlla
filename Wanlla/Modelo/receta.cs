@@ -429,5 +429,43 @@ namespace Modelo
             }
             return rm;
         }
+
+        public string[,] Consulta()
+        {
+            string[,] recetas;
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    var cat = (from c in db.categoria
+                               join r in db.receta on c.id_categoria equals r.id_categoria into r_join
+                               from r in r_join.DefaultIfEmpty()
+                               group new { c, r } by new
+                               {
+                                   c.id_categoria,
+                                   c.nom_categoria
+                               } into g
+                               select new
+                               {
+                                   id_categoria = (int?)g.Key.id_categoria,
+                                   g.Key.nom_categoria,
+                                   Cantidad = g.Count(p => p.r.id_categoria != null)
+                               }).ToList();
+                    recetas = new string[cat.Count(), 2];
+                    int count = 0;
+                    foreach (var c in cat)
+                    {
+                        recetas[count, 0] = Convert.ToString(c.nom_categoria);
+                        recetas[count, 1] = Convert.ToString(c.Cantidad);
+                        count++;
+                    }
+                }
+                return recetas;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

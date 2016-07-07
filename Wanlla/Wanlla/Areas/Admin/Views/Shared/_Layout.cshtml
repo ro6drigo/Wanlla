@@ -46,6 +46,14 @@
                         <li>@Html.ActionLink("Productos", "Index", "Producto")</li>
                         <li>@Html.ActionLink("Recetas", "Index", "Receta")</li>
                         <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Consultas<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Usuario", "Consulta", "Usuarios")</li>
+                                <li role="separator" class="divider"></li>
+                                <li>@Html.ActionLink("Recetas", "Consulta", "Receta")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@(SessionHelper.Leer<string>("nombre_usuario")) <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Perfil", "", "")</li>
