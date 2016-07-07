@@ -21,6 +21,17 @@ namespace Wanlla.Controllers
             return View(favorito.Listar(idusuario));
         }
 
-        pu
+        public ActionResult GuardarFavorito(favorito model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.Guardar();
+                return Redirect("~/Home");
+            }
+            else
+            {
+                return View("~/Views/Dieta/AgregarReceta.cshtml", model);
+            }
+        }
     }
 }
