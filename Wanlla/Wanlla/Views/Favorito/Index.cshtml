@@ -1,72 +1,113 @@
-﻿
+﻿@model List<Modelo.favorito>
 @{
-    ViewBag.Title = "Favoritos";
+    ViewBag.Title = "Favorito";
 }
 
-<div class="row">
-    <div class="col-sm-12">
-        <nav align="center">
-            <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Anterior">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="active"><a href="#">1</a></li>
-                <li>
-                    <a href="#" aria-label="Siguiente">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="card">
-                    <img src="~/images/recipe1.jpg" alt="Avatar">
-                    <div class="container-card">
-                        <h4><strong>Pollo endiablado</strong> <span class="fa fa-star favorite-icon-active"></span></h4>
-                        <p>Lavar y secar el pollo, y abrirlo cortándolo a lo largo del esternón, a su vez con el lado abierto hacia abajo sobre una tabla de cortar, aplastar bien con un aplastacarne. En un bol mezclar el aceite de...</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-4">
-                <div class="card">
-                    <img src="~/images/recipe2.jpg" alt="Avatar">
-                    <div class="container-card">
-                        <h4><strong>Mini hamburguesas a la mostaza</strong> <span class="fa fa-star favorite-icon-active"></span></h4>
-                        <p>Estas mini hamburguesas a la mostaza son ideales para un bocadillo, o para servir en un buffet. Una receta finger food, fácil de hacer y lista en tan sólo 25 minutos,con pocos ingredientes fácilmente...</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-4">
-                <div class="card">
-                    <img src="~/images/recipe3.jpg" alt="Avatar">
-                    <div class="container-card">
-                        <h4><strong>Calamares guisados con aceitunas negras</strong> <span class="fa fa-star favorite-icon-active"></span></h4>
-                        <p>Limpiar los calamares, dividiendo el cuerpo de los tentáculos y eliminando el pico, ojos, pluma y víceras. Freír en 4-5 cucharadas de aceite de oliva, el apio picado, los dientes de ajo y chile picante...</p>
-                    </div>
+@using (Html.BeginForm("Index", "Favorito", FormMethod.Post, new { @class = "form-inline", id = "form-home" }))
+{
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="sr-only" for="buscar">Buscar</label>
+                <div class="input-group">
+                    @Html.TextBox("buscar", null, new { type = "search", @class = "form-control", placeholder = "Buscar", id = "buscar", autocomplete = "off" })
+                    <div class="input-group-addon"><a href="javascript: document.getElementById('form-home').submit();"><span class="fa fa-search"></span></a></div>
                 </div>
             </div>
         </div>
-
-        <nav align="center">
-            <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Anterior">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="active"><a href="#">1</a></li>
-                <li>
-                    <a href="#" aria-label="Siguiente">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
     </div>
-</div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-sm-8">
+            <nav align="center">
+                <ul class="pagination">
+                    <li>
+                        <a href="javascript: document.getElementById('form-home').action = '/Favorito/Index/@(ViewBag.count > 1 ? (ViewBag.count - 1) : (ViewBag.count))'; document.getElementById('form-home').submit();" aria-label="Anterior">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    @for (int i = 1; i <= ViewBag.cant; i++)
+                    {
+                        <li @(ViewBag.count == i ? new HtmlString("class='active'") : null)><a href="javascript: document.getElementById('form-home').action = '/Favorito/Index/@(i)'; document.getElementById('form-home').submit();">@(i)</a></li>
+                    }
+
+                    <li>
+                        <a href="javascript: document.getElementById('form-home').action = '/Favorito/Index/@(ViewBag.count == ViewBag.cant ? (ViewBag.count) : (ViewBag.count + 1))'; document.getElementById('form-home').submit();" aria-label="Siguiente">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Inicio lista de recetas -->
+
+            @{ int count = 1; }
+            @foreach (var m in Model)
+            {
+
+                if (count % 2 != 0)
+                {
+                    @(new HtmlString("<" + "div class='row'" + ">"))
+                }
+
+                <div class="col-sm-6">
+                    <div class="card">
+                        <img src="~/images/@m.receta.img_receta" alt="" />
+                        <div class="container-card">
+                            <h4><a href="/Home/Receta/@(m.id_receta)" class="os-link"><b>@m.receta.nom_receta</b></a> <span class="fa fa-star-o favorite-icon-inactive"></span></h4>
+                            <p>
+                                <b>@(m.receta.diff_receta) / @(m.receta.time_receta) <span class="fa fa-clock-o" aria-hidden="true"></span></b>
+                                <hr />
+                                @if (m.receta.des_receta.Length > 150)
+                                {
+                                    @(m.receta.des_receta.Substring(0, 150) + "..." )
+                                }
+                                else
+                                {
+                                    @m.receta.des_receta
+                                }
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                if (count % 2 == 0)
+                {
+                    @(new HtmlString("</" + "div" + ">"))
+                }
+
+                count++;
+            }
+            @if (Model.Count % 2 != 0)
+            {
+                @(new HtmlString("</" + "div" + ">"))
+            }
+
+            <!-- Fin lista de recetas -->
+
+            <nav align="center">
+                <ul class="pagination">
+                    <li>
+                        <a href="javascript: document.getElementById('form-home').action = '/Favorito/Index/@(ViewBag.count > 1 ? (ViewBag.count - 1) : (ViewBag.count))'; document.getElementById('form-home').submit();" aria-label="Anterior">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    @for (int i = 1; i <= ViewBag.cant; i++)
+                    {
+                        <li @(ViewBag.count == i ? new HtmlString("class='active'") : null)><a href="javascript: document.getElementById('form-home').action = '/Favorito/Index/@(i)'; document.getElementById('form-home').submit();">@(i)</a></li>
+                    }
+
+                    <li>
+                        <a href="javascript: document.getElementById('form-home').action = '/Favorito/Index/@(ViewBag.count == ViewBag.cant ? (ViewBag.count) : (ViewBag.count + 1))'; document.getElementById('form-home').submit();" aria-label="Siguiente">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+}

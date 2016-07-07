@@ -7,6 +7,7 @@ namespace Modelo
     using System.Data.Entity;
     using System.Data.Entity.Spatial;
     using System.Linq;
+
     [Table("usuario")]
     public partial class usuario
     {
@@ -17,6 +18,7 @@ namespace Modelo
             pedido = new HashSet<pedido>();
             receta_comentario = new HashSet<receta_comentario>();
             receta = new HashSet<receta>();
+            favorito = new HashSet<favorito>();
         }
 
         [Key]
@@ -64,6 +66,11 @@ namespace Modelo
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<receta> receta { get; set; }
+
+        //NUEVO
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<favorito> favorito { get; set; }
+
 
 
         public List<usuario> Listar()

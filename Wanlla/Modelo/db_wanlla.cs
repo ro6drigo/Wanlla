@@ -4,7 +4,7 @@ namespace Modelo
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
-
+    using System.Data.Entity.ModelConfiguration.Conventions;
     public partial class db_wanlla : DbContext
     {
         public db_wanlla()
@@ -26,6 +26,8 @@ namespace Modelo
         public virtual DbSet<receta> receta { get; set; }
         public virtual DbSet<receta_comentario> receta_comentario { get; set; }
         public virtual DbSet<usuario> usuario { get; set; }
+
+        public virtual DbSet<favorito> favorito { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -177,11 +179,11 @@ namespace Modelo
                 .WithRequired(e => e.receta)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<receta>()
-                .HasMany(e => e.usuario)
-                .WithMany(e => e.receta)
-                .Map(m => m.ToTable("favorito").MapLeftKey("id_receta").MapRightKey("id_usuario"));
-
+            //modelBuilder.Entity<receta>()
+            //    .HasMany(e => e.usuario)
+            //    .WithMany(e => e.receta)
+            //    .Map(m => m.ToTable("favorito").MapLeftKey("id_receta").MapRightKey("id_usuario"));
+            
             modelBuilder.Entity<receta_comentario>()
                 .Property(e => e.texto_comentario)
                 .IsUnicode(false);
@@ -223,6 +225,19 @@ namespace Modelo
             modelBuilder.Entity<usuario>()
                 .HasMany(e => e.receta_comentario)
                 .WithRequired(e => e.usuario)
+                .WillCascadeOnDelete(false);
+
+
+            //NUEVO
+
+            modelBuilder.Entity<usuario>()
+                .HasMany(e => e.favorito)
+                .WithRequired(e => e.usuario)
+                .WillCascadeOnDelete(false);
+            
+            modelBuilder.Entity<receta>()
+                .HasMany(e => e.favorito)
+                .WithRequired(e => e.receta)
                 .WillCascadeOnDelete(false);
         }
     }
