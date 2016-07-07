@@ -31,6 +31,11 @@ namespace Wanlla.Areas.Admin.Controllers
             return Json(marca.ListarGrilla(grid));
         }
 
+        public ActionResult Detalle(int id)
+        {
+            return View(marca.Obtener(id));
+        }
+
         public ActionResult Mantenimiento(int id = 0)
         {
             return View(

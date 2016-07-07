@@ -174,6 +174,7 @@ namespace Modelo
                 using (var dbwanlla = new db_wanlla())
                 {
                     distribuidor = dbwanlla.distribuidor
+                        .Include("producto")
                         .Where(x => x.id_distribuidor == id)
                         .SingleOrDefault();
                 }

@@ -212,8 +212,8 @@ namespace Modelo
                 {
                     dbwanlla.Configuration.ValidateOnSaveEnabled = false;
 
-                    var eUsuario = dbwanlla.Entry(this);
-                    eUsuario.State = EntityState.Modified;
+                    var eCategoria = dbwanlla.Entry(this);
+                    eCategoria.State = EntityState.Modified;
                     //Obviar campos o ignorar en la actualización
                     if (Foto != null)
                     {
@@ -223,12 +223,12 @@ namespace Modelo
                         //String archivo = DateTime.Now.ToString("yyyyMMddHHmmss") + Path.GetExtension(Foto.FileName);
 
                         //Colocar la ruta donde se grabará
-                        Foto.SaveAs(HttpContext.Current.Server.MapPath("~/Uploads/" + archivo));
+                        Foto.SaveAs(HttpContext.Current.Server.MapPath("~/images/" + archivo));
 
                         //enviar al modelo el nombre del archivo
                         this.img_categoria = archivo;
                     }
-                    else eUsuario.Property(x => x.img_categoria).IsModified = false; // el campo no es obligatorio
+                    else eCategoria.Property(x => x.img_categoria).IsModified = false; // el campo no es obligatorio
 
                     //if (this.NOMBREUSU == null) eUsuario.Property(x => x.NOMBREUSU).IsModified = false;
 

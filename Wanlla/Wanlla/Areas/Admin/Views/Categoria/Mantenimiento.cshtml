@@ -22,9 +22,16 @@
             @Html.ValidationMessageFor(x => x.img_categoria, null, new { @class = "label label-danger" })
         </div>
     </div>
+
+    @*<div class="form-group">
+        <label for="img_categoria" class="col-sm-4 control-label hidden-xs"><i class="fa fa-picture-o fa-2x" aria-hidden="true"></i></label>
+        <label for="img_categoria" class="col-sm-4 control-label visible-xs">Imagen</label>
+        <input type="file" name="Foto" />
+    </div>*@
+
     <div class="form-group">
         <div class="col-sm-offset-4 col-sm-4">
-            <button type="submit" class="btn btn-success glyphicon glyphicon-floppy-disk" data-toggle="tooltip" title="Guardar"></button>
+            <button data-ajax="true" type="submit" class="btn btn-success glyphicon glyphicon-floppy-disk" data-toggle="tooltip" title="Guardar"></button>
             <button type="button" class="btn btn-danger glyphicon glyphicon-floppy-remove" onclick="javascript:history.back()" data-toggle="tooltip" title="Cancelar"></button>
         </div>
     </div>

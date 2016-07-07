@@ -56,7 +56,7 @@ namespace Wanlla.Areas.Admin.Controllers
             }
 
         }
-
+        
         public ActionResult Eliminar(int id)
         {
             ingrediente.id_ingrediente = id;

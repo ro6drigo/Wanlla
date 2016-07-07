@@ -137,7 +137,7 @@ namespace Modelo
             {
                 using (var dbwanlla = new db_wanlla())
                 {
-                    marca = dbwanlla.marca
+                    marca = dbwanlla.marca.Include("producto")
                         .Where(x => x.id_marca == id)
                         .SingleOrDefault();
                 }

@@ -39,6 +39,11 @@ namespace Wanlla.Areas.Admin.Controllers
             );
         }
 
+        public ActionResult Detalle(int id)
+        {
+            return View(distribuidor.Obtener(id));
+        }
+
         public ActionResult Guardar(distribuidor model)
         {
             if (ModelState.IsValid)
