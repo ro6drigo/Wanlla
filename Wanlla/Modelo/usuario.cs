@@ -345,5 +345,39 @@ namespace Modelo
                 throw;
             }
         }
+
+        public string[,] Consulta()
+        {
+            string[,] usuarios;
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    var cat = (from usuario in db.usuario
+                               group usuario by new
+                               {
+                                   usuario.sex_usuario
+                               } into g
+                               select new
+                               {
+                                   Sexo = g.Key.sex_usuario,
+                                   Cantidad = g.Count(p => p.sex_usuario != null)
+                               }).ToList();
+                    usuarios = new string[cat.Count(), 2];
+                    int count = 0;
+                    foreach (var c in cat)
+                    {
+                        usuarios[count, 0] = Convert.ToString(c.Sexo);
+                        usuarios[count, 1] = Convert.ToString(c.Cantidad);
+                        count++;
+                    }
+                }
+                return usuarios;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

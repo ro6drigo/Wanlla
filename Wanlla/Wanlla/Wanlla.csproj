@@ -296,6 +296,7 @@
     <Content Include="Areas\Admin\Views\PasoReceta\Mantenimiento.cshtml" />
     <Content Include="Areas\Admin\Views\Distribuidor\Detalle.cshtml" />
     <Content Include="Areas\Admin\Views\Marca\Detalle.cshtml" />
+    <Content Include="Areas\Admin\Views\Usuarios\Consulta.cshtml" />
     <None Include="Properties\PublishProfiles\Wanlla - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\Wanlla - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Wanlla.pubxml" />

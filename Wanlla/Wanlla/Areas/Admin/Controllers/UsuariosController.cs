@@ -29,5 +29,10 @@ namespace Wanlla.Areas.Admin.Controllers
         {
             return Json(usuario.ListarGrilla(grid));
         }
+
+        public ActionResult Consulta()
+        {
+            return View(usuario.Consulta());
+        }
     }
 }
