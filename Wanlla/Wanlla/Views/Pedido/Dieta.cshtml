@@ -1,6 +1,7 @@
 ﻿@model Modelo.dieta
 @{
     ViewBag.Title = "Hacer un pedido";
+    string[,] totalIng =  ViewBag.TotalIng;
 }
 
 @{
@@ -58,15 +59,17 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-sm-9">
+                    <div class="col-sm-8 col-sm-offset-2">
                         <p style="text-align: justify">
-                            <h4><b>Ingredientes</b> <small><a href="#resumen" data-toggle="collapse" aria-expanded="false" aria-controls="resumen">Detalle</a></small></h4>
+                            <h4><b>Ingredientes Necesarios</b> <small><a href="#resumen" data-toggle="collapse" aria-expanded="false" aria-controls="resumen">Detalle</a></small></h4>
                             <ul class="list-group collapse" id="resumen">
-                                @foreach (var ir in dr.receta.ingrediente_receta)
+
+                                @{ int cant = totalIng.GetUpperBound(0); }
+                                @for (int i = 0; i <= cant; i++)
                                 {
                                     <li class="list-group-item">
-                                        <span class="badge">@(ir.cant_ingrediente * dr.cant_persona) @(ir.umed_ingrediente)</span>
-                                        @(ir.ingrediente.nom_ingrediente)
+                                        <span class="badge">@(totalIng[i, 2]) @(totalIng[i, 3])</span>
+                                        @(totalIng[i, 1])
                                     </li>
                                 }
                             </ul>
@@ -75,6 +78,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>

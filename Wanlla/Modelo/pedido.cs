@@ -51,17 +51,42 @@ namespace Modelo
             return dietas;
         }
 
-        public List<ingrediente_receta> obtenerTotalIng(int id)
+        public string[,] obtenerTotalIng(int id)
         {
-            List<ingrediente_receta> ing_rec = new List<ingrediente_receta>();
+            string[,] ing_rec;
+
 
             try
             {
                 using (var db = new db_wanlla())
                 {
-                    ing_rec = db.ingrediente_receta
-                                .Include("receta.dieta_receta")
-                                .ToList();        
+
+                    var con = (from ir in db.ingrediente_receta
+                               join r in db.receta on ir.id_receta equals r.id_receta
+                               join dr in db.dieta_receta on r.id_receta equals dr.id_receta
+                               join i in db.ingrediente on ir.id_ingrediente equals i.id_ingrediente
+                               where dr.id_dieta == id
+                               group ir by new { ir.id_ingrediente, i.nom_ingrediente, ir.umed_ingrediente, dr.cant_persona } into g
+                               select new
+                               {
+                                   id_ingrediente = g.Key.id_ingrediente,
+                                   nom_ingrediente = g.Key.nom_ingrediente,
+                                   cant_ingrediente = g.Sum(t => (t.cant_ingrediente * g.Key.cant_persona)),
+                                   umed_ingrediente = g.Key.umed_ingrediente
+                               }).ToList();
+
+                    ing_rec = new string[con.Count(), 4];
+
+                    int count = 0;
+                    foreach (var c in con)
+                    {
+                        ing_rec[count, 0] = Convert.ToString(c.id_ingrediente);
+                        ing_rec[count, 1] = Convert.ToString(c.nom_ingrediente);
+                        ing_rec[count, 2] = Convert.ToString(c.cant_ingrediente);
+                        ing_rec[count, 3] = Convert.ToString(c.umed_ingrediente);
+
+                        count++;
+                    }
                 }
             }
             catch (Exception ex)

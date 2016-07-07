@@ -24,7 +24,7 @@ namespace Wanlla.Controllers
         {
             if(pedido.obtenerDieta(id, SessionHelper.Leer<int>("id_usuario")) != null)
             {
-                ViewBag.TotalIng = "";
+                ViewBag.TotalIng = pedido.obtenerTotalIng(id);
                 return View(pedido.obtenerDieta(id, SessionHelper.Leer<int>("id_usuario")));
             }
             else
