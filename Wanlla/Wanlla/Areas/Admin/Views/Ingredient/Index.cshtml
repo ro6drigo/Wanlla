@@ -25,7 +25,7 @@
 
 <br />
 
-<div class="table-responsive">
+@*<div class="table-responsive">
     <table class="table table-hover table-bordered text-center">
         <thead>
             <tr>
@@ -56,10 +56,77 @@
         </tbody>
     </table>
 
+</div>*@
+
+<div class="table-responsive">
+    <div class="list-group" id="ingrediente"></div>
 </div>
 
 <script>
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
+        $(document).ready(function () {
+            $("#ingrediente").anexGrid({
+                class: 'table-striped table-hover table-condensed',
+                columnas: [
+                    //columna1: ID
+                    { leyenda: "#", columna: "id_ingrediente", ordenable: true, class: "text-center" },
+                    //columna1: Nombre
+                    { leyenda: "Nombre", columna: "nom_ingrediente", ordenable: true, class: "text-center" },
+                    //columna1: Estado
+                    { leyenda: "Tipo", columna: "tipo_ingrediente", ordenable: true, class: "text-center" },
+                    //Columnas de los botones
+                    { style: 'Width: 80px;' },//Visualizar
+                    { style: 'Width: 80px;' },//Modificar
+                    { style: 'Width: 80px;' },//Eliminar
+                ],
+
+                modelo: [
+                    //campo 1: ID
+                    { propiedad: 'id_ingrediente', class: "text-center" },
+                    //campo 2: NOMBRE
+                    { propiedad: 'nom_ingrediente', class: "text-center" },
+
+                    { propiedad: 'tipo_ingrediente', class: "text-center" },
+
+                    //para los botones
+                    //Botón Visualizar
+                    {
+                        formato: function (tr, obj, valor) {
+                            return anexGrid_link({
+                                href: '@Url.Content("~/Admin/Ingredient/Detalle/")' + obj.id_ingrediente,
+                                contenido: '<span class="fa fa-eye os-ac-icon os-hover-yellow"></span>'
+                                //class: 'fa fa-eye os-ac-icon os-hover-yellow'
+                            });
+                        },
+                    },
+                    //Botón Modificar
+                    {
+                        formato: function (tr, obj, valor) {
+                            return anexGrid_link({
+                                href: '@Url.Content("~/Admin/Ingredient/Mantenimiento/")' + obj.id_ingrediente,
+                                contenido: '<span class="fa fa-pencil os-ac-icon os-hover-green"></span>'
+                                //class: 'fa fa-pencil os-ac-icon os-hover-green'
+                            });
+                        },
+                    },
+                    //Botón Eliminar
+                    {
+                        formato: function (tr, obj, valor) {
+                            return anexGrid_link({
+                                href: '@Url.Content("~/Admin/Ingredient/Eliminar/")' + obj.id_ingrediente,
+                                contenido: '<span class="fa fa-trash os-ac-icon os-hover-red"></span>',
+                                //class: 'fa fa-trash os-ac-icon os-hover-red',
+                                attr: [
+                                'onclick="return confirm(\'¿Está seguro de eliminar el registro?\')"'
+                                ]
+                            });
+                        },
+                    }
+                ],
+                url: '@Url.Content("~/Ingredient/CargarIngrediente/")',
+                paginable: true,
+                limite: [10, 20, 50, 100],
+                columna: 'id_ingrediente',
+                columna_orden: "DESC"
+            });
+        })
 </script>

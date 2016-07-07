@@ -22,7 +22,7 @@
 
 <br />
 
-<div class="table-responsive">
+@*<div class="table-responsive">
     <table class="table table-hover table-bordered text-center">
         <thead>
             <tr>
@@ -52,4 +52,58 @@
             }
         </tbody>
     </table>
+</div>*@
+
+<div class="table-responsive">
+    <div class="list-group" id="usuario"></div>
 </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#usuario").anexGrid({
+                class: 'table-striped table-hover table-condensed',
+                columnas: [
+                    //columna1: ID
+                    { leyenda: "#", columna: "id_usuario", ordenable: true, class: "text-center" },
+
+                    { leyenda: "Nombre", columna: "nom_usuario", ordenable: true, class: "text-center" },
+
+                    { leyenda: "Apellido", columna: "ape_usuario", ordenable: true, class: "text-center" },
+
+                    { leyenda: "Email", columna: "email_usuario", ordenable: true, class: "text-center" },
+
+                    { leyenda: "Teléfono", columna: "tel_usuario", ordenable: true, class: "text-center" },
+
+                    { leyenda: "Fecha Nacimiento", columna: "fecnac_usuario", ordenable: true, class: "text-center" },
+
+                    { leyenda: "Sexo", columna: "sex_usuario", ordenable: true, class: "text-center" },
+
+                    { leyenda: "Tipo Usuario", columna: "tipo_usuario", ordenable: true, class: "text-center" },
+                ],
+
+                modelo: [
+                    //campo 1: ID
+                    { propiedad: 'id_usuario', class: "text-center" },
+                    //campo 2: NOMBRE
+                    { propiedad: 'nom_usuario', class: "text-center" },
+
+                    { propiedad: 'ape_usuario', class: "text-center" },
+
+                    { propiedad: 'email_usuario', class: "text-center" },
+
+                    { propiedad: 'tel_usuario', class: "text-center" },
+
+                    { propiedad: 'fecnac_usuario', class: "text-center" },
+
+                    { propiedad: 'sex_usuario', class: "text-center" },
+
+                    { propiedad: 'tipo_usuario', class: "text-center" }
+                ],
+                url: '@Url.Content("~/Usuarios/CargarUsuario/")',
+                paginable: true,
+                limite: [10, 20, 50, 100],
+                columna: 'id_usuario',
+                columna_orden: "DESC"
+            });
+        })
+    </script>
