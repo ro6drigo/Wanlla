@@ -90,7 +90,7 @@ namespace Modelo
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
             return usuarios;
         }
@@ -199,7 +199,7 @@ namespace Modelo
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
             return usuarios;
@@ -218,7 +218,7 @@ namespace Modelo
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
@@ -241,7 +241,7 @@ namespace Modelo
             }
             catch(Exception ex)
             {
-                throw;
+                throw ex;
             }
             return estado;
         }
@@ -278,7 +278,7 @@ namespace Modelo
             }
             catch(Exception ex)
             {
-                throw;
+                throw ex;
             }
 
             return rm;
@@ -323,7 +323,7 @@ namespace Modelo
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
             return rm;
@@ -346,7 +346,7 @@ namespace Modelo
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
