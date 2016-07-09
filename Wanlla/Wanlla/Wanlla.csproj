@@ -211,6 +211,8 @@
     <Content Include="LICENSE.txt" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="scripts\FancyZoom.js" />
+    <Content Include="scripts\FancyZoomHTML.js" />
     <Content Include="scripts\jquery.anexgrid.min.js" />
     <Content Include="scripts\jquery.validate.min.js" />
     <Content Include="scripts\jquery.validate.unobtrusive.min.js" />

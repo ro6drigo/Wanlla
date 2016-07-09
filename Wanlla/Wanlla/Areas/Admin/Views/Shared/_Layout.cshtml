@@ -19,7 +19,7 @@
     <!-- Bootstrap's JavaScript plugins -->
     @Scripts.Render("~/bundles/js")
 </head>
-<body>
+<body onLoad="setupZoom()">
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand(Marca) and toggle(Nav) get grouped for better mobile display -->
@@ -85,7 +85,6 @@
             <p class="text-footer">© 2015 - @DateTime.Now.Year. AppsTacna</p>
         </div>
     </footer>
-
     
 </body>
 </html>

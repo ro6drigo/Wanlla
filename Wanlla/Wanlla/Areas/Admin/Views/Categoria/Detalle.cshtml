@@ -20,7 +20,10 @@
             <dt>NOMBRE</dt>
             <dd>@Model.nom_categoria</dd>
             <dt>IMAGEN</dt>
-            <dd><img class="img-responsive thumbnail" src="~/images/@Model.img_categoria" width="15%" height="15%"></dd>
+            <dd>
+                <a href="~/images/@Model.img_categoria"><img src="~/images/@Model.img_categoria" width="15%" height="15%"/></a>
+            @*<img class="img-responsive thumbnail" src="~/images/@Model.img_categoria" width="15%" height="15%">*@
+            </dd>
         </dl>
     </div>
 </div>
