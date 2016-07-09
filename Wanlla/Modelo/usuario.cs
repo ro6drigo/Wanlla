@@ -95,6 +95,59 @@ namespace Modelo
             return usuarios;
         }
 
+        public usuario obtener(int id)
+        {
+            var usu = new usuario();
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    usu = dbwanlla.usuario
+                                .Where(x => x.id_usuario == id)
+                                .SingleOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return usu;
+        }
+
+        public bool validarPasswordActual(string new_pass, int id_usuario)
+        {
+            bool estado = false;
+            usuario usu;
+
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    usu = dbwanlla.usuario
+                                    .Where(x => x.id_usuario == id_usuario)
+                                    .SingleOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            if ( BCrypt.Net.BCrypt.Verify(new_pass, usu.pass_usuario))
+            {
+                estado = true;
+            }
+
+            return estado;
+        }
+
+        public bool confirmarPassword(string new_pass, string conf_pass)
+        {
+            bool estado = (new_pass == conf_pass ? true : false);
+
+            return estado;
+        }
+
         public AnexGRIDResponde ListarGrilla(AnexGRID grilla)
         {
             try
@@ -332,14 +385,18 @@ namespace Modelo
         /// <summary>
         /// Cambiar password del Usuario
         /// </summary>
-        public void cambiarPass()
-        {
+        public void cambiarPassword(string new_pass, int id_usuario)
+        {   
             try
             {
                 using (var db = new db_wanlla())
                 {
-                    this.pass_usuario = BCrypt.Net.BCrypt.HashPassword(this.pass_usuario, BCrypt.Net.BCrypt.GenerateSalt());
-                    db.Entry(this).State = EntityState.Modified;
+                    var usu = db.usuario
+                                .Where(x => x.id_usuario == id_usuario)
+                                .SingleOrDefault();
+
+                    usu.pass_usuario = BCrypt.Net.BCrypt.HashPassword(new_pass, BCrypt.Net.BCrypt.GenerateSalt());
+                    db.Entry(usu).State = EntityState.Modified;
 
                     db.SaveChanges();
                 }
