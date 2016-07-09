@@ -4,6 +4,7 @@ namespace Modelo
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity;
     using System.Data.Entity.Spatial;
     using System.Linq;
     [Table("pedido")]
@@ -18,6 +19,7 @@ namespace Modelo
         [Key]
         public int id_pedido { get; set; }
 
+        [Required]
         public int id_usuario { get; set; }
 
         public DateTime fec_pedido { get; set; }
@@ -161,6 +163,27 @@ namespace Modelo
             }
 
             return cantidad;
+        }
+
+        public void crearPedido()
+        {
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    db.Entry(this).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    foreach( var pp in this.pedido_producto)
+                    {
+                        pp.guardar();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
