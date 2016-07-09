@@ -30,16 +30,29 @@ namespace Wanlla.Areas.Admin.Controllers
             }
         }
 
+        public ActionResult AgregarPaso(int id = 0)
+        {
+            if (id != 0)
+            {
+                ViewBag.id = id;
+                return View(new paso_receta());
+            }
+            else
+            {
+                return View();
+            }
+        }
+
         public ActionResult Guardar(paso_receta model)
         {
             if (ModelState.IsValid)
             {
-                model.mantenimiento();
+                model.agregar();
                 return Redirect("~/Admin/Receta/");
             }
             else
             {
-                return View("~/Admin/PasoReceta/Mantenimiento.cshtml", model);
+                return View("~/Admin/PasoReceta/AgregarPaso.cshtml", model);
             }
         }
 

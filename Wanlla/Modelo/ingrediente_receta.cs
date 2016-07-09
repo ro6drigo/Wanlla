@@ -49,6 +49,22 @@ namespace Modelo
             return ingredientereceta;
         }
 
+        public void agregar()
+        {
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    db.Entry(this).State = EntityState.Added;
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public void mantenimiento()
         {
             try

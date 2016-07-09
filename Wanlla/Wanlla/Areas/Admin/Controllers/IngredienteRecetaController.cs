@@ -33,17 +33,31 @@ namespace Wanlla.Areas.Admin.Controllers
             }
         }
 
+        public ActionResult AgregarIngrediente(int id = 0)
+        {
+            if (id != 0)
+            {
+                ViewBag.id = id;
+                ViewBag.ingredientes = tipoingrediente.ListarIngrediente();
+                return View(new ingrediente_receta());
+            }
+            else
+            {
+                return View();
+            }
+        }
+
         public ActionResult Guardar(ingrediente_receta model)
         {
             if (ModelState.IsValid)
             {
                 
-                model.mantenimiento();
+                model.agregar();
                 return Redirect("~/Admin/Receta/");
             }
             else
             {
-                return View("~/Admin/IngredienteReceta/Mantenimiento.cshtml", model);
+                return View("~/Admin/IngredienteReceta/AgregarIngrediente.cshtml", model);
             }
         }
 
