@@ -25,7 +25,7 @@
 
 <br />
 
-<div class="table-responsive">
+@*<div class="table-responsive">
     <table class="table table-striped table-hover table-bordered text-center">
         <thead>
             <tr>
@@ -67,9 +67,9 @@
             }
         </tbody>
     </table>
-</div>
+</div>*@
 
-@*<div class="table-responsive">
+<div class="table-responsive">
     <div class="list-group" id="usuario"></div>
 </div>
 
@@ -87,13 +87,16 @@
 
                     { leyenda: "Email", columna: "email_usuario", ordenable: true, class: "text-center" },
 
+                    { leyenda: "Dirección", columna: "dir_usuario", ordenable: true, class: "text-center" },
+
                     { leyenda: "Teléfono", columna: "tel_usuario", ordenable: true, class: "text-center" },
 
-                    { leyenda: "Fecha Nacimiento", columna: "fecnac_usuario", ordenable: true, class: "text-center" },
+                    //{ leyenda: "Fecha Nacimiento", columna: "fecnac_usuario", ordenable: true, class: "text-center" },
 
                     { leyenda: "Sexo", columna: "sex_usuario", ordenable: true, class: "text-center" },
 
                     { leyenda: "Tipo Usuario", columna: "tipo_usuario", ordenable: true, class: "text-center" },
+
                 ],
 
                 modelo: [
@@ -106,14 +109,40 @@
 
                     { propiedad: 'email_usuario', class: "text-center" },
 
+                    { propiedad: 'dir_usuario', class: "text-center" },
+
                     { propiedad: 'tel_usuario', class: "text-center" },
 
-                    { propiedad: 'fecnac_usuario', class: "text-center" },
+                    //{ propiedad: 'fecnac_usuario', class: "text-center" },
 
                     { propiedad: 'sex_usuario', class: "text-center" },
 
-                    { propiedad: 'tipo_usuario', class: "text-center" }
+                    { propiedad: 'tipo_usuario', class: "text-center" },
+
+                    //para los botones
+                    //Botón Visualizar
+                    {
+                        formato: function (tr, obj, valor) {
+                            return anexGrid_link({
+                                href: '@Url.Content("~/Admin/Usuarios/Detalle/")' + obj.id_usuario,
+                                contenido: '<span class="fa fa-eye os-ac-icon os-hover-yellow"></span>',
+                                class: 'data-toggle="tooltip" data-placement="bottom" title="Ver Detalle"'
+                            });
+                        },
+                    },
+                    //Botón Modificar
+                    {
+                        formato: function (tr, obj, valor) {
+                            return anexGrid_link({
+                                href: '@Url.Content("~/Admin/Usuarios/Mantenimiento/")' + obj.id_usuario,
+                                contenido: '<span class="fa fa-pencil os-ac-icon os-hover-green"></span>',
+                                class: 'data-toggle="tooltip" data-placement="bottom" title="Editar"'
+                            });
+                        },
+                    }
+
                 ],
+
                 url: '@Url.Content("~/Usuarios/CargarUsuario/")',
                 paginable: true,
                 limite: [10, 20, 50, 100],
@@ -121,4 +150,4 @@
                 columna_orden: "DESC"
             });
         })
-    </script>*@
+    </script>

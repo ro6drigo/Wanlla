@@ -199,6 +199,11 @@ namespace Modelo
                         query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.tipo_usuario)
                             : query.OrderBy(x => x.tipo_usuario);
                     }
+                    if (grilla.columna == "dir_usuario")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.dir_usuario)
+                            : query.OrderBy(x => x.dir_usuario);
+                    }
 
                     var usuarios = query.Skip(grilla.pagina).Take(grilla.limite).ToList();
 
@@ -216,7 +221,8 @@ namespace Modelo
                             u.tel_usuario,
                             u.fecnac_usuario,
                             u.sex_usuario,
-                            u.tipo_usuario
+                            u.tipo_usuario,
+                            u.dir_usuario
                         },
                         total
                     );
