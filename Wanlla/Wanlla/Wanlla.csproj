@@ -298,6 +298,8 @@
     <Content Include="Areas\Admin\Views\Marca\Detalle.cshtml" />
     <Content Include="Areas\Admin\Views\Usuarios\Consulta.cshtml" />
     <Content Include="Areas\Admin\Views\Receta\Consulta.cshtml" />
+    <Content Include="Areas\Admin\Views\IngredienteReceta\AgregarIngrediente.cshtml" />
+    <Content Include="Areas\Admin\Views\PasoReceta\AgregarPaso.cshtml" />
     <None Include="Properties\PublishProfiles\Wanlla - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\Wanlla - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Wanlla.pubxml" />
