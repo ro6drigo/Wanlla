@@ -446,5 +446,28 @@ namespace Modelo
                 throw ex;
             }
         }
+
+        public void mantenimiento()
+        {
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    if (this.id_usuario > 0)
+                    {
+                        db.Entry(this).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        db.Entry(this).State = EntityState.Added;
+                    }
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
