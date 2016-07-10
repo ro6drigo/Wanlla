@@ -59,6 +59,9 @@ namespace Modelo
         [StringLength(250)]
         public string dir_usuario { get; set; }
 
+        [StringLength(250)]
+        public string foto_usuario { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<dieta> dieta { get; set; }
 

@@ -304,7 +304,9 @@
     <Content Include="Areas\Admin\Views\PasoReceta\AgregarPaso.cshtml" />
     <Content Include="Areas\Admin\Views\Usuarios\Mantenimiento.cshtml" />
     <Content Include="Areas\Admin\Views\Usuarios\Detalle.cshtml" />
+    <None Include="Properties\PublishProfiles\Wanlla - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\Wanlla - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\Wanlla - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\Wanlla - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Wanlla.pubxml" />
     <Content Include="Areas\Admin\Views\Usuario\Perfil.cshtml" />
