@@ -1,7 +1,142 @@
-﻿
+﻿@model Modelo.usuario
 @{
     ViewBag.Title = "Detalle Usuario";
 }
 
-<h2>Detalle</h2>
+<ol class="breadcrumb">
+    <li><a href="~/Admin/Usuarios/">Usuarios</a></li>
+    <li class="active">@Model.nom_usuario</li>
+</ol>
 
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Información del Usuario
+    </div>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>ID</dt>
+            <dd>@Model.id_usuario</dd>
+            <dt>NOMBRES</dt>
+            <dd>@Model.nom_usuario</dd>
+            <dt>APELLIDOS</dt>
+            <dd>@Model.ape_usuario</dd>
+            <dt>FOTO</dt>
+            <dd>
+                <img class="img-responsive thumbnail" src="~/images/@Model.foto_usuario" width="15%" height="15%">
+            </dd>
+            <dt>DIRECCIÓN</dt>
+            <dd>@Model.dir_usuario</dd>
+            <dt>EMAIL</dt>
+            <dd>@Model.email_usuario</dd>
+            <dt>TELÉFONO</dt>
+            <dd>@Model.tel_usuario</dd>
+            <dt>FECHA NACIMIENTO</dt>
+            <dd>@Model.fecnac_usuario</dd>
+            <dt>SEXO</dt>
+            <dd>@Model.sex_usuario</dd>
+            <dt>TIPO</dt>
+            <dd>@Model.tipo_usuario</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Dietas Usuario
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var d in Model.dieta)
+                {
+                    <tr>
+                        <td>@(d.id_dieta)</td>
+                        <td>@(d.nom_dieta)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Pedidos Usuario
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">Id</th>
+                    <th class="text-center">Fecha</th>
+                    <th class="text-center">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model.pedido)
+                {
+                    <tr>
+                        <td>@(p.id_pedido)</td>
+                        <td>@(p.fec_pedido)</td>
+                        <td>@(p.est_pedido)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Favoritos Usuario
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">Id</th>
+                    <th class="text-center">Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var f in Model.favorito)
+                {
+                    <tr>
+                        <td>@(f.id_receta)</td>
+                        <td>@(f.fecha)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Comentarios Usuario
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">Id</th>
+                    <th class="text-center">Fecha</th>
+                    <th class="text-center">Comentario</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model.receta_comentario)
+                {
+                    <tr>
+                        <td>@(c.id_receta)</td>
+                        <td>@(c.fec_comentario)</td>
+                        <td>@(c.texto_comentario)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

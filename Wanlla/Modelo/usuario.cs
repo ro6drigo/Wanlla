@@ -106,6 +106,10 @@ namespace Modelo
                 using (var dbwanlla = new db_wanlla())
                 {
                     usu = dbwanlla.usuario
+                                .Include("dieta")
+                                .Include("pedido")
+                                .Include("favorito")
+                                .Include("receta_comentario")
                                 .Where(x => x.id_usuario == id)
                                 .SingleOrDefault();
                 }
@@ -207,6 +211,11 @@ namespace Modelo
                         query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.dir_usuario)
                             : query.OrderBy(x => x.dir_usuario);
                     }
+                    if (grilla.columna == "foto_usuario")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.foto_usuario)
+                            : query.OrderBy(x => x.foto_usuario);
+                    }
 
                     var usuarios = query.Skip(grilla.pagina).Take(grilla.limite).ToList();
 
@@ -225,7 +234,8 @@ namespace Modelo
                             u.fecnac_usuario,
                             u.sex_usuario,
                             u.tipo_usuario,
-                            u.dir_usuario
+                            u.dir_usuario,
+                            u.foto_usuario
                         },
                         total
                     );
