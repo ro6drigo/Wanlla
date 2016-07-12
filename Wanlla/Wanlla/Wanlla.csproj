@@ -240,6 +240,7 @@
     <Compile Include="Areas\Admin\Controllers\RecetaController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\DietaController.cs" />
+    <Compile Include="Controllers\EstablecimientoController.cs" />
     <Compile Include="Controllers\FavoritoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -319,6 +320,9 @@
     <Content Include="Views\Dieta\EditarReceta.cshtml" />
     <Content Include="Views\Perfil\CambiarPassword.cshtml" />
     <Content Include="Views\Pedido\Producto.cshtml" />
+    <Content Include="Views\Perfil\Index.cshtml" />
+    <Content Include="Views\Establecimiento\Index.cshtml" />
+    <Content Include="Views\Establecimiento\CrearMapa.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
