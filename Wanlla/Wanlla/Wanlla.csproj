@@ -318,6 +318,7 @@
     <Content Include="Views\Favorito\Index.cshtml" />
     <Content Include="Views\Dieta\EditarReceta.cshtml" />
     <Content Include="Views\Perfil\CambiarPassword.cshtml" />
+    <Content Include="Views\Pedido\Producto.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

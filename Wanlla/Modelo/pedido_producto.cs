@@ -12,13 +12,14 @@ namespace Modelo
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Required(ErrorMessage = "Id Pedido")]
         public int id_pedido { get; set; }
 
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Required(ErrorMessage = "Seleccione un producto")]
-        public int id_producto { get; set; }
+        public int? id_producto { get; set; }
 
         [Required(ErrorMessage = "Este campo es necesario")]
         public int cant_producto { get; set; }
@@ -33,7 +34,7 @@ namespace Modelo
             {
                 using (var db = new db_wanlla())
                 {
-                    db.Entry(this).State = EntityState.Modified;
+                    db.Entry(this).State = EntityState.Added;
                     db.SaveChanges();
                 }
             }
