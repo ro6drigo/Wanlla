@@ -60,6 +60,9 @@ namespace Modelo
         [StringLength(250)]
         public string dir_usuario { get; set; }
 
+        [StringLength(250)]
+        public string foto_usuario { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<dieta> dieta { get; set; }
 
@@ -135,6 +138,10 @@ namespace Modelo
                 using (var dbwanlla = new db_wanlla())
                 {
                     usu = dbwanlla.usuario
+                                .Include("dieta")
+                                .Include("pedido")
+                                .Include("favorito")
+                                .Include("receta_comentario")
                                 .Where(x => x.id_usuario == id)
                                 .SingleOrDefault();
                 }
@@ -236,6 +243,11 @@ namespace Modelo
                         query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.dir_usuario)
                             : query.OrderBy(x => x.dir_usuario);
                     }
+                    if (grilla.columna == "foto_usuario")
+                    {
+                        query = grilla.columna_orden == "DESC" ? query.OrderByDescending(x => x.foto_usuario)
+                            : query.OrderBy(x => x.foto_usuario);
+                    }
 
                     var usuarios = query.Skip(grilla.pagina).Take(grilla.limite).ToList();
 
@@ -254,7 +266,8 @@ namespace Modelo
                             u.fecnac_usuario,
                             u.sex_usuario,
                             u.tipo_usuario,
-                            u.dir_usuario
+                            u.dir_usuario,
+                            u.foto_usuario
                         },
                         total
                     );
@@ -472,6 +485,29 @@ namespace Modelo
                     }
                 }
                 return usuarios;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void mantenimiento()
+        {
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    if (this.id_usuario > 0)
+                    {
+                        db.Entry(this).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        db.Entry(this).State = EntityState.Added;
+                    }
+                    db.SaveChanges();
+                }
             }
             catch (Exception ex)
             {

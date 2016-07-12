@@ -1,0 +1,93 @@
+﻿@model Modelo.usuario
+@{
+    ViewBag.Title = (Model.id_usuario > 0 ? Model.nom_usuario : "Nuevo Usuario");
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Usuario
+    </div>
+    @using (Html.BeginForm("Guardar", "Usuarios", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.HiddenFor(x => x.id_usuario);
+        <div class="form-group">
+            <label for="nom_usuario" class="col-sm-4 control-label hidden-xs"><i class="fa fa-cutlery fa-2x" aria-hidden="true"></i></label>
+            <label for="nom_usuario" class="col-sm-4 control-label visible-xs">Nombres</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.nom_usuario, new { type = "text", @class = "form-control", placeholder = "Nombres" })
+                @Html.ValidationMessageFor(x => x.nom_usuario, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="ape_usuario" class="col-sm-4 control-label hidden-xs"><i class="fa fa-cutlery fa-2x" aria-hidden="true"></i></label>
+            <label for="ape_usuario" class="col-sm-4 control-label visible-xs">Apellidos</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.ape_usuario, new { type = "text", @class = "form-control", placeholder = "Apellidos" })
+                @Html.ValidationMessageFor(x => x.ape_usuario, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="foto_usuario" class="col-sm-4 control-label hidden-xs"><i class="fa fa-hourglass fa-2x" aria-hidden="true"></i></label>
+            <label for="foto_usuario" class="col-sm-4 control-label visible-xs">Foto</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.foto_usuario, new { type = "text", @class = "form-control", placeholder = "Foto" })
+                @Html.ValidationMessageFor(x => x.foto_usuario, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email_usuario" class="col-sm-4 control-label hidden-xs"><i class="fa fa-picture-o fa-2x" aria-hidden="true"></i></label>
+            <label for="email_usuario" class="col-sm-4 control-label visible-xs">Email</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.email_usuario, new { type = "text", @class = "form-control", placeholder = "Email" })
+                @Html.ValidationMessageFor(x => x.email_usuario, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="tel_usuario" class="col-sm-4 control-label hidden-xs"><i class="fa fa-video-camera fa-2x" aria-hidden="true"></i></label>
+            <label for="tel_usuario" class="col-sm-4 control-label visible-xs">Teléfono</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.tel_usuario, new { type = "text", @class = "form-control", placeholder = "Teléfono" })
+                @Html.ValidationMessageFor(x => x.tel_usuario, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fecnac_usuario" class="col-sm-4 control-label hidden-xs"><i class="fa fa-hourglass fa-2x" aria-hidden="true"></i></label>
+            <label for="fecnac_usuario" class="col-sm-4 control-label visible-xs">Fecha Nacimiento</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.fecnac_usuario, new { type = "text", @class = "form-control", placeholder = "Fecha Nacimiento" })
+                @Html.ValidationMessageFor(x => x.fecnac_usuario, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="dir_usuario" class="col-sm-4 control-label hidden-xs"><i class="fa fa-hourglass fa-2x" aria-hidden="true"></i></label>
+            <label for="dir_usuario" class="col-sm-4 control-label visible-xs">Dirección</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.dir_usuario, new { type = "text", @class = "form-control", placeholder = "Dirección" })
+                @Html.ValidationMessageFor(x => x.dir_usuario, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="sex_usuario" class="col-sm-4 control-label hidden-xs"><i class="fa fa-hourglass fa-2x" aria-hidden="true"></i></label>
+            <label for="sex_usuario" class="col-sm-4 control-label visible-xs">Sexo</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.sex_usuario, new { type = "text", @class = "form-control", placeholder = "Sexo" })
+                @Html.ValidationMessageFor(x => x.sex_usuario, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="tipo_usuario" class="col-sm-4 control-label hidden-xs"><i class="fa fa-hourglass fa-2x" aria-hidden="true"></i></label>
+            <label for="tipo_usuario" class="col-sm-4 control-label visible-xs">Tipo</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(x => x.tipo_usuario, new { type = "text", @class = "form-control", placeholder = "Tipo" })
+                @Html.ValidationMessageFor(x => x.tipo_usuario, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-4">
+                <button type="submit" class="btn btn-success glyphicon glyphicon-floppy-disk" data-toggle="tooltip" title="Guardar"></button>
+                <button type="button" class="btn btn-danger glyphicon glyphicon-floppy-remove" onclick="javascript:history.back()" data-toggle="tooltip" title="Cancelar"></button>
+            </div>
+        </div>
+    }
+</div>
