@@ -6,6 +6,7 @@ namespace Modelo
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity;
     using System.Data.Entity.Spatial;
+    using System.Data.Entity.Validation;
     using System.Linq;
 
     [Table("usuario")]
@@ -75,7 +76,38 @@ namespace Modelo
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<favorito> favorito { get; set; }
 
+        public void ActualizarPerfil()
+        {
+            //var rm = new ResponseModel();
 
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    //dbwanlla.Configuration.ValidateOnSaveEnabled = false;
+
+                    //var eUsuario = dbwanlla.Entry(this);
+                    dbwanlla.Entry(this).Property(x => x.id_usuario).IsModified = false;
+                    //if (this.nom_usuario == null) eUsuario.Property(x => x.nom_usuario).IsModified = false;
+                    dbwanlla.Entry(this).Property(x => x.pass_usuario).IsModified = false;
+                    dbwanlla.Entry(this).State = EntityState.Modified;
+                    //Obviar campos o ignorar en la actualización
+
+                    
+
+                    dbwanlla.SaveChanges();
+                    //rm.SetResponse(true);
+                }
+            }
+            //catch (DbEntityValidationException e)
+            //{
+            //    throw;
+            //}
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public List<usuario> Listar()
         {

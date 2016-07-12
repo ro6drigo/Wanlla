@@ -13,6 +13,11 @@ namespace Wanlla.Controllers
     {
         private usuario usuario = new usuario();
 
+        public ActionResult Index()
+        {
+            return View(usuario.obtener(SessionHelper.GetUser()));
+        }
+
         public ActionResult CambiarPassword(int id = 0)
         {
             ViewBag.id = id;
@@ -38,5 +43,19 @@ namespace Wanlla.Controllers
                 return Redirect("~/Perfil/CambiarPassword/1");
             }
         }
+
+        public ActionResult GuardarPerfil(usuario model)
+        {
+            //var rm = new ResponseModel();
+
+            ModelState.Remove("pass_usuario");
+
+            if (ModelState.IsValid)
+            {
+                model.ActualizarPerfil();
+            }
+            return Redirect("~/Perfil/Index");
+        }
     }
 }
+
