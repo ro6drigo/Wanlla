@@ -23,6 +23,7 @@ namespace Modelo
             receta_comentario = new HashSet<receta_comentario>();
             usuario = new HashSet<usuario>();
             favorito = new HashSet<favorito>();
+            receta_establecimiento = new HashSet<receta_establecimiento>();
         }
 
         [Key]
@@ -70,6 +71,9 @@ namespace Modelo
         //NUEVO
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<favorito> favorito { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<receta_establecimiento> receta_establecimiento { get; set; }
 
         public List<receta> Listar()
         {

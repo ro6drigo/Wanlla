@@ -1,0 +1,34 @@
+﻿@model List<Modelo.establecimiento>
+@{
+    ViewBag.Title = "Establecimientos";
+}
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Latitud</th>
+                <th>Longitud</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td>@(m.id_establecimiento)</td>
+                    <td>@(m.nom_establecimiento)</td>
+                    <td>@(m.lat_establecimiento)</td>
+                    <td>@(m.lon_establecimiento)</td>
+                    <td>
+                        <a href="~/Categoria/Detalle/@m.id_establecimiento" class="btn btn-warning btn-xs">Detalle</a>
+                        <a href="~/Categoria/Mantenimiento/@m.id_establecimiento" class="btn btn-primary btn-xs">Editar</a>
+                        <a href="~/Categoria/Eliminar/@m.id_establecimiento" class="btn btn-danger btn-xs" onclick="return confirm('¿Esta seguro de eliminar el registro?')">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
