@@ -34,7 +34,33 @@ namespace Modelo
                                         .Include("establecimiento")
                                         //.Where(x => x.id_receta == idreceta)
                                         .ToList();
+
+                    //receta_establecimiento[] establecimientosarray = pr.ToArray();
                 }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return establecimientos;
+        }
+
+        public List<receta_establecimiento> Listar(int idreceta)
+        {
+            var establecimientos = new List<receta_establecimiento>();
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    establecimientos = dbwanlla.receta_establecimiento
+                                        .Include("establecimiento")
+                                        .Where(x => x.id_receta == idreceta)
+                                        .ToList();
+
+                    //receta_establecimiento[] establecimientosarray = pr.ToArray();
+                }
+
             }
             catch (Exception ex)
             {

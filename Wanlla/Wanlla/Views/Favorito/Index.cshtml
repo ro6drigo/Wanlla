@@ -16,7 +16,7 @@
             </div>
         </div>
     </div>
-
+}
     <br>
 
     <div class="row">
@@ -62,18 +62,26 @@
                                     <span class="fa fa-star favorite-icon-active"></span>
                                 </a>
                             </h4>
-                            <p>
-                                <b>@(m.receta.diff_receta) / @(m.receta.time_receta)<span class="fa fa-clock-o" aria-hidden="true"></span></b>
-                                <hr />
-                                @if (m.receta.des_receta.Length > 150)
-                                {
-                                    @(m.receta.des_receta.Substring(0, 150) + "..." )
-                                }
-                                else
-                                {
-                                    @m.receta.des_receta
-                                }
-                            </p>
+                            @using (Html.BeginForm("CrearMapa", "Establecimiento", FormMethod.Post, new { @class = "form-inline", id = "form-CrearMapa" }))
+                            {
+                                <p>
+                                    <b>@(m.receta.diff_receta) / @(m.receta.time_receta) <span class="fa fa-clock-o" aria-hidden="true"></span>
+                                            @Html.Hidden("id_receta", m.id_receta)
+                                            <button type="submit" class="pull-right" style="border:0px; background-color: transparent; padding:0px">
+                                                Puntos de Venta <span class="fa fa-map-marker" style="color:#F7584C; font-size:20px"></span>
+                                            </button>
+                                    </b>
+                                    <hr />
+                                    @if (m.receta.des_receta.Length > 150)
+                                    {
+                                        @(m.receta.des_receta.Substring(0, 150) + "..." )
+                                    }
+                                    else
+                                    {
+                                        @m.receta.des_receta
+                                    }
+                                </p>
+                            }
                         </div>
                     </div>
                 </div>
@@ -114,4 +122,3 @@
             </nav>
         </div>
     </div>
-}

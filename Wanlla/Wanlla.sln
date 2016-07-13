@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wanlla", "Wanlla\Wanlla.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modelo", "Modelo\Modelo.csproj", "{3EE0A024-1662-4DDF-A28B-E337B19E667C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryToErase", "LibraryToErase\LibraryToErase.csproj", "{D207F21F-CB46-4404-B71F-119A2FC4BFCA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{3EE0A024-1662-4DDF-A28B-E337B19E667C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EE0A024-1662-4DDF-A28B-E337B19E667C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EE0A024-1662-4DDF-A28B-E337B19E667C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D207F21F-CB46-4404-B71F-119A2FC4BFCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D207F21F-CB46-4404-B71F-119A2FC4BFCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D207F21F-CB46-4404-B71F-119A2FC4BFCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D207F21F-CB46-4404-B71F-119A2FC4BFCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -20,8 +20,9 @@ namespace Wanlla.Controllers
 
         public ActionResult CrearMapa()
         {
-            //return View(rec_estable.Listar());
-            return View();
+            var idreceta = Request["id_receta"];
+            return View(rec_estable.Listar(Convert.ToInt32(idreceta)));
+            //return View();
         }
     }
 }

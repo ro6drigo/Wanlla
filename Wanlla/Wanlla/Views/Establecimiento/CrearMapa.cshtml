@@ -6,45 +6,39 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHvxGSjoQvn1E4QATGxldvKxIrkstZYKo&callback=getMap">
 </script>
 <script type="text/javascript">
-    var establecimientos =
-        [
-            ['IL Vero', -18.009866955287567, -70.24498946964741, 3],
-            ['Don Caruso', -18.009923, -70.24493, 3],
-            ['La Mamma Rosa', -18.008902, -70.243708, 3],
-            ['Presto', -18.00969, -70.244477, 3],
-            ['Presto', -18.013615, -70.248818, 3]
-        ];
-    @*@foreach (var m in Model)
-    {
-        <text>
-        var nombre = m.establecimiento.nom_establecimiento;
-        var latitud = m.establecimiento.lat_establecimiento;
-        var longitud = m.establecimiento.lon_establecimiento;
-        CrearArray(nombre, latitud, longitud);
-        </text>
-    }
 
-    function CrearArray(nombre, latitud, longitud) {
-        establecimiento[estableciento.length] = [""+nombre, latitud, longitud,3];
-    }*@
+    establecimientos =
+        [
+            @if (!Model.Any())
+            {
+            <text>
+            ['Centro de Tacna',-18.014710220303726,-70.25215045955815,3]
+            </text>
+            }else {
+                foreach(var n in Model)
+                {
+                <text>
+                ['@n.establecimiento.nom_establecimiento',@n.establecimiento.lat_establecimiento, @n.establecimiento.lon_establecimiento, 3],
+                </text>
+                }
+            }
+        ];
 
     function getMap() {
-        var ini_latlon = new google.maps.LatLng(-18.009866955287567, -70.24498946964741);
-
-        var myLatLng = { lat: -18.009866955287567, lng: -70.24498946964741 };
+        var establecimiento = establecimientos[0];
+        var init_latlon = { lat: establecimiento[1], lng: establecimiento[2]};
 
         var mapOptions = {
-            center: myLatLng,
+            center: init_latlon,
             zoom: 17,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         }
 
         var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-
         setMarkers(map, establecimientos);
     }
 
-    function setMarkers(map, establecimientoz) {
+   function setMarkers(map, establecimientoz) {
         for (var i = 0; i < establecimientoz.length; i++) {
             var establecimiento = establecimientoz[i];
             var marker = new google.maps.Marker({
@@ -53,7 +47,24 @@
                 title: establecimiento[0],
                 zIndex: establecimiento[3]
             });
+
+            var infoWindow = new google.maps.InfoWindow({
+                content: "<b>"+establecimiento[0]+"</b>"
+            });
+
+            google.maps.event.addListener(marker, 'click', function () {
+                infoWindow.open(map, marker);
+            });
         }
-    }
+   }
+
 </script>
-<div id="map_canvas" style="width:900px; height:500px"></div>
+@if (!Model.Any())
+{
+    <h4>No existen establecimientos para la receta escogida.</h4>
+}
+else
+{
+    <h4>Haga clic en el marcador para obtener mayor información.</h4>
+}
+<div id="map_canvas" style="width:1200px; height:800px"></div><br />

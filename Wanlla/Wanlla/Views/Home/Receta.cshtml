@@ -10,6 +10,18 @@
         </div>
         <hr />
         <div class="os-datos-receta text-center">
+            <h4>
+                @using (Html.BeginForm("CrearMapa", "Establecimiento", FormMethod.Post, new { @class = "form-inline", id = "form-CrearMapa" }))
+            {
+                @Html.Hidden("id_receta", Model.id_receta)
+                <button type="submit" style="border:0px; background-color: transparent; padding:0px">
+                    <b>Puntos de Venta</b> <span class="fa fa-map-marker" style="color:#F7584C; font-size:20px"></span>
+                </button>
+            }
+            </h4>
+        </div>
+        <hr />
+        <div class="os-datos-receta text-center">
             <div class="row">
                 <div class="col-xs-4">
                     <h4><b>@(Model.categoria.nom_categoria)</b></h4>
