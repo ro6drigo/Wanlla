@@ -27,7 +27,11 @@ namespace Modelo
         public virtual DbSet<receta_comentario> receta_comentario { get; set; }
         public virtual DbSet<usuario> usuario { get; set; }
 
+
         public virtual DbSet<favorito> favorito { get; set; }
+        public virtual DbSet<establecimiento> establecimiento { get; set; }
+
+        public virtual DbSet<receta_establecimiento> receta_establecimiento { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -239,6 +243,27 @@ namespace Modelo
                 .HasMany(e => e.favorito)
                 .WithRequired(e => e.receta)
                 .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<establecimiento>()
+               .Property(e => e.nom_establecimiento)
+               .IsUnicode(false);
+
+            modelBuilder.Entity<establecimiento>()
+                .Property(e => e.lat_establecimiento)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<establecimiento>()
+                .Property(e => e.lon_establecimiento)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<establecimiento>()
+               .HasMany(e => e.receta_establecimiento)
+               .WithOptional(e => e.establecimiento)
+               .HasForeignKey(e => e.id_establecimiento);
+
+            modelBuilder.Entity<receta_establecimiento>()
+                .Property(e => e.precio_receta)
+                .IsUnicode(false);
         }
     }
 }

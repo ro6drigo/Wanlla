@@ -62,6 +62,8 @@
     <Compile Include="dieta.cs" />
     <Compile Include="dieta_receta.cs" />
     <Compile Include="distribuidor.cs" />
+    <Compile Include="establecimiento.cs" />
+    <Compile Include="receta_establecimiento.cs" />
     <Compile Include="favorito.cs" />
     <Compile Include="ingrediente.cs" />
     <Compile Include="ingrediente_receta.cs" />

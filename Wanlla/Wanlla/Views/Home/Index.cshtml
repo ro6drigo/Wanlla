@@ -88,11 +88,8 @@
                         <div class="container-card">
                             @using (Html.BeginForm("GuardarFavorito","Favorito",FormMethod.Post, new { @class = "form-inline", id = "form-favorito" }))
                             {
-                            <h4><a href="/Home/Receta/@(m.id_receta)" class="os-link"><b>@m.nom_receta</b></a>
-                                @*<a href="javascript: document.getElementByID('form-favorito').action = '/Favorito/GuardarFavorito/@(m.id_receta)'; document.getElementByID('form-favorito').submit();">
-                                    @Html.Hidden("id_receta",m.id_receta)
-                                    
-                                </a>*@
+                            <h4>
+                            <a href="/Home/Receta/@(m.id_receta)" class="os-link"><b>@m.nom_receta</b></a>
                                 @Html.Hidden("id_receta",m.id_receta)
                                 
                                     @if (SessionHelper.ExisteSesion())
@@ -120,21 +117,32 @@
                                     else
                                     {
                                         <a href="~/Login"><span class="fa fa-star-o favorite-icon-inactive"></span></a>
-                                    }
-                            </h4>
+                                }
+                                </h4>
                             }
-                            <p>
-                                <b>@(m.categoria.nom_categoria) / @(m.diff_receta) / @(m.time_receta) <span class="fa fa-clock-o" aria-hidden="true"></span></b>
-                                <hr />
-                                @if (m.des_receta.Length > 150)
-                                {
-                                    @(m.des_receta.Substring(0, 150) + "..." )
-                                }
-                                else
-                                {
-                                    @m.des_receta
-                                }
-                            </p>
+
+                            @using (Html.BeginForm("CrearMapa", "Establecimiento", FormMethod.Post, new { @class = "form-inline", id = "form-CrearMapa" }))
+                            {
+                            @Html.Hidden("id_receta", m.id_receta)
+                                    <p>
+                                        <b>@(m.categoria.nom_categoria) / @(m.diff_receta) / @(m.time_receta) <span class="fa fa-clock-o" aria-hidden="true"></span>
+                                            
+                                                <button type="submit" class="pull-right" style="border:0px; background-color: transparent; padding:0px">
+                                                    Puntos de Venta <span class="fa fa-map-marker" style="color:#F7584C; font-size:20px"></span>
+                                                </button>
+                                        </b>
+                                        <hr />
+                                        @if (m.des_receta.Length > 150)
+                                        {
+                                            @(m.des_receta.Substring(0, 150) + "..." )
+                                        }
+                                        else
+                                        {
+                                            @m.des_receta
+                                        }
+                                    </p>
+                                    
+                            }
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,70 @@
+﻿@model List<Modelo.receta_establecimiento>
+@{
+    ViewBag.Title = "Establecimientos";
+}
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHvxGSjoQvn1E4QATGxldvKxIrkstZYKo&callback=getMap">
+</script>
+<script type="text/javascript">
+
+    establecimientos =
+        [
+            @if (!Model.Any())
+            {
+            <text>
+            ['Centro de Tacna',-18.014710220303726,-70.25215045955815,3]
+            </text>
+            }else {
+                foreach(var n in Model)
+                {
+                <text>
+                ['@n.establecimiento.nom_establecimiento',@n.establecimiento.lat_establecimiento, @n.establecimiento.lon_establecimiento, 3],
+                </text>
+                }
+            }
+        ];
+
+    function getMap() {
+        var establecimiento = establecimientos[0];
+        var init_latlon = { lat: establecimiento[1], lng: establecimiento[2]};
+
+        var mapOptions = {
+            center: init_latlon,
+            zoom: 17,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+
+        var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+        setMarkers(map, establecimientos);
+    }
+
+   function setMarkers(map, establecimientoz) {
+        for (var i = 0; i < establecimientoz.length; i++) {
+            var establecimiento = establecimientoz[i];
+            var marker = new google.maps.Marker({
+                position: { lat: establecimiento[1], lng: establecimiento[2] },
+                map: map,
+                title: establecimiento[0],
+                zIndex: establecimiento[3]
+            });
+
+            var infoWindow = new google.maps.InfoWindow({
+                content: "<b>"+establecimiento[0]+"</b>"
+            });
+
+            google.maps.event.addListener(marker, 'click', function () {
+                infoWindow.open(map, marker);
+            });
+        }
+   }
+
+</script>
+@if (!Model.Any())
+{
+    <h4>No existen establecimientos para la receta escogida.</h4>
+}
+else
+{
+    <h4>Haga clic en el marcador para obtener mayor información.</h4>
+}
+<div id="map_canvas" style="width:1200px; height:800px"></div><br />

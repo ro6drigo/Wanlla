@@ -171,19 +171,62 @@ namespace Modelo
             {
                 using (var db = new db_wanlla())
                 {
-                    db.Entry(this).State = EntityState.Modified;
+                    db.Entry(this).State = EntityState.Added;
                     db.SaveChanges();
-
-                    foreach( var pp in this.pedido_producto)
-                    {
-                        pp.guardar();
-                    }
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+        }
+
+        public bool validarPedido(int id_pedido)
+        {
+            bool estado = false;
+            int id_usu = SessionHelper.Leer<int>("id_usuario");
+
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    var pedido = db.pedido
+                                    .Where(x => x.id_pedido == id_pedido && x.est_pedido == "En Espera" && x.id_usuario == id_usu)
+                                    .SingleOrDefault();
+
+                    estado = (pedido != null) ? true : false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return estado;
+        }
+
+        public bool validarDieta(int id_dieta)
+        {
+            bool estado = false;
+            int id_usu = SessionHelper.Leer<int>("id_usuario");
+
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    var dieta = db.dieta
+                                    .Where(x => x.id_dieta == id_dieta && x.id_usuario == id_usu)
+                                    .SingleOrDefault();
+
+                    estado = (dieta != null) ? true : false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return estado;
         }
     }
 }
