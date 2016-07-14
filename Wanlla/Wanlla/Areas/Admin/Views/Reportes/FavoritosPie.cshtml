@@ -1,0 +1,54 @@
+﻿@model List<Modelo.receta>
+@{
+    ViewBag.Title = "Gráfico de Pie";
+    string[,] Favorito = ViewBag.Favorito;
+}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+     function drawChart() {
+
+         var data = google.visualization.arrayToDataTable([
+             ['Recetas','Usuarios'],
+          @{
+              int total = Favorito.GetUpperBound(0);
+              int receta = Convert.ToInt32(Favorito[0, 0]);
+              int usuario = Convert.ToInt32(Favorito[0, 1]);
+
+            }
+            @for (int i = 0; i <= total; i++)
+            {
+                var idreceta = Favorito[i, 0];
+                var cant_usu = Favorito[i, 1];
+                var nombre = "";
+                foreach (var m in Model)
+                {
+                    var recetafav = Convert.ToInt32(Favorito[i, 0]);
+                    var recetamod = Convert.ToInt32(m.id_receta);
+
+                    if (recetafav == recetamod)
+                    {
+                        nombre = m.nom_receta;
+                    }
+                }
+                <text>
+                ['@nombre' ,@cant_usu],
+                </text>
+            }
+
+
+        ]);
+
+        var options = {
+          title: 'Favoritos'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+</script>
+<div id="piechart" style="width: 1200px; height: 800px;"></div>
+<hr />

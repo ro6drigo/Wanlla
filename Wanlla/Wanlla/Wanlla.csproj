@@ -238,6 +238,7 @@
     <Compile Include="Areas\Admin\Controllers\PasoRecetaController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductoController.cs" />
     <Compile Include="Areas\Admin\Controllers\RecetaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ReportesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\DietaController.cs" />
     <Compile Include="Controllers\EstablecimientoController.cs" />
@@ -305,6 +306,8 @@
     <Content Include="Areas\Admin\Views\PasoReceta\AgregarPaso.cshtml" />
     <Content Include="Areas\Admin\Views\Usuarios\Mantenimiento.cshtml" />
     <Content Include="Areas\Admin\Views\Usuarios\Detalle.cshtml" />
+    <Content Include="Areas\Admin\Views\Reportes\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Reportes\FavoritosPie.cshtml" />
     <None Include="Properties\PublishProfiles\Wanlla - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\Wanlla - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\Wanlla - Web Deploy %282%29.pubxml" />

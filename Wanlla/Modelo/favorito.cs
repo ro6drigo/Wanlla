@@ -94,5 +94,54 @@ namespace Modelo
                 throw;
             }
         }
+
+
+
+
+        //Reportes
+
+        public string[,] RMasFavorito()
+        {
+            string[,] favoritos;
+            try
+            {
+                using (var dbwanlla = new db_wanlla())
+                {
+                    var favs = (from fav in dbwanlla.favorito
+                                join re in dbwanlla.receta on fav.id_receta equals re.id_receta
+                                //group new { fav, re } by new
+                                //{
+                                //    fav.id_receta
+                                //} into g
+                                group fav by new
+                                {
+                                    fav.id_receta
+                                } into g
+                                select new
+                                {
+                                    g.Key.id_receta,
+                                    cantidad = (int?)g.Count(p => p.id_usuario != null),
+                                    //nombre = receta.nom_receta + ""
+                                }).ToList().OrderByDescending(c => c.cantidad);
+
+                    favoritos = new string[favs.Count(), 2];
+
+                    int count = 0;
+                    foreach (var f in favs)
+                    {
+                        favoritos[count, 0] = Convert.ToString(f.id_receta);
+                        favoritos[count, 1] = Convert.ToString(f.cantidad);
+                        //favoritos[count, 3] = f.nombre;
+
+                        count++;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return favoritos;
+        }
     }
 }
