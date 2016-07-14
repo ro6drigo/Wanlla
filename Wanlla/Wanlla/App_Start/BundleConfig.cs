@@ -10,8 +10,10 @@ namespace Wanlla.App_Start
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.Add(new ScriptBundle("~/jquery/js").Include(
+                        "~/Scripts/jquery-2.2.3.js")); //JQuery 2.2.3
+
             bundles.Add(new ScriptBundle("~/bundles/js").Include(
-                        "~/Scripts/jquery-2.2.3.js", //JQuery 2.2.3
                         "~/Scripts/bootstrap.min.js",
                         "~/Scripts/own-javascript.js",
                         "~/Scripts/jquery.validate.min.js",
