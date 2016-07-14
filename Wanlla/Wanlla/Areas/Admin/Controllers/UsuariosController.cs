@@ -55,22 +55,17 @@ namespace Wanlla.Areas.Admin.Controllers
             var rm = new ResponseModel();
             string foto;
             ModelState.Remove("Password");
-
             if (model.foto_usuario != null)
             {
                 foto = model.foto_usuario;
                 System.IO.File.Delete(Server.MapPath("../images/") + foto);
             }
-
-
             if (!ModelState.IsValid)
             {
                 rm = model.Guardar(Foto);
-
             }
             rm.href = Url.Content("~/Admin/Usuarios/Index");
             return Json(rm);
-
         }
     }
 }

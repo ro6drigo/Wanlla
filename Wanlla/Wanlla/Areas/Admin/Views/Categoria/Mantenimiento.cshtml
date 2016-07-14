@@ -3,7 +3,7 @@
     ViewBag.Title = (Model.id_categoria > 0 ? Model.nom_categoria : "Nueva Categoría");
 }
 
-@using (Html.BeginForm("Guardar", "categoria", FormMethod.Post, new { @class = "form-horizontal" }))
+@using (Html.BeginForm("Guardar", "Categoria", FormMethod.Post, new { id = "frm-categoria", enctype = "multipart/form-data", @class = "form-horizontal" }))
 {
     @Html.HiddenFor(x => x.id_categoria);
     <div class="form-group">
@@ -15,20 +15,13 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="img_categoria" class="col-sm-4 control-label hidden-xs"><i class="fa fa-picture-o fa-2x" aria-hidden="true"></i></label>
+        <label for="img_categoria" class="col-sm-4 control-label hidden-xs"><span class="fa fa-photo fa-2x"></span></label>
         <label for="img_categoria" class="col-sm-4 control-label visible-xs">Imagen</label>
         <div class="col-sm-4">
-            @Html.TextBoxFor(x => x.img_categoria, new { type = "text", @class = "form-control", placeholder = "Imagen" })
+            <input type="file" name="foto" />
             @Html.ValidationMessageFor(x => x.img_categoria, null, new { @class = "label label-danger" })
         </div>
     </div>
-
-    @*<div class="form-group">
-        <label for="img_categoria" class="col-sm-4 control-label hidden-xs"><i class="fa fa-picture-o fa-2x" aria-hidden="true"></i></label>
-        <label for="img_categoria" class="col-sm-4 control-label visible-xs">Imagen</label>
-        <input type="file" name="Foto" />
-    </div>*@
-
     <div class="form-group">
         <div class="col-sm-offset-4 col-sm-4">
             <button data-ajax="true" type="submit" class="btn btn-success glyphicon glyphicon-floppy-disk" data-toggle="tooltip" title="Guardar"></button>

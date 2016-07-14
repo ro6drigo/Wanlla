@@ -387,45 +387,65 @@ namespace Modelo
             }
         }
 
-        public ResponseModel GuardarFoto(HttpPostedFileBase Foto)
+        public ResponseModel Guardar(HttpPostedFileBase Foto)
+
         {
             var rm = new ResponseModel();
 
             try
             {
-                using (var dbwanlla = new db_wanlla())
+                using (var db = new db_wanlla())
                 {
-                    dbwanlla.Configuration.ValidateOnSaveEnabled = false;
+                    db.Configuration.ValidateOnSaveEnabled = false;
 
-                    var eReceta = dbwanlla.Entry(this);
-                    eReceta.State = EntityState.Modified;
-                    //Obviar campos o ignorar en la actualización
-                    if (Foto != null)
+                    var eUsuario = db.Entry(this);
+                    if (this.id_receta > 0)
                     {
-                        String archivo = Path.GetFileName(Foto.FileName);//Path.GetExtension(Foto.FileName);
+                        eUsuario.State = EntityState.Modified;
 
-                        //Nombre de imagen en forma aleatoria
-                        //String archivo = DateTime.Now.ToString("yyyyMMddHHmmss") + Path.GetExtension(Foto.FileName);
+                        if (Foto != null)
+                        {
+                            String archivo = Path.GetFileName(Foto.FileName); //*Path.GetExtension(Foto.FileName);
 
-                        //Colocar la ruta donde se grabará
-                        Foto.SaveAs(HttpContext.Current.Server.MapPath("~/images/" + archivo));
+                            //String archivo = DateTime.Now.ToString("yyyyMMddMMss") + Path.GetFileName(Foto.FileName);
 
-                        //enviar al modelo el nombre del archivo
-                        this.img_receta = archivo;
+                            Foto.SaveAs(HttpContext.Current.Server.MapPath("~/images/" + archivo));
+
+
+                            this.img_receta = archivo;
+
+                        }
+                        else eUsuario.Property(x => x.img_receta).IsModified = false;
+
+                        db.SaveChanges();
+                        rm.SetResponse(true);
                     }
-                    else eReceta.Property(x => x.img_receta).IsModified = false; // el campo no es obligatorio
+                    else
+                    {
+                        eUsuario.State = EntityState.Added;
 
-                    //if (this.NOMBREUSU == null) eUsuario.Property(x => x.NOMBREUSU).IsModified = false;
+                        if (Foto != null)
+                        {
+                            String archivo = Path.GetFileName(Foto.FileName); //*Path.GetExtension(Foto.FileName);
 
-                    //if (this.PASSWORD == null) eUsuario.Property(x => x.PASSWORD).IsModified = false;
+                            //String archivo = DateTime.Now.ToString("yyyyMMddMMss") + Path.GetFileName(Foto.FileName);
 
-                    dbwanlla.SaveChanges();
-                    rm.SetResponse(true);
+                            Foto.SaveAs(HttpContext.Current.Server.MapPath("~/images/" + archivo));
+
+
+                            this.img_receta = archivo;
+
+                        }
+                        else eUsuario.Property(x => x.img_receta).IsModified = false;
+                        db.SaveChanges();
+                        rm.SetResponse(true);
+
+                    }
                 }
             }
             catch (DbEntityValidationException e)
             {
-                throw e;
+                throw;
             }
             catch (Exception)
             {
