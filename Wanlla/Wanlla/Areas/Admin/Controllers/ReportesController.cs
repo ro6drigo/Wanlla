@@ -31,5 +31,18 @@ namespace Wanlla.Areas.Admin.Controllers
             ViewBag.Favorito = favorito.RMasFavorito();
             return View(receta.Listar());
         }
+
+        public ActionResult RecetasPie()
+        {
+            return View(receta.Consulta());
+        }
+        public ActionResult RecetasDonut()
+        {
+            return View(receta.Consulta());
+        }
+        public ActionResult RecetasBar()
+        {
+            return View(receta.Consulta());
+        }
     }
 }

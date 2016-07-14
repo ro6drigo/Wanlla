@@ -1,0 +1,37 @@
+﻿@model string[,]
+@{
+    ViewBag.Title = "Gráfico de Pie";
+}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+     function drawChart() {
+
+         var data = google.visualization.arrayToDataTable([
+             ['Recetas','Usuarios'],
+            
+            @{ int count = 1;}
+            @{ int cant = Model.GetUpperBound(0); }
+            @for (int i = 0; i <= cant; i++)
+            {
+                <text>
+                ['@Model[i,0]' ,@Model[i, 1]],
+                </text>
+            }
+
+        ]);
+
+        var options = {
+            title: 'Categorías más Utilizadas',
+            is3D: true
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+</script>
+<div id="piechart" style="width: 1200px; height: 800px;"></div>
+<hr />
