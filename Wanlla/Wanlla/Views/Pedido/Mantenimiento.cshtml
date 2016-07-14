@@ -1,0 +1,84 @@
+﻿@model Modelo.pedido
+@{
+    ViewBag.Title = "Hacer un Pedido";
+    string[,] ingredientes = ViewBag.ingredientes;
+    int total = ingredientes.GetUpperBound(0);
+}
+
+<div class="row">
+
+    @if (ingredientes.GetUpperBound(0) > -1)
+    {
+        <div class="col-xs-12">
+            @using (Html.BeginForm("AgregarProducto", "Pedido", FormMethod.Post, new { id = "frm-pedido-producto", @class = "form-horizontal" }))
+            {
+                @Html.HiddenFor(x => x.id_pedido)
+
+                <div class="form-group">
+                    <label for="id_dieta" class="col-sm-4 control-label">Ingrediente</label>
+                    <div class="col-sm-4">
+                        <select name="id_ingrediente" id="id_ingrediente" class="form-control">
+                            @for (int i = 0; i <= total; i++)
+                            {
+                                <option value="@(ingredientes[i, 0])">@(ingredientes[i, 1])</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="col-xs-10 col-xs-offset-1" id="producto">
+            <!-- Productos CargarProducto() -->
+        </div>
+
+        <script>
+            $('#id_ingrediente').change(function () {
+                @if (Model.id_pedido > 0)
+            {
+                <text>
+                CargarProducto();
+                </text>
+            }
+            });
+
+            $(document).ready(function () {
+                @if (Model.id_pedido > 0)
+            {
+                <text>
+                CargarProducto();
+                </text>
+            }
+            })
+
+            function CargarProducto(selectedValue) {
+                var id_ingrediente = $('#id_ingrediente').val();
+                $("#producto").load('@Url.Content("~/Pedido/Producto/")' + id_ingrediente + "?id_dieta=@(Model.id_dieta)&id_pedido=@(Model.id_pedido)");
+            }
+        </script>
+    }
+
+    <div class="col-xs-10 col-xs-offset-1" id="ped_productos"></div>
+
+    <script>
+            $(document).ready(function () {
+                @if (Model.id_pedido > 0)
+                {
+                    <text>
+                    CargarProductoPedido();
+                    </text>
+                }
+            })
+
+            function CargarProductoPedido()
+            {
+                $("#ped_productos").load('@Url.Content("~/Pedido/ProductoPedido/" + Model.id_pedido)');
+            }
+    </script>
+
+    <div class="col-lg-1-xs-12 text-right">
+        <a class="btn btn-default" href="~/Pedido/ConfirmarPedido/@(Model.id_pedido)" role="button">Confirmar Pedido</a>
+    </div>
+
+    <br />
+</div>

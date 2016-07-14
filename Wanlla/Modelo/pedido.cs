@@ -22,6 +22,9 @@ namespace Modelo
         [Required]
         public int id_usuario { get; set; }
 
+        [Required]
+        public int id_dieta { get; set; }
+
         public DateTime fec_pedido { get; set; }
 
         [Required]
@@ -30,8 +33,33 @@ namespace Modelo
 
         public virtual usuario usuario { get; set; }
 
+        public virtual dieta dieta { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pedido_producto> pedido_producto { get; set; }
+
+        public List<pedido> listar()
+        {
+            var pedidos = new List<pedido>();
+            var id_usuario = SessionHelper.Leer<int>("id_usuario");
+
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    pedidos = db.pedido
+                                .Include("usuario")
+                                .Include("dieta")
+                                .Where(x => x.id_usuario == id_usuario)
+                                .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return pedidos;
+        }
 
         public dieta obtenerDieta(int id, int id_usuario)
         {
@@ -51,6 +79,28 @@ namespace Modelo
                 throw ex;
             }
             return dietas;
+        }
+
+        public pedido obtenerPedido(int id_pedido)
+        {
+            var pedido = new pedido();
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    pedido = db.pedido
+                            .Include("dieta")
+                            .Include("pedido_producto")
+                            .Include("usuario")
+                            .Where(x => x.id_pedido == id_pedido)
+                            .SingleOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return pedido;
         }
 
         public string[,] obtenerTotalIng(int id)
@@ -172,6 +222,23 @@ namespace Modelo
                 using (var db = new db_wanlla())
                 {
                     db.Entry(this).State = EntityState.Added;
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void confirmarPedido()
+        {
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    this.est_pedido = "Confirmado";
+                    db.Entry(this).State = EntityState.Modified;
                     db.SaveChanges();
                 }
             }

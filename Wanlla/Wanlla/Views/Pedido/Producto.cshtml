@@ -1,6 +1,64 @@
 ﻿@model Modelo.pedido_producto
 @{
-    ViewBag.Title = "Hacer un pedido";
+    string[,] ing_rec = ViewBag.ing_rec;
+    int total = ing_rec.GetUpperBound(0);
+    Modelo.ingrediente ingrediente = ViewBag.ingrediente;
+    
 }
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-xs-6">
+                <h3 class="panel-title"><b>@(ingrediente.nom_ingrediente)</b></h3>
+            </div>
+            <div class="col-xs-6 text-right">
+                <span class="badge">@(ing_rec[0, 2])@(ing_rec[0, 3])</span>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12">
+                <p style="text-align: justify">
+                    @if (ingrediente.producto.Count > 0)
+                    {
+                        using (Html.BeginForm("AgregarProducto", "Pedido", FormMethod.Post, new { @class = "form-inline" }))
+                        {
+                            @Html.HiddenFor(x => x.id_pedido)
+                            <ul style="list-style-type: none">
+                                @foreach (var p in ingrediente.producto)
+                                {
+                                    int cant = Model.obtenerCantPro(Convert.ToDecimal(ing_rec[0, 2]), p.cant_producto);
 
-@ViewBag.ing
+                                    <li>
+                                        <div class="radio form-group" style="width:100%">
+                                            <label class="col-xs-12 control-label">
+                                                @Html.RadioButtonFor(x => x.id_producto, p.id_producto) @(p.distribuidor.nom_distribuidor) - @(p.marca.nom_marca) @(p.cant_producto + p.umed_producto) - S/ @(p.precio_producto) c/u
+                                            </label>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(x => x.cant_producto, new { type = "number", @class = "form-control", placeholder = "Cantidad", min = "1", step = "1" })
+                                    <div class="input-group-addon">Unidades</div>
+                                    @Html.ValidationMessageFor(x => x.cant_producto, null, new { @class = "label label-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12 text-right">
+                                    <button type="submit" class="btn btn-default">Agregar</button>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        @("Sin Productos Registrados")
+                    }
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

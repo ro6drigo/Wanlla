@@ -1,0 +1,36 @@
+﻿@model List<Modelo.pedido>
+@{
+    ViewBag.Title = "Pedidos";
+}
+
+<div class="table-responsive">
+    <table class="table table-hover table-condensed text-center">
+        <thead>
+            <tr>
+                <th class="text-center">Cód</th>
+                <th class="text-center">Dieta</th>
+                <th class="text-center">Fecha</th>
+                <th class="text-center">Estado</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <th class="text-center" scope="row">@(m.id_pedido)</th>
+                    <td>@(m.dieta.nom_dieta)</td>
+                    <td>@(m.fec_pedido)</td>
+                    <td>@(m.est_pedido)</td>
+                    <td>
+                        <table class="text-center" style="width:100%;">
+                            <tr>
+                                <td><a href="~/Pedido/Mantenimiento/@(m.id_pedido)" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Detalle"><span class="fa fa-eye os-ac-icon os-hover-yellow"></span></a></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

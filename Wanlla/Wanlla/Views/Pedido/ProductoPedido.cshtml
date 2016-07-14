@@ -1,0 +1,67 @@
+﻿@model Modelo.pedido
+@{
+    int cont = 1;
+    decimal total = 0;
+}
+
+@if (Model.pedido_producto.Count() > 0)
+{
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3 class="panel-title"><b>Pedido</b></h3>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-condensed">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Distribuidor</th>
+                                    <th class="text-center">Producto</th>
+                                    <th class="text-center">Unidades</th>
+                                    <th class="text-center">Precio Unitario</th>
+                                    <th class="text-center">Subtotal</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var p in Model.pedido_producto)
+                                {
+                                    <tr>
+                                        <td class="text-center">@(cont++)</td>
+                                        <td class="text-center">@(p.producto.distribuidor.nom_distribuidor)</td>
+                                        <td class="text-center">@(p.producto.ingrediente.nom_ingrediente) @(p.producto.marca.nom_marca) @(p.producto.cant_producto)@(p.producto.umed_producto)</td>
+                                        <td class="text-right">@(p.cant_producto)</td>
+                                        <td class="text-right">@(p.producto.precio_producto)</td>
+                                        <td class="text-right">@(p.cant_producto * p.producto.precio_producto)</td>
+                                        <td>
+                                            <table class="text-center" style="width:100%;">
+                                                <tr>
+                                                    <td><a href="#" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Editar"><span class="fa fa-pencil os-ac-icon os-hover-green"></span></a></td>
+                                                    <td><a onclick="return confirm('¿Esta seguro de eliminar este producto del pedido?');" href="~/Pedido/QuitarProducto/@(p.id_pedido)?pro=@(p.id_producto)" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 1000, "hide": 50 }' title="Eliminar"><span class="fa fa-trash os-ac-icon os-hover-red"></span></a></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    total += (p.cant_producto * p.producto.precio_producto);
+                                }
+                                <tr>
+                                    <td colspan="5" class="text-right"><b>Total</b></td>
+                                    <td class="text-right">@(total)</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
