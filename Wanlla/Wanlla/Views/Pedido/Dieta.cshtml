@@ -3,6 +3,11 @@
     ViewBag.Title = "Hacer un pedido";
     string[,] totalIng =  ViewBag.TotalIng;
     Modelo.dieta dieta = ViewBag.dieta;
+
+    Model.id_dieta = dieta.id_dieta;
+    Model.id_usuario = Modelo.SessionHelper.Leer<int>("id_usuario");
+    Model.est_pedido = "En Espera";
+
     List<Modelo.pedido_producto> pedPro = new List<Modelo.pedido_producto>(); //borrar
 }
 
@@ -82,7 +87,9 @@
         <div class="text-right">
             @using (Html.BeginForm("CrearPedido", "Pedido", FormMethod.Post, new { }))
             {
-                @Html.Hidden("dieta", dieta.id_dieta)
+                @Html.HiddenFor(x => x.id_usuario)
+                @Html.HiddenFor(x => x.id_dieta)
+                @Html.HiddenFor(x => x.est_pedido)
                 <button type="submit" class="btn btn-default">Comenzar Pedido</button>
             }
         </div>

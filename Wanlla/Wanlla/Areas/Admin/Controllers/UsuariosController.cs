@@ -48,18 +48,24 @@ namespace Wanlla.Areas.Admin.Controllers
             );
         }
 
-        public ActionResult Guardar(usuario model)
-        {
-            if (ModelState.IsValid)
-            {
-                model.mantenimiento();
-                return Redirect("~/Admin/Usuarios/");
-            }
-            else
-            {
-                return View("~/Admin/Usuarios/Mantenimiento.cshtml", model);
-            }
+        [HttpPost]
 
+        public JsonResult Guardar(usuario model, HttpPostedFileBase Foto)
+        {
+            var rm = new ResponseModel();
+            string foto;
+            ModelState.Remove("Password");
+            if (model.foto_usuario != null)
+            {
+                foto = model.foto_usuario;
+                System.IO.File.Delete(Server.MapPath("../images/") + foto);
+            }
+            if (!ModelState.IsValid)
+            {
+                rm = model.Guardar(Foto);
+            }
+            rm.href = Url.Content("~/Admin/Usuarios/Index");
+            return Json(rm);
         }
     }
 }

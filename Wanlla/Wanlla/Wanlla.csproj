@@ -309,8 +309,10 @@
     <Content Include="Areas\Admin\Views\Reportes\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Reportes\FavoritosPie.cshtml" />
     <None Include="Properties\PublishProfiles\Wanlla - FTP %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\Wanlla - FTP %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\Wanlla - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\Wanlla - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\Wanlla - Web Deploy %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\Wanlla - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Wanlla.pubxml" />
     <Content Include="Areas\Admin\Views\Usuario\Perfil.cshtml" />
@@ -326,6 +328,9 @@
     <Content Include="Views\Perfil\Index.cshtml" />
     <Content Include="Views\Establecimiento\Index.cshtml" />
     <Content Include="Views\Establecimiento\CrearMapa.cshtml" />
+    <Content Include="Views\Pedido\Mantenimiento.cshtml" />
+    <Content Include="Views\Pedido\ProductoPedido.cshtml" />
+    <Content Include="Views\Pedido\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -336,7 +341,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Pedido\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

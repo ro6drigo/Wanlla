@@ -43,30 +43,36 @@ namespace Wanlla.Areas.Admin.Controllers
             );
         }
 
-        public ActionResult Guardar(categoria model)
-        {
-            if (ModelState.IsValid)
-            {
-                model.mantenimiento();
-                return Redirect("~/Admin/Categoria/");
-            }
-            else
-            {
-                return View("~/Admin/Categoria/Mantenimiento.cshtml", model);
-            }
-        }
-
-        //public JsonResult Guardar(categoria model, HttpPostedFileBase Foto)
+        //public ActionResult Guardar(categoria model)
         //{
-        //    var rm = new ResponseModel();
-
         //    if (ModelState.IsValid)
         //    {
         //        model.mantenimiento();
-        //        rm = model.GuardarFoto(Foto);
+        //        return Redirect("~/Admin/Categoria/");
         //    }
-        //    return Json(rm);
+        //    else
+        //    {
+        //        return View("~/Admin/Categoria/Mantenimiento.cshtml", model);
+        //    }
         //}
+
+        public JsonResult Guardar(categoria model, HttpPostedFileBase Foto)
+        {
+            var rm = new ResponseModel();
+            string foto;
+            ModelState.Remove("Password");
+            if (model.img_categoria != null)
+            {
+                foto = model.img_categoria;
+                System.IO.File.Delete(Server.MapPath("../images/") + foto);
+            }
+            if (!ModelState.IsValid)
+            {
+                rm = model.Guardar(Foto);
+            }
+            rm.href = Url.Content("~/Admin/Categoria/Index");
+            return Json(rm);
+        }
 
         public ActionResult Eliminar(int id)
         {
