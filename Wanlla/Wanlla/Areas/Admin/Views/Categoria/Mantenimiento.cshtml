@@ -3,7 +3,7 @@
     ViewBag.Title = (Model.id_categoria > 0 ? Model.nom_categoria : "Nueva Categoría");
 }
 
-@using (Html.BeginForm("Guardar", "Categoria", FormMethod.Post, new { id = "frm-categoria", enctype = "multipart/form-data", @class = "form-horizontal" }))
+@using (Html.BeginForm("Guardar", "categoria", FormMethod.Post, new { id = "frm-categoria", enctype = "multipart/form-data", @class = "form-horizontal" }))
 {
     @Html.HiddenFor(x => x.id_categoria);
     <div class="form-group">
