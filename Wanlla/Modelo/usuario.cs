@@ -7,7 +7,9 @@ namespace Modelo
     using System.Data.Entity;
     using System.Data.Entity.Spatial;
     using System.Data.Entity.Validation;
+    using System.IO;
     using System.Linq;
+    using System.Web;
 
     [Table("usuario")]
     public partial class usuario
@@ -513,6 +515,74 @@ namespace Modelo
             {
                 throw ex;
             }
+        }
+
+        public ResponseModel Guardar(HttpPostedFileBase Foto)
+
+        {
+            var rm = new ResponseModel();
+
+            try
+            {
+                using (var db = new db_wanlla())
+                {
+                    db.Configuration.ValidateOnSaveEnabled = false;
+
+                    var eUsuario = db.Entry(this);
+                    if (this.id_usuario > 0)
+                    {
+                        eUsuario.State = EntityState.Modified;
+
+                        if (Foto != null)
+                        {
+                            //String archivo = Path.GetFileName(Foto.FileName); //*Path.GetExtension(Foto.FileName);
+
+                            String archivo = DateTime.Now.ToString("yyyyMMddMMss") + Path.GetFileName(Foto.FileName);
+
+                            Foto.SaveAs(HttpContext.Current.Server.MapPath("~/images/" + archivo));
+
+
+                            this.foto_usuario = archivo;
+
+                        }
+                        else eUsuario.Property(x => x.foto_usuario).IsModified = false;
+                        if (this.pass_usuario == null) eUsuario.Property(x => x.pass_usuario).IsModified = false;
+
+                        db.SaveChanges();
+                        rm.SetResponse(true);
+                    }
+                    else
+                    {
+                        eUsuario.State = EntityState.Added;
+
+                        if (Foto != null)
+                        {
+                            //String archivo = Path.GetFileName(Foto.FileName); //*Path.GetExtension(Foto.FileName);
+
+                            String archivo = DateTime.Now.ToString("yyyyMMddMMss") + Path.GetFileName(Foto.FileName);
+
+                            Foto.SaveAs(HttpContext.Current.Server.MapPath("~/images/" + archivo));
+
+
+                            this.foto_usuario = archivo;
+
+                        }
+                        else eUsuario.Property(x => x.foto_usuario).IsModified = false;
+                        db.SaveChanges();
+                        rm.SetResponse(true);
+
+                    }
+                }
+            }
+            catch (DbEntityValidationException e)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return rm;
         }
     }
 }

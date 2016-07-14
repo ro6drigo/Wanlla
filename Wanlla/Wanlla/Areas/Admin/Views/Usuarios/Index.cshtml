@@ -103,8 +103,12 @@
                     { propiedad: 'nom_usuario', class: "text-center" },
 
                     { propiedad: 'ape_usuario', class: "text-center" },
-
-                    { propiedad: 'foto_usuario', class: "text-center" },
+                    
+                    {
+                        propiedad: 'foto_usuario', class: "text-center", formato: function (tr, obj, valor) {
+                            return valor != null ? "Si" : "No"
+                        }
+                    },
 
                     { propiedad: 'email_usuario', class: "text-center" },
 
