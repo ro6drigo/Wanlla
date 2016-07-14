@@ -1,6 +1,6 @@
 ﻿@model List<Modelo.receta>
 @{
-    ViewBag.Title = "Gráfico de Pie";
+    ViewBag.Title = "Gráfico de Barras";
     string[,] Favorito = ViewBag.Favorito;
 }
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -43,13 +43,14 @@
 
         var options = {
             title: 'Favoritos',
-            is3D: true
+            pieHole: 0.4
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        var chart = new google.visualization.ColumnChart(document.getElementById('columnchart_values'));
 
         chart.draw(data, options);
       }
 </script>
-<div id="piechart" style="width: 1200px; height: 800px;"></div>
+<div id="columnchart_values" style="width: 1200px; height: 800px;"></div>
 <hr />
+

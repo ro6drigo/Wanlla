@@ -308,6 +308,8 @@
     <Content Include="Areas\Admin\Views\Usuarios\Detalle.cshtml" />
     <Content Include="Areas\Admin\Views\Reportes\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Reportes\FavoritosPie.cshtml" />
+    <Content Include="Areas\Admin\Views\Reportes\FavoritosDonut.cshtml" />
+    <Content Include="Areas\Admin\Views\Reportes\FavoritosBar.cshtml" />
     <None Include="Properties\PublishProfiles\Wanlla - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\Wanlla - FTP %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\Wanlla - FTP.pubxml" />

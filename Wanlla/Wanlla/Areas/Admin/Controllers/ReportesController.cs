@@ -21,5 +21,15 @@ namespace Wanlla.Areas.Admin.Controllers
             ViewBag.Favorito = favorito.RMasFavorito();
             return View(receta.Listar());
         }
+        public ActionResult FavoritosDonut()
+        {
+            ViewBag.Favorito = favorito.RMasFavorito();
+            return View(receta.Listar());
+        }
+        public ActionResult FavoritosBar()
+        {
+            ViewBag.Favorito = favorito.RMasFavorito();
+            return View(receta.Listar());
+        }
     }
 }

@@ -1,54 +1,33 @@
-﻿@model List<Modelo.receta>
-@{
-    ViewBag.Title = "Gráfico de Pie";
-    string[,] Favorito = ViewBag.Favorito;
+﻿@{
+    ViewBag.Title = "Reportes y Consultas";
 }
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-
-     function drawChart() {
-
-         var data = google.visualization.arrayToDataTable([
-             ['Recetas','Usuarios'],
-          @{
-              int total = Favorito.GetUpperBound(0);
-              int receta = Convert.ToInt32(Favorito[0, 0]);
-              int usuario = Convert.ToInt32(Favorito[0, 1]);
-
-            }
-            @for (int i = 0; i <= total; i++)
-            {
-                var idreceta = Favorito[i, 0];
-                var cant_usu = Favorito[i, 1];
-                var nombre = "";
-                foreach (var m in Model)
-                {
-                    var recetafav = Convert.ToInt32(Favorito[i, 0]);
-                    var recetamod = Convert.ToInt32(m.id_receta);
-
-                    if (recetafav == recetamod)
-                    {
-                        nombre = m.nom_receta;
-                    }
-                }
-                <text>
-                ['@nombre' ,@cant_usu],
-                </text>
-            }
-
-
-        ]);
-
-        var options = {
-          title: 'Favoritos'
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-        chart.draw(data, options);
-      }
-</script>
-<div id="piechart" style="width: 1200px; height: 800px;"></div>
-<hr />
+<div class="table-responsive">
+    <table class="table table-hover table-bordered text-center">
+        <thead>
+            <tr>
+                <th class="text-center">Tema</th>
+                <th class="text-center">Tipo de Gráfico</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Favoritos</td>
+                <td>
+                    <table class="text-center" style="width:100%;">
+                        <tr>
+                            <td><a href="~/Admin/Reportes/FavoritosPie" data-toggle="tooltip" data-placement="bottom" title="Gráfico de Pie">
+                                <span class="fa fa-pie-chart os-ac-icon os-hover-green"></span></a></td>
+                            <td>
+                                <a href="~/Admin/Reportes/FavoritosDonut" data-toggle="tooltip" data-placement="bottom" title="Gráfico de Dona">
+                                    <span class="fa fa-circle-o-notch os-ac-icon os-hover-red"></span>
+                                </a>
+                            </td>
+                            <td><a href="~/Admin/Reportes/FavoritosBar" data-toggle="tooltip" data-placement="bottom" title="Gráfico de Barras">
+                                <span class="fa fa-bar-chart os-ac-icon os-hover-blue"></span></a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

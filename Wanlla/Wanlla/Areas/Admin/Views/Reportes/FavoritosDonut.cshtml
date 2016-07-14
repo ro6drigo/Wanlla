@@ -1,6 +1,6 @@
 ﻿@model List<Modelo.receta>
 @{
-    ViewBag.Title = "Gráfico de Pie";
+    ViewBag.Title = "Gráfico de Dona";
     string[,] Favorito = ViewBag.Favorito;
 }
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -43,7 +43,7 @@
 
         var options = {
             title: 'Favoritos',
-            is3D: true
+            pieHole: 0.4
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -53,3 +53,4 @@
 </script>
 <div id="piechart" style="width: 1200px; height: 800px;"></div>
 <hr />
+
